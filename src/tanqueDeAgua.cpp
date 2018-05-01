@@ -24,6 +24,7 @@ void tanqueDeAgua::ampliarTanque(int dificultad){
 	cin >> ampliacionElegida;
 	// validar (ampliacionElegida); FALTA CREAR
 
+	cantidadDeAguaMaxima+= ampliacionElegida;  //amplia el tanque
 
 	int dineroGastado= ampliacionElegida*5*dificultad;
 	//monedero.restarDinero(dineroGastado);  FALTA CREAR
