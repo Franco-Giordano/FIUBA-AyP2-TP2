@@ -10,7 +10,7 @@ private:
 	unsigned int cantidadDeAguaMaxima;
 public:
 	//Pre: se recibe N,M y la dificultad
-	//dado el tamaño del terreno como [N,M] y la dificultad en el intervalo [1,3]
+	//dado el tamaï¿½o del terreno como [N,M] y la dificultad en el intervalo [1,3]
 	// ambas ingresadas por el usuario
 	//Post: se crea el tanque de agua vacio (cantidad de agua = 0)
 	TanqueDeAgua(unsigned int N, unsigned int M, unsigned int dificultad);
@@ -30,7 +30,7 @@ public:
 	//Post: devuelve la capacidad maxima del tanque de agua.
 	int obtenerCantidadDeAguaMaxima();
 
-	//Pre: La ampliacion depende de la dificultad y de la eleccion del usuario. El usuario podrá
+	//Pre: La ampliacion depende de la dificultad y de la eleccion del usuario. El usuario podrï¿½
 	//elegir una ampliacion de 5, 10 o 15 unidades, y la dificultad cambiara el dinero requerido para
 	//llevar a cabo esa accion. Recibe el monedero para poder modificar el haber del jugador.
 	//Post: se amplia el tanque restando el dinero del monedero.
