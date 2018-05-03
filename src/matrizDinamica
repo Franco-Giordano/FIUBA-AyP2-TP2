@@ -139,9 +139,9 @@ void Terreno<T>::asignarTamanio(ui fila, ui columna)
 		copiar(aux,fila,columna);
 		for(ui i=0; i<fila; i++)
 		{
-			delete[] aux[i];
+			delete[] terreno[i];
 		}
-		delete[] aux;
+		delete[] terreno;
 	}
 	terreno=aux;
 	cantidadFilas=fila;
