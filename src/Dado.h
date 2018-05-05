@@ -11,8 +11,8 @@ class Dado {
 	//POST: crea el dado.
 	Dado();
 
-	//PRE:
-	//POST: devuelve un numero obtenido de forma aleatoria, del 1 al 6.
+	
+	//POST: guarda en el atributo numeroRandom, el numero obtenido de forma aleatoria.
 	void tirarDado();
 
 	//PRE:
