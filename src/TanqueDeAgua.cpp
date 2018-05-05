@@ -1,3 +1,10 @@
+/*
+ * tanqueDeAgua.cpp
+ *
+ *  Created on: 28 abr. 2018
+ *      Author: Alvaro
+ */
+
 #include "TanqueDeAgua.h"
 
 using namespace std;
@@ -24,18 +31,11 @@ int TanqueDeAgua::obtenerCantidadDeAguaMaxima(){
 	return this->cantidadDeAguaMaxima;
 }
 
-void TanqueDeAgua::ampliarTanque(int dificultad, Monedero &monedero){
-	int ampliacionElegida;
+void TanqueDeAgua::ampliarTanque(int dificultad, Monedero &monedero, int ampliacionElegida){
 
-	cout << "Puede ampliar el tanque en 5, 10 o 15 unidades,"
-				" para ello presione 1, 2 o 3 respectivamente." << endl;
-	cin >> ampliacionElegida;
+	cantidadDeAguaMaxima+= ampliacionElegida;  //amplia el tanque
 
-	// validar (ampliacionElegida); FALTA CREAR
-
-	cantidadDeAguaMaxima+= ampliacionElegida*5;  //amplia el tanque
-
-	int dineroGastado= ampliacionElegida*5*dificultad;
+	int dineroGastado= ampliacionElegida*dificultad;
 	monedero.gastarDinero(dineroGastado);
 
 }
@@ -43,3 +43,4 @@ void TanqueDeAgua::ampliarTanque(int dificultad, Monedero &monedero){
 TanqueDeAgua::~TanqueDeAgua() {
 
 }
+
