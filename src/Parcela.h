@@ -9,6 +9,9 @@
 #define PARCELA_H_
 
 #include "Cultivo.h"
+#include "Monedero.h"
+#include "TanqueDeAgua.h"
+
 
 enum Estado
 	{
@@ -38,10 +41,18 @@ public:
 	//Post: Devuelve el objeto cultivo por referencia, para modificaciones. OJO CON ESTO, fijense que les parece.
 	Cultivo& obtenerCultivo();
 
-	/*
-	//Post: Siembra un cultivo, asignandole las propiedades de dicho cultivo al cultivo contenido por la parcela. Esta funci√≥n podr√≠a ser una de las que se use, solamente que por
-	void sembrarCultivo(std::string nombreLeido,int costoSemillaLeido,int tiempoCosechaLeido,int rentabilidadLeida,int tiempoRecuperacionLeido);
-	*/
+
+	//Post: Siembra un cultivo, asignandole las propiedades de dicho cultivo al cultivo contenido por la parcela.
+	void sembrarCultivo(std::string nombreLeido,int costoSemillaLeido,int tiempoCosechaLeido,int rentabilidadLeida,
+												int tiempoRecuperacionLeido,Monedero &monedero);
+
+	//Pre:  El estado de regada debe ser False.
+	//Post: Cambia el estado de regada a True.
+	void regarParcela(TanqueDeAgua& tanqueAgua,int costoDeAgua);
+
+	//Post: Devuelve true si est· regada, false si no lo est·.
+	bool obtenerRegado();
+
 };
 
 

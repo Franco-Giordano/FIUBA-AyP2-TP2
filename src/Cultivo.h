@@ -44,7 +44,6 @@ public:
 	//Post: Devuelve el tiempo de recuperación.
 	int obtenerTiempoRecuperacion();
 
-
 };
 
 #endif /* Cultivo_H_ */

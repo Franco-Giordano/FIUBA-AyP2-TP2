@@ -7,6 +7,7 @@
 
 
 #include "Terreno.h"
+
 #include <iostream>
 
 using namespace std;
@@ -14,15 +15,25 @@ using namespace std;
 int main(){
 
 	int cantidadFilas,cantidadColumnas;
+	Monedero monedero(5,5,1);
+	TanqueDeAgua tanqueAgua(5,5,1);
 
 	cout << "Ingrese cantidad de filas: ";
 	cin >> cantidadFilas;
-	cout << "Ingrese cantdidad de columnas: ";
+	cout << "Ingrese cantidad de columnas: ";
 	cin >> cantidadColumnas;
 	Terreno terreno(cantidadFilas,cantidadColumnas);
 
-	terreno.obtenerParcela(0,0).obtenerCultivo().modificarCultivo("Papa",1,1,1,1);
-	terreno.obtenerParcela(1,1).obtenerCultivo().modificarCultivo("Zanahoria",2,3,1,4);
+	tanqueAgua.agregarAgua(50);
+
+	cout << "CREDITOS: " << monedero.obtenerDineroActual() << endl;
+	cout << "TANQUE: " << tanqueAgua.obtenerCantidadDeAguaActual() << endl;
+	terreno.obtenerParcela(0,0).sembrarCultivo("Papa",1,1,1,1,monedero);
+	terreno.obtenerParcela(1,1).sembrarCultivo("Zanahoria",2,3,1,4,monedero);
+	terreno.obtenerParcela(0,0).regarParcela(tanqueAgua,1);
+	cout << "Sembrados 2 terrenos y regados 1." << endl;
+	cout << "CREDITOS: " << monedero.obtenerDineroActual() << endl;
+	cout << "TANQUE: "<< tanqueAgua.obtenerCantidadDeAguaActual() << endl <<endl ;
 
 	for (int i = 0; i < terreno.obtenerFilas(); i ++){
 		for (int j = 0; j < terreno.obtenerColumnas(); j++){
@@ -30,7 +41,8 @@ int main(){
 			cout << "Costo semilla: " << terreno.obtenerParcela(i,j).obtenerCultivo().obtenerCostoSemilla() << endl;
 			cout << "Rentabilidad: " << terreno.obtenerParcela(i,j).obtenerCultivo().obtenerRentabilidad() << endl;
 			cout << "Tiempo cosecha: " << terreno.obtenerParcela(i,j).obtenerCultivo().obtenerTiempoCosecha() << endl;
-			cout << "Tiempo recuperacion: " << terreno.obtenerParcela(i,j).obtenerCultivo().obtenerTiempoRecuperacion() << endl << endl;
+			cout << "Tiempo recuperacion: " << terreno.obtenerParcela(i,j).obtenerCultivo().obtenerTiempoRecuperacion() << endl;
+			cout << "Regada: " << terreno.obtenerParcela(i,j).obtenerRegado()<< endl << endl;
 		}
 	}
 
