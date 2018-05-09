@@ -19,15 +19,16 @@ private:
 	int tiempoCosecha;
 	int rentabilidad;
 	int tiempoRecuperacion;
+	int consumoAgua;
 
 public:
 
-	//Post: Crea un Cultivo inicializado con sus valores num√©ricos en 0 y con nombre "VACIO".
+	//Post: Crea un Cultivo inicializado con sus valores numÈricos en 0 y con nombre "VACIO".
 	Cultivo();
 
 	//Pre:  Los datos deben de ser validos.
-	//Post:  Modifica las propiedades del Cultivo con los datos recibidos por par√°metro.
-	void modificarCultivo(std::string nombreRecibido, int costoSemillaRecibido, int tiempoCosechaRecibido, int rentabilidadRecibida, int tiempoRecuperacionRecibido);
+	//Post:  Modifica las propiedades del Cultivo con los datos recibidos por par·metro.
+	void modificarCultivo(std::string nombreRecibido, int costoSemillaRecibido, int tiempoCosechaRecibido, int rentabilidadRecibida, int tiempoRecuperacionRecibido, int consumoAguaRecibido);
 
 	//Post: Devuelve el nombre.
 	std::string obtenerNombre();
@@ -41,8 +42,11 @@ public:
 	//Post: Devuelve el tiempo de cosecha.
 	int obtenerTiempoCosecha();
 
-	//Post: Devuelve el tiempo de recuperaci√≥n.
+	//Post: Devuelve el tiempo de recuperaciÛn.
 	int obtenerTiempoRecuperacion();
+
+	//Post: Devuelve el consumo de agua del cultivo.
+	int obtenerConsumoAgua();
 
 };
 
