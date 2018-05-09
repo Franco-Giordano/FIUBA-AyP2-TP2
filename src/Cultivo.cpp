@@ -14,9 +14,10 @@ Cultivo :: Cultivo(){
 	this -> tiempoCosecha = 0;
 	this -> rentabilidad = 0;
 	this -> tiempoRecuperacion = 0;
+	this -> consumoAgua = 0;
 }
 
-void Cultivo :: modificarCultivo(std::string nombreRecibido, int costoSemillaRecibido, int tiempoCosechaRecibido, int rentabilidadRecibida, int tiempoRecuperacionRecibido)
+void Cultivo :: modificarCultivo(std::string nombreRecibido, int costoSemillaRecibido, int tiempoCosechaRecibido, int rentabilidadRecibida, int tiempoRecuperacionRecibido, int consumoAguaRecibido)
 {
 
 	this -> nombre = nombreRecibido;
@@ -24,6 +25,7 @@ void Cultivo :: modificarCultivo(std::string nombreRecibido, int costoSemillaRec
 	this -> tiempoCosecha = tiempoCosechaRecibido;
 	this -> rentabilidad = rentabilidadRecibida;
 	this -> tiempoRecuperacion = tiempoRecuperacionRecibido;
+	this -> consumoAgua = consumoAguaRecibido;
 }
 
 std::string Cultivo::obtenerNombre()
@@ -56,5 +58,8 @@ int Cultivo::obtenerTiempoRecuperacion()
 	return this->tiempoRecuperacion;
 }
 
+int obtenerConsumoAgua() {
+	return this->consumoAgua;
+}
 
 
