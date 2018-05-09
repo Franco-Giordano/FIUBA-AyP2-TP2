@@ -22,9 +22,9 @@ Cultivo& Parcela::obtenerCultivo(){
 }
 
 void Parcela::sembrarCultivo(std::string nombreLeido,int costoSemillaLeido,int tiempoCosechaLeido,int rentabilidadLeida,
-																int tiempoRecuperacionLeido,Monedero &monedero){
+																int tiempoRecuperacionLeido,int consumoAguaLeido, Monedero &monedero){
 
-	obtenerCultivo().modificarCultivo(nombreLeido,costoSemillaLeido,tiempoCosechaLeido,rentabilidadLeida,tiempoRecuperacionLeido);
+	obtenerCultivo().modificarCultivo(nombreLeido,costoSemillaLeido,tiempoCosechaLeido,rentabilidadLeida,tiempoRecuperacionLeido,consumoAguaLeido);
 	monedero.gastarDinero(obtenerCultivo().obtenerCostoSemilla());
 
 }
@@ -41,5 +41,4 @@ bool Parcela::obtenerRegado(){
 
 	return this -> regada;
 }
-
 
