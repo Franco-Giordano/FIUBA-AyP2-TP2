@@ -44,13 +44,13 @@ public:
 
 	//Post: Siembra un cultivo, asignandole las propiedades de dicho cultivo al cultivo contenido por la parcela.
 	void sembrarCultivo(std::string nombreLeido,int costoSemillaLeido,int tiempoCosechaLeido,int rentabilidadLeida,
-												int tiempoRecuperacionLeido,Monedero &monedero);
+												int tiempoRecuperacionLeido,int consumoAguaLeido, Monedero &monedero);
 
 	//Pre:  El estado de regada debe ser False.
 	//Post: Cambia el estado de regada a True.
 	void regarParcela(TanqueDeAgua& tanqueAgua,int costoDeAgua);
 
-	//Post: Devuelve true si está regada, false si no lo está.
+	//Post: Devuelve true si estï¿½ regada, false si no lo estï¿½.
 	bool obtenerRegado();
 
 };
