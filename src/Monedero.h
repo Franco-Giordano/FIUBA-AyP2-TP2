@@ -14,7 +14,7 @@ public:
 	int obtenerDineroActual();
 
 	//Post: devuelve true si el usuario posee mas dinero del que va a gastar.
-	bool dineroSuficiente(int dineroAGastar);
+	bool dineroSuficiente(unsigned int dineroAGastar);
 
 	//Pre: recibe el dinero que se sumará al haber del jugador.
 	//Post: Suma el dinero obtenido al que el usuario tenía previamente.

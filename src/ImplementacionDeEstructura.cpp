@@ -28,8 +28,8 @@ int main(){
 
 	cout << "CREDITOS: " << monedero.obtenerDineroActual() << endl;
 	cout << "TANQUE: " << tanqueAgua.obtenerCantidadDeAguaActual() << endl;
-	terreno.obtenerParcela(0,0).sembrarCultivo("Papa",1,1,1,1,monedero);
-	terreno.obtenerParcela(1,1).sembrarCultivo("Zanahoria",2,3,1,4,monedero);
+	terreno.obtenerParcela(0,0).sembrarCultivo("Papa",1,1,1,1,monedero,1);
+	terreno.obtenerParcela(1,1).sembrarCultivo("Zanahoria",2,3,1,4,monedero,1);
 	terreno.obtenerParcela(0,0).regarParcela(tanqueAgua,1);
 	cout << "Sembrados 2 terrenos y regados 1." << endl;
 	cout << "CREDITOS: " << monedero.obtenerDineroActual() << endl;
@@ -42,7 +42,7 @@ int main(){
 			cout << "Rentabilidad: " << terreno.obtenerParcela(i,j).obtenerCultivo().obtenerRentabilidad() << endl;
 			cout << "Tiempo cosecha: " << terreno.obtenerParcela(i,j).obtenerCultivo().obtenerTiempoCosecha() << endl;
 			cout << "Tiempo recuperacion: " << terreno.obtenerParcela(i,j).obtenerCultivo().obtenerTiempoRecuperacion() << endl;
-			cout << "Regada: " << terreno.obtenerParcela(i,j).obtenerRegado()<< endl << endl;
+			cout << "Regada: " << terreno.obtenerParcela(i,j).estaRegada()<< endl << endl;
 		}
 	}
 

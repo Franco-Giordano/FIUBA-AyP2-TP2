@@ -48,6 +48,7 @@ public:
 	//Post: Devuelve el consumo de agua del cultivo.
 	int obtenerConsumoAgua();
 
+
 };
 
 #endif /* Cultivo_H_ */

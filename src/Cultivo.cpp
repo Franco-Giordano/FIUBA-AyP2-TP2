@@ -58,7 +58,7 @@ int Cultivo::obtenerTiempoRecuperacion()
 	return this->tiempoRecuperacion;
 }
 
-int obtenerConsumoAgua() {
+int Cultivo::obtenerConsumoAgua() {
 	return this->consumoAgua;
 }
 

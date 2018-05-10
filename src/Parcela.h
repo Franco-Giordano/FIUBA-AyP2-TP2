@@ -51,13 +51,10 @@ public:
 	//Post: Devuelve true si est� libre, false si no lo est�.
 	bool estaLibre();
 
-
-
 	//Post: Devuelve el objeto cultivo por referencia, para modificaciones. OJO CON ESTO, fijense que les parece.
 	Cultivo& obtenerCultivo();
 
 	void liberarParcela();
-
 
 	//Post: Siembra un cultivo, asignandole las propiedades de dicho cultivo al cultivo contenido por la parcela.
 	void sembrarCultivo(std::string nombreLeido,int costoSemillaLeido,int tiempoCosechaLeido,
@@ -70,6 +67,8 @@ public:
 
 	//Agregado que faltaba de antes.
 	void cultivarParcela(Monedero& monedero);
+
+	//ob
 
 
 

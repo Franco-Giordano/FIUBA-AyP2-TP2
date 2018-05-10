@@ -10,7 +10,7 @@ int Monedero::obtenerDineroActual(){
 	return this->dinero;
 }
 
-bool Monedero::dineroSuficiente(int dineroAGastar){
+bool Monedero::dineroSuficiente(unsigned int dineroAGastar){
 	return (this->dinero > dineroAGastar);
 }
 void Monedero::sumarDinero(unsigned int dineroASumar){
