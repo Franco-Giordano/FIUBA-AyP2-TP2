@@ -81,8 +81,8 @@ int main(){
 				cout << "Nombre: " << terreno.obtenerParcela(i,j).obtenerCultivo()->obtenerNombre() << endl;
 				cout << "Costo semilla: " << terreno.obtenerParcela(i,j).obtenerCultivo()->obtenerCostoSemilla() << endl;
 				cout << "Rentabilidad: " << terreno.obtenerParcela(i,j).obtenerCultivo()->obtenerRentabilidad() << endl;
-				cout << "Tiempo cosecha: " << terreno.obtenerParcela(i,j).obtenerCultivo()->obtenerTiempoCosecha() << endl;
-				cout << "Tiempo recuperacion: " << terreno.obtenerParcela(i,j).obtenerCultivo()->obtenerTiempoRecuperacion() << endl;
+				cout << "Tiempo cosecha: " << terreno.obtenerParcela(i,j).obtenerTiempoCosecha()<< endl;
+				cout << "Tiempo recuperacion: " << terreno.obtenerParcela(i,j).obtenerTiempoRecuperacion()<< endl;
 				cout << "Regada: " << terreno.obtenerParcela(i,j).estaRegada()<< endl << endl;
 			}
 		}

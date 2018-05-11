@@ -68,6 +68,12 @@ public:
 	//Agregado que faltaba de antes.
 	void cultivarParcela(Monedero& monedero);
 
+	//Post: Devuelve el tiempo actual que falta hasta la cosecha de la parcela.
+	int obtenerTiempoCosecha();
+
+	//Devuelve el tiempo de recuperación actual de la parcela.
+	int obtenerTiempoRecuperacion();
+
 };
 
 

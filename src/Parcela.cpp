@@ -69,3 +69,13 @@ void Parcela:: cultivarParcela(Monedero& monedero){
 	monedero.sumarDinero(this->cultivo->obtenerRentabilidad());
 	this->liberarParcela();
 }
+
+int Parcela::obtenerTiempoCosecha(){
+
+	return this->tiempoCosecha;
+}
+
+int Parcela::obtenerTiempoRecuperacion(){
+
+	return this->tiempoRecuperacion;
+}
