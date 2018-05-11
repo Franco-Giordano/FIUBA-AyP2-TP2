@@ -31,35 +31,35 @@ private:
 
 	bool regada;
 
-	Cultivo cultivo;
+	Cultivo* cultivo;
+
+	int tiempoCosecha;
+
+	int tiempoRecuperacion;
 
 public:
 
 	//Post: Crea una parcela, con un tipo de cultivo VacÃ­o, con estado Libre, y sin regar.
 	Parcela();
 
-	
-	//Post: Devuelve true si estï¿½ plantada, false si no lo estï¿½.
+	//Post: Devuelve true si estaplantada, false si no lo esta
 	//Podria servir para las validaciones, como estaLibre.
 	bool estaPlantada();
 
-	//Post: Devuelve true si estï¿½ regada, false si no lo estï¿½.
-	// Cambie el nombre, porque me parece mas claro comparar con un si esta o no esta regada
-	// que con obtenerRegado.
+	//Post: Devuelve true si esta regada, false si no lo esta.
 	bool estaRegada();
 
-	//Post: Devuelve true si estï¿½ libre, false si no lo estï¿½.
+	//Post: Devuelve true si esta libre, false si no lo esta.
 	bool estaLibre();
 
-	//Post: Devuelve el objeto cultivo por referencia, para modificaciones. OJO CON ESTO, fijense que les parece.
-	Cultivo& obtenerCultivo();
+	//Post: Devuelve un puntero a la "bolsa de semillas", especificamente apuntando al cultivo que está plantado en la parcela.
+	Cultivo* obtenerCultivo();
 
+	//Post:  Libera la parcela, dejando al cultivo en NULL y el estado en Libre.
 	void liberarParcela();
 
 	//Post: Siembra un cultivo, asignandole las propiedades de dicho cultivo al cultivo contenido por la parcela.
-	void sembrarCultivo(std::string nombreLeido,int costoSemillaLeido,int tiempoCosechaLeido,
-						int rentabilidadLeida, int tiempoRecuperacionLeido,Monedero &monedero,
-						int consumoDeAguaRecibido);
+	void sembrarCultivo(Cultivo* cultivoParaSembrar,Monedero &monedero);
 
 	//Pre:  El estado de regada debe ser False.
 	//Post: Cambia el estado de regada a True.
@@ -67,10 +67,6 @@ public:
 
 	//Agregado que faltaba de antes.
 	void cultivarParcela(Monedero& monedero);
-
-	//ob
-
-
 
 };
 

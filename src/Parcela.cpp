@@ -8,29 +8,33 @@
 #include "Parcela.h"
 
 
-
 Parcela::Parcela(){
 
-	Cultivo cultivo;
+	this -> cultivo = NULL;
 	this -> estado = Libre;
 	this -> regada = false;
+	this->tiempoRecuperacion = 0;
+	this->tiempoCosecha = 0;
 
 }
+
 
 bool Parcela:: estaRegada(){
 	return this -> regada;
 }
 
+
 bool Parcela::estaPlantada(){
 	return this->estado == Plantada;
 }
+
 
 bool Parcela::estaLibre(){
 	return this->estado == Libre;
 }
 
 
-Cultivo& Parcela::obtenerCultivo(){
+Cultivo* Parcela::obtenerCultivo(){
 
 	return this->cultivo;
 }
@@ -38,15 +42,16 @@ Cultivo& Parcela::obtenerCultivo(){
 
 void Parcela::liberarParcela(){
 	this->estado = Libre;
+	this->cultivo = NULL;
 }
 
-void Parcela::sembrarCultivo(std::string nombreLeido,int costoSemillaLeido,int tiempoCosechaLeido,
-							int rentabilidadLeida, int tiempoRecuperacionLeido,Monedero &monedero,
-							int consumoDeAguaRecibido){
 
-	obtenerCultivo().modificarCultivo(nombreLeido,costoSemillaLeido,tiempoCosechaLeido,rentabilidadLeida,
-									  tiempoRecuperacionLeido, consumoDeAguaRecibido);
-	monedero.gastarDinero(obtenerCultivo().obtenerCostoSemilla());
+void Parcela::sembrarCultivo(Cultivo* cultivoParaSembrar,Monedero &monedero){
+
+	this->cultivo = cultivoParaSembrar;
+	this->tiempoCosecha = this->cultivo->obtenerTiempoCosecha();
+	this->tiempoRecuperacion = this->cultivo->obtenerTiempoRecuperacion();
+	monedero.gastarDinero(this->cultivo->obtenerCostoSemilla());
 
 }
 
@@ -61,7 +66,6 @@ void Parcela::regarParcela(TanqueDeAgua& tanqueAgua, int costoDeAgua){
 
 void Parcela:: cultivarParcela(Monedero& monedero){
 
-	monedero.sumarDinero(this->obtenerCultivo().obtenerRentabilidad());
-	obtenerCultivo().modificarCultivo(" VACIO ", 0, 0, 0, this->obtenerCultivo().obtenerTiempoRecuperacion(), 0);
+	monedero.sumarDinero(this->cultivo->obtenerRentabilidad());
 	this->liberarParcela();
 }
