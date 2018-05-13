@@ -30,7 +30,28 @@ void Almacen::agrandarAlmacen(Monedero* monedero, unsigned int capacidadAAgregar
 
 		monedero->gastarDinero(precio);
 		this->capacidad += capacidadAAgregar;
+}
+
+void Almacen::agregarCultivo(Cultivo* cultivo){
+		cultivos->agregar(cultivo);							// Habria que chequear que no supera el maximo
+}
 
 
+void Almacen::quitarCultivo(int posicion){
+	cultivos->remover(posicion);
+}
 
+void Almacen:: mostrarNombresDeCultivosEnElAlmacen(){
+	cultivos->iniciarCursor();
+	int i=1;
+	while ( cultivos->avanzarCursor()){
+		cout << "Elemento " << i << "en la lista: " << cultivos->obtener(i)->obtenerNombre() << endl;
+		i++;
+	}
+
+}
+
+
+Almacen::~Almacen() {
+	delete cultivos;
 }
