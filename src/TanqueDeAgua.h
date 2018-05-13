@@ -1,3 +1,9 @@
+/*
+ * tanqueDeAgua.h
+ *
+ *  Created on: 28 abr. 2018
+ *      Author: Alvaro
+ */
 
 #ifndef TANQUEDEAGUA_H_
 #define TANQUEDEAGUA_H_
@@ -8,7 +14,7 @@
 class TanqueDeAgua {
 private:
 	unsigned int cantidadDeAguaActual;
-	unsigned int cantidadDeAguaMaxima;
+	unsigned int capacidadMaxima;
 public:
 	//Pre: se recibe N,M y la dificultad
 	//dado el tamaño del terreno como [N,M] y la dificultad en el intervalo [1,3]
@@ -31,11 +37,14 @@ public:
 	//Post: devuelve la capacidad maxima del tanque de agua.
 	int obtenerCantidadDeAguaMaxima();
 
+	bool hayAguaEnElTanque();
+
+
 	//Pre: La ampliacion depende de la dificultad y de la eleccion del usuario. El usuario podrá
 	//elegir una ampliacion de 5, 10 o 15 unidades, y la dificultad cambiara el dinero requerido para
 	//llevar a cabo esa accion. Recibe el monedero para poder modificar el haber del jugador.
 	//Post: se amplia el tanque restando el dinero del monedero.
-	void ampliarTanque(int dificultad, Monedero &monedero, int ampliacionElegida);
+	void ampliarTanque(int dificultad, Monedero* monedero, int ampliacionElegida);
 
 	~TanqueDeAgua();
 };
