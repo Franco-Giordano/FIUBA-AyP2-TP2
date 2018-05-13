@@ -1,10 +1,17 @@
+/*
+ * Almacen.cpp
+ *
+ *  Created on: 6 may. 2018
+ *      Author: Alvaro
+ */
+
 #include "Almacen.h"
 #include <iostream>
 using namespace std;
 
 Almacen::Almacen(int N, int M, int dificultad) {
 	this->capacidad= (2*(N+M))/dificultad;
-	Lista<Cultivo> cultivos;
+	this->cultivos= new Lista<Cultivo*>;
 }
 
 int Almacen::obtenerCapacidad(){
@@ -12,43 +19,18 @@ int Almacen::obtenerCapacidad(){
 }
 
 bool Almacen:: capacidadValida(){
-	return (cultivos.contarElementos() <= capacidad);
+	return (cultivos->contarElementos() <= capacidad);
 }
 
-void Almacen::agrandarAlmacen(Monedero& monedero, unsigned int capacidadAAgregar, int dificultad){
+void Almacen::agrandarAlmacen(Monedero* monedero, unsigned int capacidadAAgregar, int dificultad){
 
 	int precio= (capacidadAAgregar + dificultad) *10;
 
-	if (monedero.dineroSuficiente(precio)){
-		monedero.gastarDinero(precio);
+//	if (monedero->dineroSuficiente(precio)){             // Esto hay que validarlo
+
+		monedero->gastarDinero(precio);
 		this->capacidad += capacidadAAgregar;
-	}
 
 
-}
 
-void Almacen::agregarCultivo(Cultivo cultivo){
-	if( capacidadValida())
-		cultivos.agregar(cultivo);
-	else
-		cout << "Se llego a la capacidad maxima del almacen." << endl;
-}
-
-
-void Almacen::quitarCultivo(int posicion){
-	cultivos.remover(posicion);
-}
-
-void Almacen:: mostrarNombresDeCultivosEnElAlmacen(){
-	cultivos.iniciarCursor();
-	int i=1;
-	while ( cultivos.avanzarCursor()){
-		cout << "Elemento " << i << "en la lista: " << cultivos.obtener(i).obtenerNombre() << endl;
-		i++;
-	}
-
-}
-
-
-Almacen::~Almacen() {
 }
