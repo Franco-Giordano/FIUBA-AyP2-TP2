@@ -1,3 +1,10 @@
+/*
+ * Almacen.h
+ *
+ *  Created on: 6 may. 2018
+ *      Author: Alvaro
+ */
+
 #ifndef ALMACEN_H_
 #define ALMACEN_H_
 
@@ -8,10 +15,10 @@
 class Almacen {
 private:
 	unsigned int capacidad;
-	Lista<Cultivo> cultivos;
+	Lista<Cultivo*>* cultivos;
 
 public:
-	/* Crea el objeto almacen que depende del tamaÃ±o inicial del terreno y de la dificultad
+	/* Crea el objeto almacen que depende del tamaño inicial del terreno y de la dificultad
 	 * Este objeto tiene un atributo llamado capacidad que data del maximo de cultivos cosechados que se
 	 * podran almacenar en el mismo.
 	 */
@@ -26,10 +33,10 @@ public:
 
 	//Pre:
 	//Post: incrementa la capacidad del almacen para poder seguir agregando elementos a la lista.
-	void agrandarAlmacen(Monedero& monedero, unsigned int capacidadAAgregar,  int dificultad);
+	void agrandarAlmacen(Monedero* monedero, unsigned int capacidadAAgregar,  int dificultad);
 
 	//Post: agrega un nodo cultivo a la lista de cultivos.
-	void agregarCultivo(Cultivo cultivo);
+	void agregarCultivo(Cultivo* cultivo);
 
 	// Post: quita un elemento de la lista de cultivos-
 	void quitarCultivo(int posicion);
