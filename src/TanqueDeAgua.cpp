@@ -11,7 +11,7 @@ using namespace std;
 
 TanqueDeAgua::TanqueDeAgua(unsigned int N, unsigned int M, unsigned int dificultad) {
 	this->cantidadDeAguaActual=0;
-	this->cantidadDeAguaMaxima= (N * M * 2) / dificultad;
+	this->capacidadMaxima= (N * M * 2) / dificultad;
 
 }
 
@@ -28,15 +28,19 @@ int TanqueDeAgua::obtenerCantidadDeAguaActual(){
 }
 
 int TanqueDeAgua::obtenerCantidadDeAguaMaxima(){
-	return this->cantidadDeAguaMaxima;
+	return this->capacidadMaxima;
 }
 
-void TanqueDeAgua::ampliarTanque(int dificultad, Monedero &monedero, int ampliacionElegida){
+bool TanqueDeAgua:: hayAguaEnElTanque(){
+	return this->cantidadDeAguaActual>0;
+}
 
-	cantidadDeAguaMaxima+= ampliacionElegida;  //amplia el tanque
+void TanqueDeAgua::ampliarTanque(int dificultad, Monedero* monedero, int ampliacionElegida){
+
+	capacidadMaxima+= ampliacionElegida;  //amplia el tanque
 
 	int dineroGastado= ampliacionElegida*dificultad;
-	monedero.gastarDinero(dineroGastado);
+	monedero->gastarDinero(dineroGastado);
 
 }
 
