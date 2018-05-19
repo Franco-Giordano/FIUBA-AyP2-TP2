@@ -1,3 +1,13 @@
+/*
+ * Usuario.h
+ *
+ *  Created on: 5 may. 2018
+ *      Author: Alvaro
+ */
+
+#ifndef JUGADOR_H_
+#define JUGADOR_H_
+
 #include <iostream>
 #include "Monedero.h"
 #include "TanqueDeAgua.h"
@@ -13,7 +23,7 @@ class Jugador {
 private:
 	int cantidadDeTerrenos;
 	Monedero* monedero;
-	Lista<Terreno*>* terrenos= new Lista<Terreno*>;
+	Lista<Terreno*>* terrenos;
 	TanqueDeAgua* tanque;
 	Almacen* almacen;
 
@@ -22,7 +32,7 @@ public:
 	// reciben N y M, las cuales seran las dimensiones del terreno inicial del jugador. Cada jugador se crea con un
 	// terreno inicialmente.
 	//Post: se crea el objeto jugador.
-	Jugador(Monedero* monedero, TanqueDeAgua* tanque, Almacen* almacen, int N, int M);
+	Jugador(int N, int M, int dificultad);
 
 	//Post: Devuelve el puntero al objeto monedero.
 	Monedero* obtenerMonedero();
