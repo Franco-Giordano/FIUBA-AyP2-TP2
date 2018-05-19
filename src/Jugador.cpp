@@ -1,3 +1,10 @@
+/*
+ * Usuario.cpp
+ *
+ *  Created on: 5 may. 2018
+ *      Author: Alvaro
+ */
+
 #include "Jugador.h"
 
 #include "Monedero.h"
@@ -5,14 +12,14 @@
 
 using namespace std;
 
-Jugador::Jugador(Monedero* monedero, TanqueDeAgua* tanque, Almacen* almacen, int N, int M) {
+Jugador::Jugador (int N, int M, int dificultad) {
 	this->cantidadDeTerrenos= 1;
-	this->monedero = monedero;
+	this->monedero = new Monedero(N, M, dificultad);
 	this->terrenos= new Lista<Terreno*>;
 	Terreno* terreno=new Terreno(N,M);
 		terrenos->agregar(terreno);
-	this->tanque= tanque;
-	this->almacen= almacen;
+	this->tanque= new TanqueDeAgua (N, M, dificultad);
+	this->almacen= new Almacen (N, M, dificultad);
 }
 
 Lista<Terreno*>* Jugador::obtenerListaTerreno(){
@@ -81,5 +88,3 @@ Jugador::~Jugador() {
 	delete this->terrenos;
 
 }
-
-
