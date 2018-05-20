@@ -12,19 +12,20 @@ public:
 	 */
 	RealizadorDeAcciones();
 	/*
-	 * post: Dependiendo de la opcion ingresada, se realizar√° la accion que se desee
+	 * post: Dependiendo de la opcion ingresada, se realizar· la accion que se desee. Tambien recibe la dificultad para
+	 * las acciones que dependan de ella
 	 */
-	void realizoAccion(unsigned int opcion);
+	void realizoAccion(unsigned int opcion, int dificultad);
 	/*
-	 * post: Le pregunta al jugador en qu√© fila de su terreno desea realizar una accion, y la devuelve
+	 * post: Le pregunta al jugador en quÈ fila de su terreno desea realizar una accion, y la devuelve
 	 */
 	unsigned int obtenerFila();
 	/*
-	 * post: Le pregunta al jugador en qu√© columna de su terreno desea realizar una accion, y la devuelve
+	 * post: Le pregunta al jugador en quÈ columna de su terreno desea realizar una accion, y la devuelve
 	 */
 	unsigned int obtenerColumna();
 	/*
-	 * post: Le pregunta al jugador en qu√© terreno desea realizar una accion, y lo devuelve
+	 * post: Le pregunta al jugador en quÈ terreno desea realizar una accion, y lo devuelve
 	 */
 	int obtenerTerreno();
 	/*
@@ -56,13 +57,13 @@ public:
 	 */
 	void venderTerreno();
 	/*
-	 *
+	 * post: Amplia la capacidad del tanque, y la dificultad modifica el precio de tal ampliacion
 	 */
-	void comprarCapacidadTanque();
+	void comprarCapacidadTanque(int dificultad);
 	/*
-	 *
+	 * post: Amplia la capacidad del almacen, y la dificultad modifica el precio de tal ampliacion
 	 */
-	void comprarCapacidadAlmacen();
+	void comprarCapacidadAlmacen(int dificultad);
 	/*
 	 *
 	 */
