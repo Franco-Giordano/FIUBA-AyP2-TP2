@@ -8,7 +8,7 @@ RealizadorDeAcciones::RealizadorDeAcciones()
 	opcion=acciones.obtenerOpcionElegida();
 }
 
-void RealizadorDeAcciones::realizoAccion(unsigned int opcion)
+void RealizadorDeAcciones::realizoAccion(unsigned int opcion, int dificultad)
 {
 	opcion=this-> opcion;
 	switch (opcion)
@@ -25,9 +25,9 @@ void RealizadorDeAcciones::realizoAccion(unsigned int opcion)
 		break;
 		case 6: venderTerreno();
 		break;
-		case 7: comprarCapacidadTanque();
+		case 7: comprarCapacidadTanque(dificultad);
 		break;
-		case 8: comprarCapacidadAlmacen();
+		case 8: comprarCapacidadAlmacen(dificultad);
 		break;
 		case 9: pasarTurno();
 		break;
@@ -132,22 +132,48 @@ void RealizadorDeAcciones::enviarCosecha()
 
 void RealizadorDeAcciones::comprarTerreno()
 {
-
+	Jugador jugador;
+	cout<<"Ingrese la cantidad de filas y columnas que desea que su nuevo terreno posea: "<<endl;
+	unsigned int filas=obtenerFila();
+	unsigned int columnas=obtenerColumna();
+	//Falta el precio del terreno
+	jugador.comprarTerreno(filas, columnas);
 }
 
 void RealizadorDeAcciones::venderTerreno()
 {
-
+	Jugador jugador;
+	unsigned int terrenoAVender=obtenerTerreno();
+	//Falta el precio del terreno
+	jugador.venderTerreno(terrenoAVender);
 }
 
-void RealizadorDeAcciones::comprarCapacidadTanque()
+void RealizadorDeAcciones::comprarCapacidadTanque(int dificultad)
 {
-
+	TanqueDeAgua tanque;
+	Monedero* monedero;
+	unsigned int ampliacion;
+	cout<<"¿Cuanto desea ampliar su tanque?"<<endl;
+	cin>>ampliacion;
+	if(monedero->dineroSuficiente(dificultad*ampliacion)) //dificultad*ampliacion es el precio
+		tanque.ampliarTanque(dificultad, monedero, ampliacion);
+	else
+		cout<<"No posee dinero suficiente"<<endl;
 }
 
-void RealizadorDeAcciones::comprarCapacidadAlmacen()
+void RealizadorDeAcciones::comprarCapacidadAlmacen(int dificultad)
 {
-
+	Almacen almacen;
+	Monedero* monedero;
+	unsigned int ampliacion, precio=(ampliacion + dificultad) *10; //hay que sacarlo de almacen.cpp
+	cout<<"¿Cuanto desea ampliar su almacen?"<<endl;
+	cin>>ampliacion;
+	if(almacen.capacidadValida() && monedero->dineroSuficiente(precio))
+	{
+		almacen.agrandarAlmacen(monedero, ampliacion, dificultad); //hay un problema en almacen.agrandaralmacen
+	}
+	else
+		cout<<"No se ha podido realizar la expansion"<<endl;
 }
 
 void RealizadorDeAcciones::pasarTurno()
