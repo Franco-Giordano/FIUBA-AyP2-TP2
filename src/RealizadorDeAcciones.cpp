@@ -174,6 +174,7 @@ void RealizadorDeAcciones::comprarCapacidadAlmacen(int dificultad)
 	}
 	else
 		cout<<"No se ha podido realizar la expansion"<<endl;
+
 }
 
 void RealizadorDeAcciones::pasarTurno()
