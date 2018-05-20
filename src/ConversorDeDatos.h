@@ -23,7 +23,7 @@ public:
 	/* PRE: Recibe un puntero a un array de strings de tamanio 6, donde cada posicion representa las propiedades
 	 * de un cultivo: nombre, precio, rentabilidad, tiempoCosecha, tiempoRecuperacion, consumoAgua respectivamente.
 	 * Cada propiedad debera ser valida ya que sera convertida a su tipo correspondiente, condiciones de validez ya descriptas en "Cultivo.h"
-	 * Ademas, recibe por referencia un objeto del tipo Cultivo
+	 * Ademas, recibe por referencia un objeto del tipo Cultivo.
 	 * POST: le asigna a 'cultivoAmodificar' las propiedades descriptas en 'datos'.
 	 */
 	void convertirCultivo(std::string* datos, Cultivo &cultivoAmodificar);
