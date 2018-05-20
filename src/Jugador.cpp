@@ -43,7 +43,7 @@ Almacen* Jugador:: obtenerAlmacen(){
 void Jugador::regar(int terrenoARegar, int posFila, int posColumna ){
 
 	int consumoDeAgua= terrenos->obtener(terrenoARegar)->obtenerParcela(posFila, posColumna).
-						obtenerCultivo()->obtenerConsumoDeAgua();
+						obtenerCultivo()->obtenerConsumoAgua();
 
 	this->terrenos->obtener(terrenoARegar)->obtenerParcela(posFila, posColumna).regarParcela(this->tanque, consumoDeAgua);
 
