@@ -2,7 +2,7 @@
  * Terreno.h
  *
  *  Created on: 4 may. 2018
- *      Author: federico
+ *      Author: Federico
  */
 
 #ifndef TERRENO_H_
@@ -30,7 +30,7 @@ public:
 	int obtenerColumnas();
 
 	//Post: Devuelve el objeto parcela como referencia para su modifición. OJO CON ESTO, funciona, pero no se que les parece.
-	Parcela& obtenerParcela(int coordenadaX, int coordenadaY);
+	Parcela* obtenerParcela(int coordenadaX, int coordenadaY);
 
 	//Post: Libera la memoria utilizada por la matriz dinámica Terreno.
 	~Terreno();

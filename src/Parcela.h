@@ -2,7 +2,7 @@
  * Parcela.h
  *
  *  Created on: 4 may. 2018
- *      Author: federico
+ *      Author: Federico
  */
 
 #ifndef PARCELA_H_
@@ -18,9 +18,7 @@ enum Estado
 	{
 		Libre,
 		Plantada,
-		Cosechada,
-		Podrida,
-		Seca,
+		Recuperando,
 	};
 
 class Parcela
@@ -38,9 +36,11 @@ private:
 
 	int tiempoRecuperacion;
 
+
+
 public:
 
-	//Post: Crea una parcela, con un tipo de cultivo VacÃ­o, con estado Libre, y sin regar.
+	//Post: Crea una parcela, con un cultivo NULL (o vacio), con estado Libre, y sin regar.
 	Parcela();
 
 	//Post: Devuelve true si estaplantada, false si no lo esta
@@ -53,29 +53,29 @@ public:
 	//Post: Devuelve true si esta libre, false si no lo esta.
 	bool estaLibre();
 
-	//Post: Devuelve un puntero a la "bolsa de semillas", especificamente apuntando al cultivo que estï¿½ plantado en la parcela.
-	Cultivo* obtenerCultivo();
-
 	//Post:  Libera la parcela, dejando al cultivo en NULL y el estado en Libre.
 	void liberarParcela();
 
-	//Post: Siembra un cultivo, asignandole las propiedades de dicho cultivo al cultivo contenido por la parcela.
-	void sembrarCultivo(Cultivo* cultivoParaSembrar, Monedero* monedero);
-
-	//Pre:  El estado de regada debe ser False.
-	//Post: Cambia el estado de regada a True.
-	void regarParcela(TanqueDeAgua* tanqueAgua,int costoDeAgua);
-
-
-	//Post: quita el cultivo de la parcela y lo manda al almacen.  Luego la parcela es puesta en estado "Plantada"
-	// y su puntero a cultivo es puesto en "Null".
-	void cosecharParcela(Monedero* monedero, Almacen* almacen);
+	//Post: Devuelve un puntero a la "bolsa de semillas", especificamente apuntando al cultivo que estï¿½ plantado en la parcela.
+	Cultivo* obtenerCultivo();
 
 	//Post: Devuelve el tiempo actual que falta hasta la cosecha de la parcela.
 	int obtenerTiempoCosecha();
 
-	//Devuelve el tiempo de recuperaciï¿½n actual de la parcela.
+	//Post:Devuelve el tiempo de recuperacion actual de la parcela.
 	int obtenerTiempoRecuperacion();
+
+	//Post: modificar el tiempo de cosecha por el recibido por parámetro.
+	void modificarTiempoCosecha(int tiempoCosechaRecibido);
+
+
+	void modificarTiempoRecuperacion(int tiempoRecuperacionRecibido);
+
+	void modificarEstado(Estado estadoRecibido);
+
+	void modificarCultivo(Cultivo* cultivoRecibido);
+
+	void modificarRegado();
 
 };
 

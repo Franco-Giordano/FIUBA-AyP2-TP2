@@ -2,7 +2,7 @@
  * Parcela.cpp
  *
  *  Created on: 5 may. 2018
- *      Author: Alvaro
+ *      Author: Federico
  */
 
 #include "Parcela.h"
@@ -10,17 +10,7 @@
 
 Parcela::Parcela(){
 
-	this -> cultivo = NULL;
-	this -> estado = Libre;
-	this -> regada = false;
-	this->tiempoRecuperacion = 0;
-	this->tiempoCosecha = 0;
-
-}
-
-
-bool Parcela:: estaRegada(){
-	return this -> regada;
+	this -> liberarParcela();
 }
 
 
@@ -29,8 +19,24 @@ bool Parcela::estaPlantada(){
 }
 
 
+bool Parcela:: estaRegada(){
+
+	return this -> regada;
+}
+
+
 bool Parcela::estaLibre(){
+
 	return this->estado == Libre;
+}
+
+void Parcela::liberarParcela(){
+
+	this -> cultivo = NULL;
+	this -> estado = Libre;
+	this -> regada = false;
+	this->tiempoRecuperacion = 0;
+	this->tiempoCosecha = 0;
 }
 
 
@@ -40,15 +46,11 @@ Cultivo* Parcela::obtenerCultivo(){
 }
 
 
-void Parcela::liberarParcela(){
-	this->estado = Libre;
-	this->cultivo = NULL;
-}
-
 int Parcela::obtenerTiempoCosecha(){
 
 	return this->tiempoCosecha;
 }
+
 
 int Parcela::obtenerTiempoRecuperacion(){
 
@@ -56,32 +58,30 @@ int Parcela::obtenerTiempoRecuperacion(){
 }
 
 
-void Parcela::sembrarCultivo(Cultivo* cultivoParaSembrar,Monedero* monedero){
+void Parcela::modificarTiempoCosecha(int tiempoCosechaRecibido){
 
-	this->cultivo = cultivoParaSembrar;
-	this->tiempoCosecha = this->cultivo->obtenerTiempoCosecha();
-	this->tiempoRecuperacion = this->cultivo->obtenerTiempoRecuperacion();
-	monedero->gastarDinero(this->obtenerCultivo()->obtenerCostoSemilla());
-
-}
-
-void Parcela::regarParcela(TanqueDeAgua* tanqueAgua, int costoDeAgua){
-
-	if (!this -> regada){							// Esto se podria chequear en otro lado.
-		this -> regada = true;
-		tanqueAgua->restarAgua(costoDeAgua);
-	}
+	this -> tiempoCosecha = tiempoCosechaRecibido;
 }
 
 
-void Parcela:: cosecharParcela(Monedero* monedero, Almacen* almacen){
+void Parcela::modificarTiempoRecuperacion(int tiempoRecuperacionRecibido){
 
-	almacen->agregarCultivo(this->cultivo);
-	this->tiempoRecuperacion= this->obtenerCultivo()->obtenerTiempoRecuperacion();
+	this -> tiempoRecuperacion = tiempoRecuperacionRecibido;
+}
 
-	this->cultivo=NULL;
-	this->estado= Cosechada;
 
-	this->liberarParcela();
+void Parcela:: modificarEstado(Estado estadoRecibido){
+
+	this -> estado = estadoRecibido;
+}
+
+void Parcela:: modificarCultivo(Cultivo* cultivoRecibido){
+
+	this -> cultivo = cultivoRecibido;
+}
+
+void Parcela:: modificarRegado(){
+
+	this -> regada = true;
 }
 

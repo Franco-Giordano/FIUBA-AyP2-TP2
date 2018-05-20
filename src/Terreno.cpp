@@ -2,13 +2,12 @@
  * Terreno.cpp
  *
  *  Created on: 4 may. 2018
- *      Author: federico
+ *      Author: Federico
  */
 
 #include "Terreno.h"
 
-Terreno::Terreno(int cantidadFilasRecibidas, int cantidadColumnasRecibidas)
-{
+Terreno::Terreno(int cantidadFilasRecibidas, int cantidadColumnasRecibidas){
 
 		if (cantidadFilasRecibidas >= 0 && cantidadColumnasRecibidas >= 0)
 		{
@@ -30,26 +29,22 @@ Terreno::Terreno(int cantidadFilasRecibidas, int cantidadColumnasRecibidas)
 		}
 	}
 
-	int Terreno::obtenerFilas()
-	{
+	int Terreno::obtenerFilas(){
 
 		return this->cantidadFilas;
 	}
 
-	int Terreno::obtenerColumnas()
-	{
+	int Terreno::obtenerColumnas(){
 
 		return this->cantidadColumnas;
 	}
 
-	Parcela&  Terreno::obtenerParcela(int coordenadaX, int coordenadaY)
-	{
+	Parcela*  Terreno::obtenerParcela(int coordenadaX, int coordenadaY){
 
-		return this -> terreno[coordenadaX][coordenadaY];
+		return &( this -> terreno[coordenadaX][coordenadaY]);
 	}
 
-	Terreno::~Terreno()
-	{
+	Terreno::~Terreno(){
 
 		for (int i = 0; i < cantidadFilas; i++){
 			delete [] terreno[i];
