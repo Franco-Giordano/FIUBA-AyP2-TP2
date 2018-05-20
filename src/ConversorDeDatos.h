@@ -9,6 +9,7 @@
 #define SRC_CONVERSORDEDATOS_H_
 
 #include "Cultivo.h"
+#include "Destino.h"
 #include <sstream>
 typedef unsigned int ui;
 
@@ -26,12 +27,16 @@ public:
 	 * Ademas, recibe por referencia un objeto del tipo Cultivo.
 	 * POST: le asigna a 'cultivoAmodificar' las propiedades descriptas en 'datos'.
 	 */
-	void convertirCultivo(std::string* datos, Cultivo &cultivoAmodificar);
+	void convertirAobjeto(std::string* datos, Cultivo &cultivoAmodificar);
 
 
-	//--------------FALTA HACER CLASE DESTINO (o no?)-----------------------
-	/* void convertirDestino(std::string* datos, Destino &destinoAmodificar);
+	/* PRE: Recibe un puntero a un array de strings de tamanio 4, donde cada posicion representa las propiedades
+	 * de un destino: nombre, distancia en KM, precio, cultivo respectivamente.
+	 * Cada propiedad debera ser valida ya que sera convertida a su tipo correspondiente, condiciones de validez ya descriptas en "Destino.h"
+	 * Ademas, recibe por referencia un objeto del tipo Destino.
+	 * POST: le asigna a 'destinoAmodificar' las propiedades descriptas en 'datos'.
 	 */
+	void convertirAobjeto(std::string* datos, Destino &destinoAmodificar);
 
 };
 

@@ -10,7 +10,7 @@
 ConversorDeDatos::ConversorDeDatos() {};
 
 
-void ConversorDeDatos::convertirCultivo(std::string* datos, Cultivo &cultivoAmodificar){
+void ConversorDeDatos::convertirAobjeto(std::string* datos, Cultivo &cultivoAmodificar){
 	std::string nombre = datos[0];
 
 	ui precio,rentabilidad,tiempoCosecha,tiempoRecuperacion,consumoAgua;
@@ -24,15 +24,13 @@ void ConversorDeDatos::convertirCultivo(std::string* datos, Cultivo &cultivoAmod
 }
 
 
-
-//--------------FALTA HACER CLASE DESTINO (o no?)-----------------------
-/* void ConversorDeDatos::convertirDestino(std::string* datos, Destino &destinoAmodificar){
+void ConversorDeDatos::convertirAobjeto(std::string* datos, Destino &destinoAmodificar){
 		std::string nombre = datos[0];
-		ui distancia, precio, cultivo;
+		ui distancia, precio;
 		std::istringstream(datos[1]) >> distancia;
 		std::istringstream(datos[2]) >> precio;
-		std::istringstream(datos[3]) >> cultivo;
+		std::string cultivo = datos[3];
 
-		destinoAmodificar->modificarDestino(nombre, distancia, precio, cultivo);
-}*/
+		destinoAmodificar.modificarDestino(nombre, distancia, precio, cultivo);
+}
 

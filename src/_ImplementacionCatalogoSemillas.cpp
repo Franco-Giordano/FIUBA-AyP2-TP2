@@ -1,9 +1,10 @@
 
 
 #include <iostream>
+
+#include "Catalogo.h"
 #include "LectorCSV.h"
 #include "ConversorDeDatos.h"
-#include "CatalogoDeSemillas.h"
 
 typedef unsigned int ui;
 
@@ -13,11 +14,11 @@ using namespace std;
 
 int main(){
 
-	LectorCSV lectorDeCosas("RUTA_ARCHIVO_SEMILLAS", 6);
+	LectorCSV lectorDeCosas("hola", 6);
 
 	Lista<std::string*>* datos = lectorDeCosas.obtenerLista();
 
-	CatalogoDeSemillas todasLasSemillas(datos);
+	CatalogoDe<Cultivo> todasLasSemillas(datos);
 
 	Cultivo* actual;
 	for (unsigned int i = 0; i < todasLasSemillas.obtenerCantidadDisponible(); i++) {
@@ -31,4 +32,5 @@ int main(){
 	return 0;
 
 }
+
 

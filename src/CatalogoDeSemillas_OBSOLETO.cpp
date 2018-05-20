@@ -5,7 +5,7 @@
  *      Author: frank
  */
 
-#include "CatalogoDeSemillas.h"
+#include "CatalogoDeSemillas_OBSOLETO.h"
 
 
 CatalogoDeSemillas::CatalogoDeSemillas(Lista<std::string*>* datosCSV) {
@@ -22,7 +22,7 @@ CatalogoDeSemillas::CatalogoDeSemillas(Lista<std::string*>* datosCSV) {
 		datosCultivoActual = datosCSV->obtenerCursor();
 
 		Cultivo cultivoActual;
-		conversor.convertirCultivo(datosCultivoActual, cultivoActual);
+		conversor.convertirAobjeto(datosCultivoActual, cultivoActual);
 
 		semillas[posicion] = cultivoActual;
 		posicion++;

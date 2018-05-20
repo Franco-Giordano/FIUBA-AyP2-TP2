@@ -1,4 +1,4 @@
-#include "Jugadores.h"
+#include "Jugadores_OBSOLETO.h"
 
 Jugadores::Jugadores(unsigned int numeroDeJugadores) {
 	this->jugadores= new Lista<Jugador*>;

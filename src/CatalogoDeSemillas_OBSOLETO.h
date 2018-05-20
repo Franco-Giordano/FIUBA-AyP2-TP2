@@ -5,8 +5,8 @@
  *      Author: frank
  */
 
-#ifndef SRC_CATALOGODESEMILLAS_H_
-#define SRC_CATALOGODESEMILLAS_H_
+#ifndef SRC_CATALOGODESEMILLAS_OBSOLETO_H_
+#define SRC_CATALOGODESEMILLAS_OBSOLETO_H_
 
 #include "Cultivo.h"
 #include "Lista.h"
@@ -44,4 +44,4 @@ public:
 };
 
 
-#endif /* SRC_CATALOGODESEMILLAS_H_ */
+#endif /* SRC_CATALOGODESEMILLAS_OBSOLETO_H_ */
