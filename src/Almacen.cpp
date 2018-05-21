@@ -33,7 +33,7 @@ void Almacen::agrandarAlmacen(Monedero* monedero, unsigned int capacidadAAgregar
 }
 
 void Almacen::agregarCultivo(Cultivo* cultivo){
-		cultivos->agregar(cultivo);							// Habria que chequear que no supera el maximo
+		cultivos->agregar(cultivo);							// Habria que chequear que no supera el maximo, si esta lleno descartar mas barata (o mas vieja)
 }
 
 
@@ -41,7 +41,7 @@ void Almacen::quitarCultivo(int posicion){
 	cultivos->remover(posicion);
 }
 
-void Almacen:: mostrarNombresDeCultivosEnElAlmacen(){
+void Almacen:: mostrarNombresDeCultivosEnElAlmacen(){ 				//wat is dis
 	cultivos->iniciarCursor();
 	int i=1;
 	while ( cultivos->avanzarCursor()){

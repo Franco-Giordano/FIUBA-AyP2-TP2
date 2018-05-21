@@ -39,9 +39,9 @@ Terreno::Terreno(int cantidadFilasRecibidas, int cantidadColumnasRecibidas){
 		return this->cantidadColumnas;
 	}
 
-	Parcela*  Terreno::obtenerParcela(int coordenadaX, int coordenadaY){
+	Parcela*  Terreno::obtenerParcela(int filaElegida, int columnaElegida){
 
-		return &( this -> terreno[coordenadaX][coordenadaY]);
+		return &( this -> terreno[filaElegida][columnaElegida]);
 	}
 
 	Terreno::~Terreno(){

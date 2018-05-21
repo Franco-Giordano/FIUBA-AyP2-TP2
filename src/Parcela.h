@@ -65,7 +65,7 @@ public:
 	//Post:Devuelve el tiempo de recuperacion actual de la parcela.
 	int obtenerTiempoRecuperacion();
 
-	//Post: modificar el tiempo de cosecha por el recibido por parámetro.
+	//Post: modificar el tiempo de cosecha por el recibido por parï¿½metro.
 	void modificarTiempoCosecha(int tiempoCosechaRecibido);
 
 
@@ -76,6 +76,10 @@ public:
 	void modificarCultivo(Cultivo* cultivoRecibido);
 
 	void modificarRegado();
+
+	bool sePuedeSembrar();
+
+	bool sePuedeCosechar();
 
 };
 

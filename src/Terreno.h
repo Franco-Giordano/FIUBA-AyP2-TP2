@@ -30,7 +30,7 @@ public:
 	int obtenerColumnas();
 
 	//Post: Devuelve el objeto parcela como referencia para su modifición. OJO CON ESTO, funciona, pero no se que les parece.
-	Parcela* obtenerParcela(int coordenadaX, int coordenadaY);
+	Parcela* obtenerParcela(int filaElegida, int columnaElegida);
 
 	//Post: Libera la memoria utilizada por la matriz dinámica Terreno.
 	~Terreno();

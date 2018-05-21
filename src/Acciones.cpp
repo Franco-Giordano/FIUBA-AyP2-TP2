@@ -1,38 +1,62 @@
 #include "Acciones.h"
+#include <limits>
 using namespace std;
 
-Acciones::Acciones(){
+Acciones::Acciones(Jugador* pJugador){
 	opcionElegida=0;
+	jugador = pJugador;
 }
 
-void Acciones::mostrarAccionesPosibles(){
+unsigned int Acciones::obtenerAccionDeJugador(){
 	unsigned int opcion;
 	cout<<"Estas son las acciones que puede realizar, elija la que desea:"<<endl;
-	cout<<"1. Comprar semillas"<<endl;
-	cout<<"2. Sembrar"<<endl;
-	cout<<"3. Cosechar"<<endl;
-	cout<<"4. Regar"<<endl;
-	cout<<"5. Enviar una cosecha"<<endl;
-	cout<<"6. Comprar un terreno"<<endl;
-	cout<<"7. Vender un terreno"<<endl;
-	cout<<"8. Comprar capacidad del tanque de agua"<<endl;
-	cout<<"9. Comprar capacidad del almacen"<<endl;
-	cout<<"10. Pasar de turno"<<endl;
+	cout<<"1. Sembrar"<<endl;
+	cout<<"2. Cosechar"<<endl;
+	cout<<"3. Regar"<<endl;
+	cout<<"4. Enviar una cosecha"<<endl;
+	cout<<"5. Comprar un terreno"<<endl;
+	cout<<"6. Vender un terreno"<<endl;
+	cout<<"7. Comprar capacidad del tanque de agua"<<endl;
+	cout<<"8. Comprar capacidad del almacen"<<endl;
+	cout<<"9. Pasar de turno"<<endl;
 	cin>>opcion;
-	while (!opcionValida(opcion))
+	while (!opcionValida(1,9,opcion))
 	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout<<"Opcion invalida, ingrese otra: "<<endl;
 		cin>>opcion;
 	}
 	opcionElegida=opcion;
-}
-
-unsigned int Acciones::obtenerOpcionElegida()
-{
 	return opcionElegida;
 }
 
-bool Acciones::opcionValida(unsigned int opcion)
+bool Acciones::opcionValida(unsigned int minimo,unsigned int maximo, unsigned int opcion)
 {
-	return (opcion>0 && opcion<11);
+	return (opcion>=minimo && opcion<=maximo);
 }
+
+bool Acciones::esSiembraValida(Parcela* parcelaElegida, Cultivo* cultivoElegido) {
+
+	bool puedeComprarSemilla = jugador->obtenerMonedero()->dineroSuficiente(cultivoElegido->obtenerCostoSemilla());
+	return parcelaElegida->sePuedeSembrar() && puedeComprarSemilla;
+}
+
+
+bool Acciones::esRiegoValido(Parcela* parcelaElegida) {
+	bool hayAguaSuficiente = jugador->obtenerTanqueDeAgua()->obtenerCantidadDeAguaActual() >= parcelaElegida->obtenerCultivo()->obtenerConsumoAgua();
+	return !parcelaElegida->estaRegada() && hayAguaSuficiente;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

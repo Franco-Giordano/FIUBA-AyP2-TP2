@@ -14,7 +14,6 @@ using namespace std;
 
 Jugador::Jugador (int N, int M, int dificultad) {
 
-	this->cantidadDeTerrenos= 1;
 	this->monedero = new Monedero(N, M, dificultad);
 	this->terrenos= new Lista<Terreno*>;
 	Terreno* terreno=new Terreno(N,M);
@@ -54,7 +53,6 @@ void Jugador::agregarTerreno(int N, int M){
 void Jugador::comprarTerreno(int N, int M){
 
 	Terreno* terreno = new Terreno(N,M);
-	this->cantidadDeTerrenos++;
 	this->terrenos->agregar(terreno);
 }
 
@@ -62,7 +60,6 @@ void Jugador::comprarTerreno(int N, int M){
 void Jugador::venderTerreno(int terrenoAVender){
 
 	this->terrenos->remover(terrenoAVender);
-	this->cantidadDeTerrenos--;
 }
 
 
@@ -73,6 +70,14 @@ void Jugador::agrandarAlmacen(int capacidadAAgregar, int dificultad){
 
 
 Jugador::~Jugador() {
+	delete monedero;
+	delete tanque;
+	delete almacen;
 
-	delete this->terrenos;
+	terrenos->iniciarCursor();
+	while(terrenos->avanzarCursor()) {
+		delete terrenos->obtenerCursor();
+	}
+
+	delete terrenos;
 }

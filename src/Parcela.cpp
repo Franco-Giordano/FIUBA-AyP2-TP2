@@ -85,3 +85,11 @@ void Parcela:: modificarRegado(){
 	this -> regada = true;
 }
 
+bool Parcela::sePuedeSembrar() {
+	return estaLibre();
+}
+
+bool Parcela::sePuedeCosechar() {
+	return obtenerTiempoCosecha() == 0 && estaPlantada();
+}
+

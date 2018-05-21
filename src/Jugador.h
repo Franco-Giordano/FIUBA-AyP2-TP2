@@ -16,7 +16,6 @@
 class Jugador {
 
 private:
-	int cantidadDeTerrenos;
 	Monedero* monedero;
 	Lista<Terreno*>* terrenos;
 	TanqueDeAgua* tanque;
