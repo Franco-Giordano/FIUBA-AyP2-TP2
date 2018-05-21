@@ -24,7 +24,7 @@ Secretario::Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destin
 
 
 
-int Secretario::obtenerNumero(int minimo, int maximo, std::string textoOpcional = "") {
+int Secretario::obtenerNumero(int minimo, int maximo, std::string textoOpcional /*= ""*/) {
 	std::string input;
 	int numero;
 
@@ -42,7 +42,7 @@ int Secretario::obtenerNumero(int minimo, int maximo, std::string textoOpcional 
 }
 
 
-int Secretario::obtenerNumero(int minimo, std::string textoOpcional = "") {
+int Secretario::obtenerNumero(int minimo, std::string textoOpcional /*= ""*/) {
 	std::string input;
 	int numero;
 
@@ -161,5 +161,5 @@ Cultivo* Secretario::seleccionarCultivoDeCatalogo() {
 		std::cout<< i+1 << ". " << catalogoSemillas->obtenerPosicion(i)->obtenerNombre()<<std::endl;
 	}
 
-	return catalogoSemillas->obtenerPosicion(obtenerNumero(1, catalogoSemillas->obtenerCantidadDisponible() - 1));
+	return catalogoSemillas->obtenerPosicion(obtenerNumero(1, catalogoSemillas->obtenerCantidadDisponible()));
 }
