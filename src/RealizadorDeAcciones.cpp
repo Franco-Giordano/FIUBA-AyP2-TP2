@@ -193,9 +193,9 @@ void RealizadorDeAcciones::impresionFinDeJuego(Lista<Jugador*>* jugadores)
 		if(jugadorActual->monedero->obtenerDineroActual() > jugadorSiguiente->monedero->obtenerDineroActual())
 			ganador=j;
 		else
-			ganador=j+1;
+			ganador=j;
 	}
-	cout<<"El ganador es el jugador "<< ganador+1;
+	cout<<"El ganador es el jugador "<< ganador;
 }
 
 void RealizadorDeAcciones::verMisTerrenos(Jugador* jugadorActual)
