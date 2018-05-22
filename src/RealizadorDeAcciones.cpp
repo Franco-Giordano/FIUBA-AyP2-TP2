@@ -183,14 +183,18 @@ void RealizadorDeAcciones::pasarTurno()
 void RealizadorDeAcciones::impresionFinDeJuego(Lista<Jugador*>* jugadores)
 {
 	unsigned int ganador;
-	for (unsigned int j=1; j<=jugadores->contarElementos(); j++)
+	for (unsigned int j=1; j<jugadores->contarElementos(); j++)
 	{
 		Jugador* jugadorActual=jugadores->obtener(j);
-		Jugador* jugadorSiguiente=jugadores->obtener(j+1);
+		Jugador* jugadorSiguiente;
+		if(j!=jugadores->contarElementos())
+			jugadorSiguiente=jugadores->obtener(j+1);
+		else
+			jugadorSiguiente=jugadorActual;
 		cout<<"Jugador "<<j<<endl;
 		cout<<"Cantidad de terrenos: "<<jugadorActual->obtenerListaTerreno()->contarElementos()<<endl;
 		cout<<"Creditos: "<<jugadorActual->monedero->obtenerDineroActual()<<endl;
-		if(jugadorActual->monedero->obtenerDineroActual() > jugadorSiguiente->monedero->obtenerDineroActual())
+		if(jugadorActual->monedero->obtenerDineroActual() >= jugadorSiguiente->monedero->obtenerDineroActual())
 			ganador=j;
 		else
 			ganador=j+1;
@@ -201,16 +205,17 @@ void RealizadorDeAcciones::impresionFinDeJuego(Lista<Jugador*>* jugadores)
 void RealizadorDeAcciones::verMisTerrenos(Jugador* jugadorActual)
 {
 	unsigned int f, c, t; //fila, columna, terreno
-	for(t=1; t<=jugadorActual->obtenerListaTerreno()->contarElementos(); t++)
+	Lista<Terreno*>* listaJugadorActual=jugadorActual->obtenerListaTerreno();
+	for(t=1; t<=listaJugadorActual->contarElementos(); t++)
 	{
 		cout<<"Terreno "<<t<<endl;
-		for (f=1; f<=jugadorActual->obtenerListaTerreno()->obtener(t)->obtenerFilas(); f++)
+		for (f=0; f<listaJugadorActual->obtener(t)->obtenerFilas(); f++)
 		{
-			for (c=1; c<=jugadorActual->obtenerListaTerreno()->obtener(t)->obtenerColumnas(); c++)
+			for (c=0; c<listaJugadorActual->obtener(t)->obtenerColumnas(); c++)
 			{
-				if (jugadorActual->obtenerListaTerreno()->obtener(t)->obtenerParcela(f,c).estaLibre())
+				if (listaJugadorActual->obtener(t)->obtenerParcela(f,c).estaLibre())
 				cout<<"L"; //libre
-				if (jugadorActual->obtenerListaTerreno()->obtener(t)->obtenerParcela(f,c).estaPlantada())
+				else if (listaJugadorActual->obtener(t)->obtenerParcela(f,c).estaPlantada())
 				cout<<"P"; //plantada
 			}
 			cout<<endl;
