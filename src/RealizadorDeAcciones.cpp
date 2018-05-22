@@ -161,16 +161,14 @@ void RealizadorDeAcciones::comprarCapacidadTanque(int dificultad)
 		cout<<"No posee dinero suficiente"<<endl;
 }
 
-void RealizadorDeAcciones::comprarCapacidadAlmacen(int dificultad)
+void RealizadorDeAcciones::comprarCapacidadAlmacen(int dificultad, Almacen *almacen, Monedero* monedero)
 {
-	Almacen almacen;
-	Monedero* monedero;
-	unsigned int ampliacion, precio=(ampliacion + dificultad) *10; //hay que sacarlo de almacen.cpp
+	unsigned int ampliacion, precio=(ampliacion + dificultad) *10; 
 	cout<<"¿Cuanto desea ampliar su almacen?"<<endl;
 	cin>>ampliacion;
-	if(almacen.capacidadValida() && monedero->dineroSuficiente(precio))
+	if(almacen->capacidadValida() && monedero->dineroSuficiente(precio))
 	{
-		almacen.agrandarAlmacen(monedero, ampliacion, dificultad); //hay un problema en almacen.agrandaralmacen
+		almacen->agrandarAlmacen(monedero, ampliacion, dificultad); 
 	}
 	else
 		cout<<"No se ha podido realizar la expansion"<<endl;
