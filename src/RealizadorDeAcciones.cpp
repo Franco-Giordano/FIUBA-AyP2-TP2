@@ -183,11 +183,11 @@ void RealizadorDeAcciones::pasarTurno()
 void RealizadorDeAcciones::impresionFinDeJuego(Lista<Jugador*>* jugadores)
 {
 	unsigned int ganador;
-	for (unsigned int j=0; j<jugadores->contarElementos(); j++)
+	for (unsigned int j=1; j<=jugadores->contarElementos(); j++)
 	{
 		Jugador* jugadorActual=jugadores->obtener(j);
 		Jugador* jugadorSiguiente=jugadores->obtener(j+1);
-		cout<<"Jugador "<<j+1<<endl;
+		cout<<"Jugador "<<j<<endl;
 		cout<<"Cantidad de terrenos: "<<jugadorActual->obtenerListaTerreno()->contarElementos()<<endl;
 		cout<<"Creditos: "<<jugadorActual->monedero->obtenerDineroActual()<<endl;
 		if(jugadorActual->monedero->obtenerDineroActual() > jugadorSiguiente->monedero->obtenerDineroActual())
@@ -201,12 +201,12 @@ void RealizadorDeAcciones::impresionFinDeJuego(Lista<Jugador*>* jugadores)
 void RealizadorDeAcciones::verMisTerrenos(Jugador* jugadorActual)
 {
 	unsigned int f, c, t; //fila, columna, terreno
-	for(t=0; t<jugadorActual->obtenerListaTerreno()->contarElementos(); t++)
+	for(t=1; t<=jugadorActual->obtenerListaTerreno()->contarElementos(); t++)
 	{
-		cout<<"Terreno "<<t+1<<endl;
-		for (f=0; f<jugadorActual->obtenerListaTerreno()->obtener(t)->obtenerFilas(); f++)
+		cout<<"Terreno "<<t<<endl;
+		for (f=1; f<=jugadorActual->obtenerListaTerreno()->obtener(t)->obtenerFilas(); f++)
 		{
-			for (c=0; c<jugadorActual->obtenerListaTerreno()->obtener(t)->obtenerColumnas(); c++)
+			for (c=1; c<=jugadorActual->obtenerListaTerreno()->obtener(t)->obtenerColumnas(); c++)
 			{
 				if (jugadorActual->obtenerListaTerreno()->obtener(t)->obtenerParcela(f,c).estaLibre())
 				cout<<"L"; //libre
