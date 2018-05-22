@@ -193,7 +193,7 @@ void RealizadorDeAcciones::impresionFinDeJuego(Lista<Jugador*>* jugadores)
 		if(jugadorActual->monedero->obtenerDineroActual() > jugadorSiguiente->monedero->obtenerDineroActual())
 			ganador=j;
 		else
-			ganador=j;
+			ganador=j+1;
 	}
 	cout<<"El ganador es el jugador "<< ganador;
 }
