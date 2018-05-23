@@ -9,19 +9,13 @@
 
 Terreno::Terreno(int cantidadFilasRecibidas, int cantidadColumnasRecibidas){
 
-		if (cantidadFilasRecibidas >= 0 && cantidadColumnasRecibidas >= 0)
+		if (cantidadFilasRecibidas > 0 && cantidadColumnasRecibidas > 0)
 		{
 
-			this->cantidadFilas = cantidadFilasRecibidas;
-			this -> cantidadColumnas = cantidadColumnasRecibidas;
+			this->limiteFilas = cantidadFilasRecibidas;
+			this -> limiteColumnas = cantidadColumnasRecibidas;
 
-			terreno = new Parcela * [cantidadFilas];
-
-			for ( int i = 0; i < cantidadFilas; i ++ )
-			{
-
-				terreno[i] = new Parcela [cantidadColumnas];
-			}
+			terreno = new ListaCoordenada<ListaCoordenada<Parcela*>*>(limiteFilas);
 		}
 		else
 		{
@@ -29,28 +23,46 @@ Terreno::Terreno(int cantidadFilasRecibidas, int cantidadColumnasRecibidas){
 		}
 	}
 
-	int Terreno::obtenerFilas(){
+int Terreno::obtenerFilas(){
 
-		return this->cantidadFilas;
-	}
+	return this->limiteFilas;
+}
 
-	int Terreno::obtenerColumnas(){
+int Terreno::obtenerColumnas(){
 
-		return this->cantidadColumnas;
-	}
+	return this->limiteColumnas;
+}
 
-	Parcela*  Terreno::obtenerParcela(int filaElegida, int columnaElegida){
 
-		return &( this -> terreno[filaElegida][columnaElegida]);
-	}
+Parcela*  Terreno::obtenerParcela(int filaElegida, int columnaElegida){
 
-	Terreno::~Terreno(){
+	return terreno->obtenerEnCoordenada(filaElegida)->obtenerEnCoordenada(columnaElegida);
+}
 
-		for (int i = 0; i < cantidadFilas; i++){
-			delete [] terreno[i];
+bool Terreno::estaOcupada(int filaRecibida, int columnaRecibida) {
+	return terreno->estaOcupadaLaCoordenada(filaRecibida) && terreno->obtenerEnCoordenada(filaRecibida)->estaOcupadaLaCoordenada(columnaRecibida);
+}
+
+
+void Terreno::prepararParcela(int fila, int columna) {
+
+
+
+}
+
+
+Terreno::~Terreno(){
+	terreno->iniciarCursor();
+	while (terreno->avanzarCursor()) {
+		ListaCoordenada<Parcela*>* colActual = terreno->obtenerCursor();
+		colActual->iniciarCursor();
+		while (colActual->avanzarCursor()) {
+			delete colActual->obtenerCursor();
 		}
-		delete [] terreno;
+		delete colActual;
 	}
+	delete terreno;
+};
 
 
 

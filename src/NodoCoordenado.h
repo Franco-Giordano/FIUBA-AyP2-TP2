@@ -1,23 +1,19 @@
-* Nodo.h
- *
- *  Created on: 6 may. 2018
- *      Author: Alvaro
- */
-
-#ifndef NODOMODIFICADO_H_
-#define NODOMODIFICADO_H_
+#ifndef NodoCoordenado_H_
+#define NodoCoordenado_H_
 
 #ifndef NULL
 #define NULL 0
 #endif
 
-template<class T> class Nodo {
+
+
+template<class T> class NodoCoordenado {
 
     private:
 
         T dato;
 
-        Nodo<T>* siguiente;
+        NodoCoordenado<T>* siguiente;
 
         unsigned int coordenada;
 
@@ -25,11 +21,11 @@ template<class T> class Nodo {
 
         /*
          * pre: coordenada esta en el intervalo [1, maximo de la lista].
-         * post: el Nodo resulta inicializado con el dato dado
-         *       y sin un Nodo siguiente.
+         * post: el NodoCoordenadoresulta inicializado con el dato dado
+         *       y sin un NodoCoordenadosiguiente.
          *
          */
-        Nodo(T dato, unsigned int coordenada) {
+        NodoCoordenado(T dato, unsigned int coordenada) {
 
             this->dato = dato;
             this->siguiente = NULL;
@@ -55,15 +51,15 @@ template<class T> class Nodo {
         /*
          * post: devuelve el siguiente Nodo.
          */
-        Nodo<T>* obtenerSiguiente() {
+        NodoCoordenado<T>* obtenerSiguiente() {
 
             return this->siguiente;
         }
 
         /*
-         * post: cambia el siguiente Nodo por nuevoSiguiente.
+         * post: cambia el siguiente NodoCoordenadopor nuevoSiguiente.
          */
-        void cambiarSiguiente(Nodo<T>* nuevoSiguiente) {
+        void cambiarSiguiente(NodoCoordenado<T>* nuevoSiguiente) {
 
             this->siguiente = nuevoSiguiente;
         }
@@ -76,11 +72,10 @@ template<class T> class Nodo {
         	if (this->obtenerSiguiente()!= NULL){
         		return this->obtenerSiguiente()->obtenerCoordenada();
         	}
-
         	return 0;
         }
 
 };
 
 
-#endif /* NODOMODIFICADO_H_ */
+#endif /* NodoCoordenado_H_ */
