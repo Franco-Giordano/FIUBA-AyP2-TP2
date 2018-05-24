@@ -7,20 +7,20 @@
 
 class Correo{
 private:
-	CatalogoDe<Destino*>* destinos;
+	Lista<Destino*>* destinosValidos;
 	int costoEnvio;
 	Cultivo* cultivoAEnviar;
 public:
 
-	Correo(CatalogoDe<Destino*>* destinos, Cultivo* cultivoAEnviar);
+	Correo(Lista<Destino*>* destinosValidos, Cultivo* cultivoAEnviar);
 
 	Cultivo* cultivoParaEnviar();
 
-	void enviarCultivo(Almacen* almacen);
+	void enviarCultivo(unsigned int posicionCultivoAEnviar, Almacen* almacen);
 
-	void cobrar(Almacen* almacen, Destino* destino, Monedero* monedero);
+	void cobrar(Destino* destino, Monedero* monedero);
 
-	unsigned int obtenerRentabilidad(Almacen* almacen, Destino* destino);
+	unsigned int obtenerRentabilidad();
 
 	int calcularCostoEnvio(Destino* destino);
 };
