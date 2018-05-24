@@ -112,3 +112,27 @@ bool Acciones::tieneMasDeUnTerreno() {
 	return jugador->obtenerListaTerreno()->contarElementos() > 1;
 }
 
+
+void Acciones::obtenerDestinosValidos(Lista<Destino*>* lista, Cultivo* cultivo, CatalogoDe<Destino>* catalogoDestinos) {
+
+	unsigned int cantidad = catalogoDestinos->obtenerCantidadDisponible();
+
+	for (unsigned int i=0; i < cantidad; i++) {
+		Destino* destinoActual = catalogoDestinos->obtenerPosicion(i);
+		if (destinoActual->obtenerNombreCultivo()==cultivo->obtenerNombre()) {
+			lista->agregar(destinoActual);
+		}
+	}
+}
+
+void Acciones::imprimirListaDestinos(Lista<Destino*>* destinosValidos)
+{
+	unsigned int posicionDestino=1;
+	destinosValidos->iniciarCursor();
+	while(destinosValidos->avanzarCursor())
+	{
+		Destino* destinoActual=destinosValidos->obtenerCursor();
+		cout<<posicionDestino<<". "<<destinoActual->obtenerNombre()<<" | costo de envio: "<<
+					destinoActual->obtenerDistancia()*destinoActual->obtenerPrecio()<<endl;
+	}
+}
