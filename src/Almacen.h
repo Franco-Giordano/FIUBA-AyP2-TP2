@@ -49,6 +49,8 @@ public:
 	//Funcion creada para probar la funcionalidad del codigo.
 	void  mostrarNombresDeCultivosEnElAlmacen();
 
+	Cultivo* obtenerCultivoEnPosicion(unsigned int posicion);
+
 	~Almacen();
 };
 
