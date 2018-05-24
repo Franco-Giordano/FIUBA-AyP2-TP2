@@ -5,14 +5,24 @@
  *      Author: frank
  */
 
-#include "Lista.h"
+#include "Terreno.h"
+#include "Parcela.h"
 #include "Jugador.h"
-#include "LectorCSV.h"
-#include "Catalogo.h"
-#include "Cultivo.h"
 #include "Secretario.h"
+#include "LectorCSV.h"
+#include "Peon.h"
+#include "Dado.h"
+#include "Marcador.h"
+#include "DronAereo.h"
+#include "Tiempo.h"
 
+
+#include <iostream>
+
+
+using namespace std;
 int main() {
+
 
 	LectorCSV lectorSemillas("cultivos.txt", 6);
 
@@ -36,10 +46,19 @@ int main() {
 	}
 
 
+	cout << "Preparando el dron, aguarde..."<<endl;
+	DronAereo dron(secretario.obtenerFilas(),secretario.obtenerColumnas());
 
+	Dado dado;
+
+
+
+	Marcador marcador;
+
+	unsigned int numeroJugador = 1;
 	for (int i=1; i <= secretario.obtenerCantidadTurnos(); i++) {
 
-		//Imprimir turno, puntuaciones?
+		cout << "-----------------------TURNO "<<i<<"-----------------------"<< endl;
 
 		jugadores->iniciarCursor();
 
@@ -47,13 +66,32 @@ int main() {
 		while (jugadores->avanzarCursor()) {
 			jugadorActual = jugadores->obtenerCursor();
 
-			//imprimir que jugador jugara con sus datos
-			//imprimirBMP();
+			Tiempo tiempo(jugadorActual);
+			tiempo.madurarTodosLosTerrenosDelJugador();
+
+			cout << "/////Jugador nº "<<numeroJugador<<"/////"<<endl;
+			unsigned int resultadoDado = dado.obtenerNumeroRandom();
+			cout << "// Obtuviste "<<resultadoDado<<" en tu dado! Ganaste "<<resultadoDado*5<<" de agua."<<endl;
+			unsigned int aguaPerdida = jugadorActual->obtenerTanqueDeAgua()->agregarAgua(resultadoDado*5);
+			if (aguaPerdida != 0) {
+				std::cout <<"// ****Perdiste "<<aguaPerdida<<"unidad(es) de riego!****"<<endl;
+			}
+
+			marcador.mostrarTurno(jugadorActual);
+
+
+			cout <<"Tomando fotos de todos sus terrenos, aguarde un momento..."<<endl;
+			dron.tomarFoto(jugadorActual, numeroJugador, i);
+
+
 
 			secretario.atenderJugador(jugadorActual);
 
-			//pudrir y secar sus sus terrenos
+
+
+			numeroJugador++;
 		}
+		numeroJugador = 1;
 
 	}
 
@@ -72,7 +110,8 @@ int main() {
 	}
 	delete jugadores;
 
-	return 0;
-}
 
+	return 0;
+
+}
 

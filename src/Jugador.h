@@ -41,22 +41,11 @@ public:
 	//Devuelve un puntero a la lista de punteros "Terreno".
 	Lista<Terreno*>* obtenerListaTerreno();
 
-	//Post: Agrega un terreno, metodo creado para probar el funcionamiento.
-	void agregarTerreno(int N, int M);
-
 	//Falta hacer el objeto "Servicio de envios".
 	void enviarADestino();
 
-	//Pre: N y M  son las dimensiones del terreno a comprar las cuales deben ser enteros validos.
-	//Post: agrega un terreno de las dimensiones elegidas en la ultima posicion de la lista.
-	void comprarTerreno(int N, int M);
-
 	//POST: quita el terreno elegido por el usuario (ingreso por teclado)
 	void venderTerreno(int terrenoAVender);
-
-	//Post: le suma el entero capacidadAAgregar a la capacidad del almacen.
-	void agrandarAlmacen(int capacidadAAgregar, int dificultad);
-
 
 	~Jugador();
 };

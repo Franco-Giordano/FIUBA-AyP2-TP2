@@ -10,7 +10,7 @@
 void Peon::regar(Parcela* parcelaATrabajar,TanqueDeAgua* tanqueAgua){
 
 	int consumoAgua = parcelaATrabajar->obtenerCultivo()->obtenerConsumoAgua();
-    parcelaATrabajar->modificarRegado();
+    parcelaATrabajar->regar();
     tanqueAgua->restarAgua(consumoAgua);
 
 }

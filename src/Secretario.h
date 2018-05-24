@@ -14,6 +14,7 @@
 #include "Acciones.h"
 #include "Jugador.h"
 #include "Catalogo.h"
+#include "Mercado.h"
 
 class Secretario {
 
@@ -21,6 +22,8 @@ private:
 	unsigned int turnos, numeroDeJugadores, filas, columnas, dificultad;
     CatalogoDe<Cultivo>* catalogoSemillas;
     CatalogoDe<Destino>* catalogoDestinos;
+
+    std::string convertirIntAString(int i);
 
 public:
 
@@ -42,7 +45,28 @@ public:
 
 	void atenderJugador(Jugador* jugador);
 
+	bool administrarEleccion(unsigned int eleccion, Jugador* jugador, Acciones acciones);
+
     unsigned int obtenerTerrenoDeJugador(Jugador* jugador);
+
+    bool advertirQuePuedePerderCosechas(Jugador* jugador, unsigned int posicionT);
+
+
+    void gestionarSiembra(Terreno* terreno, unsigned int fila, unsigned int columna, Jugador* jugador);
+
+    void gestionarCosecha(Terreno* terreno, unsigned int fila, unsigned int columna, Jugador* jugador);
+
+    void gestionarRiego(Terreno* terreno, unsigned int fila, unsigned int columna, Jugador* jugador);
+
+    void gestionarEnvioCosecha();
+
+    void gestionarCompraTerreno(Jugador* jugador);
+
+    void gestionarVentaTerreno(Jugador* jugador);
+
+    void gestionarAmpliarTanque(Jugador* jugador);
+
+    void gestionarAmpliarAlmacen(Jugador* jugador);
 
     Cultivo* seleccionarCultivoDeCatalogo();
 };

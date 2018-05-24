@@ -22,18 +22,21 @@ bool Almacen:: capacidadValida(){
 	return (cultivos->contarElementos() <= capacidad);
 }
 
-void Almacen::agrandarAlmacen(Monedero* monedero, unsigned int capacidadAAgregar, int dificultad){
+void Almacen::agrandarAlmacen(unsigned int capacidadAAgregar){
 
-	int precio= (capacidadAAgregar + dificultad) *10;
-
-//	if (monedero->dineroSuficiente(precio)){             // Esto hay que validarlo
-
-		monedero->gastarDinero(precio);
-		this->capacidad += capacidadAAgregar;
+	this->capacidad += capacidadAAgregar;
 }
 
 void Almacen::agregarCultivo(Cultivo* cultivo){
-		cultivos->agregar(cultivo);							// Habria que chequear que no supera el maximo, si esta lleno descartar mas barata (o mas vieja)
+		cultivos->agregar(cultivo);
+}
+
+int Almacen::contarCultivos() {
+	return this->cultivos->contarElementos();
+}
+
+bool Almacen::hayEspacioLibre() {
+	return this->obtenerCapacidad() > this->contarCultivos();
 }
 
 

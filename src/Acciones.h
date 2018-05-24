@@ -18,9 +18,19 @@ public:
 	 */
 	unsigned int obtenerAccionDeJugador();
 
-	bool esSiembraValida(Parcela* parcelaElegida, Cultivo* cultivoElegido);
+	bool esSiembraValida(Terreno* terreno,unsigned int fila,unsigned int columna, Cultivo* cultivoElegido);
 
-	bool esRiegoValido(Parcela* parcelaElegida);
+	bool esCosechaValida(Terreno* terreno,unsigned int fila,unsigned int columna);
+
+	bool esRiegoValido(Terreno* terreno,unsigned int fila,unsigned int columna);
+
+	bool compraCapacidadTanqueValida(unsigned int ampliacionElegida, unsigned int dificultad);
+
+	bool compraCapacidadAlmacenValida(unsigned int ampliacionElegida, unsigned int dificultad);
+
+	bool puedeComprarTerreno(unsigned int dificultad, unsigned int filas, unsigned int columnas);
+
+	bool tieneMasDeUnTerreno();
 
 private:
 	/*

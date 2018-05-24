@@ -44,28 +44,9 @@ Almacen* Jugador:: obtenerAlmacen(){
 }
 
 
-void Jugador::agregarTerreno(int N, int M){
-	Terreno* terreno= new Terreno(N,M);
-	this->terrenos->agregar(terreno);
-}
-
-
-void Jugador::comprarTerreno(int N, int M){
-
-	Terreno* terreno = new Terreno(N,M);
-	this->terrenos->agregar(terreno);
-}
-
-
 void Jugador::venderTerreno(int terrenoAVender){
 
 	this->terrenos->remover(terrenoAVender);
-}
-
-
-void Jugador::agrandarAlmacen(int capacidadAAgregar, int dificultad){
-
-	this->almacen->agrandarAlmacen(this->monedero, capacidadAAgregar, dificultad);
 }
 
 

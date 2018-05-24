@@ -17,7 +17,7 @@ private:
 
 	int limiteFilas;
 	int limiteColumnas;
-	ListaCoordenada<ListaCoordenada<Parcela*>*>* terreno;
+	ListaCoordenada<ListaCoordenada<Parcela*>*>* filas;
 
 public:
 
@@ -38,6 +38,10 @@ public:
 	bool estaOcupada(int filaRecibida, int columnaRecibida);
 
 	void prepararParcela(int fila, int columna);
+
+	ListaCoordenada<ListaCoordenada<Parcela*>*>* obtenerListaFilas();
+
+	bool estaTodoVacio();
 
 	//Post: Libera la memoria utilizada por Terreno.
 	~Terreno();

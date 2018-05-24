@@ -36,21 +36,60 @@ bool Acciones::opcionValida(unsigned int minimo,unsigned int maximo, unsigned in
 	return (opcion>=minimo && opcion<=maximo);
 }
 
-bool Acciones::esSiembraValida(Parcela* parcelaElegida, Cultivo* cultivoElegido) {
+bool Acciones::esSiembraValida(Terreno* terreno,unsigned int fila,unsigned int columna, Cultivo* cultivoElegido) {
 
 	bool puedeComprarSemilla = jugador->obtenerMonedero()->dineroSuficiente(cultivoElegido->obtenerCostoSemilla());
-	return parcelaElegida->sePuedeSembrar() && puedeComprarSemilla;
+	bool parcelaOcupada  = terreno->estaOcupada(fila, columna);
+	if (!parcelaOcupada && puedeComprarSemilla){
+		terreno->prepararParcela (fila,columna);
+	}
+	return !parcelaOcupada && puedeComprarSemilla;
+}
+
+bool Acciones::esCosechaValida(Terreno* terreno,unsigned int fila,unsigned int columna){
+	bool parcelaOcupada = terreno->estaOcupada(fila, columna);
+	bool sePuedeCosecharParcela = false;
+
+	if (parcelaOcupada){
+		sePuedeCosecharParcela = terreno->obtenerParcela(fila,columna)->sePuedeCosechar();
+	}
+
+	bool hayEspacioLibreEnAlmacen = this->jugador->obtenerAlmacen()->hayEspacioLibre();
+
+	return parcelaOcupada && sePuedeCosecharParcela && hayEspacioLibreEnAlmacen;
 }
 
 
-bool Acciones::esRiegoValido(Parcela* parcelaElegida) {
-	bool hayAguaSuficiente = jugador->obtenerTanqueDeAgua()->obtenerCantidadDeAguaActual() >= parcelaElegida->obtenerCultivo()->obtenerConsumoAgua();
-	return !parcelaElegida->estaRegada() && hayAguaSuficiente;
+
+bool Acciones::esRiegoValido(Terreno* terreno,unsigned int fila,unsigned int columna) {
+	bool hayAguaSuficiente = false;
+	bool parcelaOcupada  = terreno->estaOcupada(fila, columna);
+	if (parcelaOcupada){
+		hayAguaSuficiente = jugador->obtenerTanqueDeAgua()->obtenerCantidadDeAguaActual() >= terreno->obtenerParcela(fila, columna)->obtenerCultivo()->obtenerConsumoAgua();
+	}
+
+	return parcelaOcupada && terreno->obtenerParcela(fila,columna)->estaPlantada() && !terreno->obtenerParcela(fila,columna)->estaRegada() && hayAguaSuficiente;
+}
+
+bool Acciones::compraCapacidadTanqueValida(unsigned int ampliacionElegida, unsigned int dificultad) {
+	return this->jugador->obtenerMonedero()->dineroSuficiente(dificultad*ampliacionElegida);
 }
 
 
+bool Acciones::compraCapacidadAlmacenValida(unsigned int ampliacionElegida, unsigned int dificultad) {
+	return this->jugador->obtenerMonedero()->dineroSuficiente((dificultad+ampliacionElegida)*10);
+}
 
+bool Acciones::puedeComprarTerreno(unsigned int dificultad, unsigned int filas, unsigned int columnas) {
 
+	unsigned int cantidadTerrenos = jugador->obtenerListaTerreno()->contarElementos();
+
+	return jugador->obtenerMonedero()->dineroSuficiente(filas*columnas*dificultad*cantidadTerrenos);
+}
+
+bool Acciones::tieneMasDeUnTerreno() {
+	return jugador->obtenerListaTerreno()->contarElementos() > 1;
+}
 
 
 

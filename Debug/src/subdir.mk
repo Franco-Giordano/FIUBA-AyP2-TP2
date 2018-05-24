@@ -6,71 +6,68 @@
 CPP_SRCS += \
 ../src/Acciones.cpp \
 ../src/Almacen.cpp \
-../src/CatalogoDeSemillas_OBSOLETO.cpp \
 ../src/ConversorDeDatos.cpp \
 ../src/Cultivo.cpp \
 ../src/Dado.cpp \
 ../src/Destino.cpp \
+../src/DronAereo.cpp \
+../src/EasyBMP.cpp \
+../src/EasyBMP_Font.cpp \
+../src/EasyBMP_Geometry.cpp \
 ../src/Jugador.cpp \
 ../src/LectorCSV.cpp \
-../src/LeerArchivos_OBSOLETO.cpp \
 ../src/Monedero.cpp \
 ../src/Parcela.cpp \
 ../src/Peon.cpp \
-../src/RealizadorDeAcciones.cpp \
+../src/Secretario.cpp \
 ../src/TanqueDeAgua.cpp \
 ../src/Terreno.cpp \
-../src/_ImplementacionCatalogoSemillas.cpp \
-../src/_ImplementacionDeAlmacen.cpp \
-../src/_ImplementacionDeEstructura.cpp \
-../src/_ImplementacionDeJugadores.cpp \
-../src/main.cpp 
+../src/Tiempo.cpp \
+../src/main_PROTOTIPO.cpp 
 
 OBJS += \
 ./src/Acciones.o \
 ./src/Almacen.o \
-./src/CatalogoDeSemillas_OBSOLETO.o \
 ./src/ConversorDeDatos.o \
 ./src/Cultivo.o \
 ./src/Dado.o \
 ./src/Destino.o \
+./src/DronAereo.o \
+./src/EasyBMP.o \
+./src/EasyBMP_Font.o \
+./src/EasyBMP_Geometry.o \
 ./src/Jugador.o \
 ./src/LectorCSV.o \
-./src/LeerArchivos_OBSOLETO.o \
 ./src/Monedero.o \
 ./src/Parcela.o \
 ./src/Peon.o \
-./src/RealizadorDeAcciones.o \
+./src/Secretario.o \
 ./src/TanqueDeAgua.o \
 ./src/Terreno.o \
-./src/_ImplementacionCatalogoSemillas.o \
-./src/_ImplementacionDeAlmacen.o \
-./src/_ImplementacionDeEstructura.o \
-./src/_ImplementacionDeJugadores.o \
-./src/main.o 
+./src/Tiempo.o \
+./src/main_PROTOTIPO.o 
 
 CPP_DEPS += \
 ./src/Acciones.d \
 ./src/Almacen.d \
-./src/CatalogoDeSemillas_OBSOLETO.d \
 ./src/ConversorDeDatos.d \
 ./src/Cultivo.d \
 ./src/Dado.d \
 ./src/Destino.d \
+./src/DronAereo.d \
+./src/EasyBMP.d \
+./src/EasyBMP_Font.d \
+./src/EasyBMP_Geometry.d \
 ./src/Jugador.d \
 ./src/LectorCSV.d \
-./src/LeerArchivos_OBSOLETO.d \
 ./src/Monedero.d \
 ./src/Parcela.d \
 ./src/Peon.d \
-./src/RealizadorDeAcciones.d \
+./src/Secretario.d \
 ./src/TanqueDeAgua.d \
 ./src/Terreno.d \
-./src/_ImplementacionCatalogoSemillas.d \
-./src/_ImplementacionDeAlmacen.d \
-./src/_ImplementacionDeEstructura.d \
-./src/_ImplementacionDeJugadores.d \
-./src/main.d 
+./src/Tiempo.d \
+./src/main_PROTOTIPO.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

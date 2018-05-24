@@ -15,8 +15,15 @@ TanqueDeAgua::TanqueDeAgua(unsigned int N, unsigned int M, unsigned int dificult
 
 }
 
-void TanqueDeAgua::agregarAgua(int cantidad){
+unsigned int TanqueDeAgua::agregarAgua(int cantidad){
+	unsigned int cantidadAguaPerdida = 0;
 	this->cantidadDeAguaActual += cantidad;
+	if (this->cantidadDeAguaActual > this->capacidadMaxima) {
+		cantidadAguaPerdida = this->cantidadDeAguaActual - this->capacidadMaxima;
+		this->cantidadDeAguaActual = this->capacidadMaxima;
+	}
+
+	return cantidadAguaPerdida;
 }
 
 void TanqueDeAgua::restarAgua(int cantidad){
@@ -35,12 +42,9 @@ bool TanqueDeAgua:: hayAguaEnElTanque(){
 	return this->cantidadDeAguaActual>0;
 }
 
-void TanqueDeAgua::ampliarTanque(int dificultad, Monedero* monedero, int ampliacionElegida){
+void TanqueDeAgua::ampliarTanque(int ampliacionElegida){
 
-	capacidadMaxima+= ampliacionElegida;  //amplia el tanque
-
-	int dineroGastado= ampliacionElegida*dificultad;
-	monedero->gastarDinero(dineroGastado);
+	capacidadMaxima+= ampliacionElegida;
 
 }
 

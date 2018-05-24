@@ -2,7 +2,7 @@
 #define ListaCoordenada_H_
 
 #include "NodoCoordenado.h"
-
+#include <string>
 
 
 
@@ -99,8 +99,6 @@ template<class T> class ListaCoordenada {
          */
         T obtenerCursor();
 
-        NodoCoordenado<T>* obtenerNodoCursor();
-
         unsigned int obtenerLimite();
 
         bool estaOcupadaLaCoordenada(unsigned int coordenada);
@@ -108,6 +106,8 @@ template<class T> class ListaCoordenada {
         unsigned int verMinimaCoordenada();
 
         T obtenerEnCoordenada(unsigned int coordenada);
+
+        unsigned int obtenerCoordenadaDeLaPosicion(unsigned int posicion);
 
         /*
          * post: libera los recursos asociados a la Lista.
@@ -120,9 +120,13 @@ template<class T> class ListaCoordenada {
          * pre : posición pertenece al intervalo: [1, contarElementos()]
          * post: devuelve el NodoCoordenado en la posición indicada.
          */
-        NodoCoordenado<T>* obtenerNodo(unsigned int coordenada); // NOTA: primitiva PRIVADA
+        NodoCoordenado<T>* obtenerNodoConCoordenada(unsigned int coordenada); // NOTA: primitiva PRIVADA
+
+        NodoCoordenado<T>* obtenerNodo(unsigned int posicion);
 
         NodoCoordenado<T>* obtenerNodoAnteriorALaCoordenada( unsigned int coordenada );
+
+        NodoCoordenado<T>* obtenerNodoCursor();
 };
 
 template<class T> ListaCoordenada<T>::ListaCoordenada(unsigned int limiteRecibido) {
@@ -131,6 +135,11 @@ template<class T> ListaCoordenada<T>::ListaCoordenada(unsigned int limiteRecibid
     this->tamanio = 0;
     this->cursor = NULL;
     this->limite = limiteRecibido;
+}
+
+
+template <class T> unsigned int ListaCoordenada<T>::obtenerCoordenadaDeLaPosicion(unsigned int posicion) {
+	return this->obtenerNodo(posicion)->obtenerCoordenada();
 }
 
 template<class T> bool ListaCoordenada<T>::estaVacia() {
@@ -142,6 +151,7 @@ template<class T> unsigned int ListaCoordenada<T>::contarElementos() {
 
     return this->tamanio;
 }
+
 
 //PRE: La coordenada no esta ocupada en la lista y + cosas
 template<class T> void ListaCoordenada<T>::agregarEnCoordenada(T elemento, unsigned int coordenada) {
@@ -167,6 +177,9 @@ template<class T> void ListaCoordenada<T>::agregarEnCoordenada(T elemento, unsig
         this->iniciarCursor();
     }
 
+    else {
+    	throw std::string("Coordenada invalida");
+    }
 }
 
 template<class T>
@@ -208,7 +221,7 @@ template<class T> T ListaCoordenada<T>::obtenerEnCoordenada(unsigned int coorden
 
     if ((coordenada > 0) && (this->estaOcupadaLaCoordenada(coordenada))) {
 
-        elemento = this->obtenerNodo(coordenada)->obtenerDato();
+        elemento = this->obtenerNodoConCoordenada(coordenada)->obtenerDato();
     }
 
     return elemento;
@@ -338,7 +351,7 @@ template<class T> ListaCoordenada<T>::~ListaCoordenada() {
 
 //PRE: coordenada esta ocupada. 
 template<class T>
-NodoCoordenado<T>* ListaCoordenada<T>::obtenerNodo(unsigned int coordenada) {
+NodoCoordenado<T>* ListaCoordenada<T>::obtenerNodoConCoordenada(unsigned int coordenada) {
 
     NodoCoordenado<T>* actual = this->primero;
     unsigned int i=actual->obtenerCoordenada();
@@ -346,6 +359,18 @@ NodoCoordenado<T>* ListaCoordenada<T>::obtenerNodo(unsigned int coordenada) {
 
         actual = actual->obtenerSiguiente();
         i= actual->obtenerCoordenada();
+    }
+
+    return actual;
+}
+
+template<class T>
+NodoCoordenado<T>* ListaCoordenada<T>::obtenerNodo(unsigned int posicion) {
+
+    NodoCoordenado<T>* actual = this->primero;
+    for (unsigned int i = 1; i < posicion; i++) {
+
+        actual = actual->obtenerSiguiente();
     }
 
     return actual;

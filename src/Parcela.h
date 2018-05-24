@@ -19,6 +19,7 @@ enum Estado
 		Libre,
 		Plantada,
 		Recuperando,
+		ListaParaCosecha,
 	};
 
 class Parcela
@@ -65,6 +66,8 @@ public:
 	//Post:Devuelve el tiempo de recuperacion actual de la parcela.
 	int obtenerTiempoRecuperacion();
 
+	Estado obtenerEstado();
+
 	//Post: modificar el tiempo de cosecha por el recibido por par�metro.
 	void modificarTiempoCosecha(int tiempoCosechaRecibido);
 
@@ -75,7 +78,9 @@ public:
 
 	void modificarCultivo(Cultivo* cultivoRecibido);
 
-	void modificarRegado();
+	void regar();
+
+	void secar();
 
 	bool sePuedeSembrar();
 

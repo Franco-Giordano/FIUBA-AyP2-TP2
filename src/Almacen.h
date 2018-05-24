@@ -18,7 +18,7 @@ private:
 	Lista<Cultivo*>* cultivos;
 
 public:
-	/* Crea el objeto almacen que depende del tamaño inicial del terreno y de la dificultad
+	/* Crea el objeto almacen que depende del tamaï¿½o inicial del terreno y de la dificultad
 	 * Este objeto tiene un atributo llamado capacidad que data del maximo de cultivos cosechados que se
 	 * podran almacenar en el mismo.
 	 */
@@ -31,9 +31,13 @@ public:
 	// que la capacidad, devuelve false.
 	bool capacidadValida();
 
+	bool hayEspacioLibre();
+
+	int contarCultivos();
+
 	//Pre:
 	//Post: incrementa la capacidad del almacen para poder seguir agregando elementos a la lista.
-	void agrandarAlmacen(Monedero* monedero, unsigned int capacidadAAgregar,  int dificultad);
+	void agrandarAlmacen(unsigned int capacidadAAgregar);
 
 	//Post: agrega un nodo cultivo a la lista de cultivos.
 	void agregarCultivo(Cultivo* cultivo);

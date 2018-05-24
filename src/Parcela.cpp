@@ -10,33 +10,25 @@
 
 Parcela::Parcela(){
 
-	this -> liberarParcela();
+	this -> cultivo = NULL;
+	this -> estado = Libre;
+	this -> regada = false;
+	this->tiempoRecuperacion = 0;
+	this->tiempoCosecha = 0;
 }
 
+Estado Parcela::obtenerEstado() {
+	return this->estado;
+}
 
 bool Parcela::estaPlantada(){
 	return this->estado == Plantada;
 }
 
 
-bool Parcela:: estaRegada(){
-
-	return this -> regada;
-}
-
-
 bool Parcela::estaLibre(){
 
 	return this->estado == Libre;
-}
-
-void Parcela::liberarParcela(){
-
-	this -> cultivo = NULL;
-	this -> estado = Libre;
-	this -> regada = false;
-	this->tiempoRecuperacion = 0;
-	this->tiempoCosecha = 0;
 }
 
 
@@ -80,9 +72,19 @@ void Parcela:: modificarCultivo(Cultivo* cultivoRecibido){
 	this -> cultivo = cultivoRecibido;
 }
 
-void Parcela:: modificarRegado(){
+void Parcela:: regar(){
 
 	this -> regada = true;
+}
+
+void Parcela:: secar(){
+
+	this -> regada = false;
+}
+
+bool Parcela:: estaRegada(){
+
+	return this -> regada;
 }
 
 bool Parcela::sePuedeSembrar() {
