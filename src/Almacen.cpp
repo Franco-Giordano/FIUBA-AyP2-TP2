@@ -44,16 +44,19 @@ void Almacen::quitarCultivo(int posicion){
 	cultivos->remover(posicion);
 }
 
-void Almacen:: mostrarNombresDeCultivosEnElAlmacen(){ 				//wat is dis
+void Almacen:: mostrarNombresDeCultivosEnElAlmacen(){
 	cultivos->iniciarCursor();
 	int i=1;
 	while ( cultivos->avanzarCursor()){
-		cout << "Elemento " << i << "en la lista: " << cultivos->obtener(i)->obtenerNombre() << endl;
+		cout << i << ". " << cultivos->obtener(i)->obtenerNombre() << endl;
 		i++;
 	}
 
 }
 
+Cultivo* Almacen::obtenerCultivoEnPosicion(unsigned int posicion){
+	return this->cultivos->obtener(posicion);
+}
 
 Almacen::~Almacen() {
 	delete cultivos;
