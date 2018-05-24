@@ -43,7 +43,7 @@ int main() {
 		jugadores->agregar(jugador);
 	}
 
-	cout << "Mandando a volar el dron, estara listo en unos momentos!..." << endl;
+	cout << "Mandando a volar el dron, estara listo en unos momentos..." << endl;
 	DronAereo dron(secretario.obtenerFilas(), secretario.obtenerColumnas());
 
 	Dado dado;
@@ -65,7 +65,7 @@ int main() {
 			Tiempo tiempo(jugadorActual);
 			tiempo.madurarTodosLosTerrenosDelJugador();
 
-			cout << "/////Jugador nº " << numeroJugador << "/////" << endl;
+			cout << "/////Jugador " << numeroJugador << "/////" << endl;
 			unsigned int resultadoDado = dado.obtenerNumeroRandom();
 			cout << "// Obtuviste " << resultadoDado << " en tu dado! Ganaste "<< resultadoDado * 5 << " de agua." << endl;
 			unsigned int aguaPerdida =

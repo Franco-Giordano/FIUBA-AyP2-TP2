@@ -27,7 +27,7 @@ DronAereo::DronAereo(unsigned int cantidadFilas,unsigned int cantidadColumnas) {
 	this->fotoTerreno.SetBitDepth(8);
 
 	/*Imprime en la foto el pasto de fondo. Lo hace hasta resolucion menos 2 asi queda un recuadro
-	 blanco (solamente estético)*/
+	 blanco (solamente estatico)*/
 	for (unsigned int i = 1; i < resolucionDeFoto[0] - 1; i++) {
 		for (unsigned int j = 1; j < resolucionDeFoto[1] - 1; j++) {
 			fotoTerreno(i, j)->Green = rand() % 161 + 255;
@@ -62,15 +62,14 @@ DronAereo::DronAereo(unsigned int cantidadFilas,unsigned int cantidadColumnas) {
 	colorFuente.Green = 255;
 	colorFuente.Blue = 255;
 
-	const char* texto = new char();
+	char* texto = new char[5];
 
 	//Imprime en la foto el indice horizontal de la matriz.
 	unsigned int numeroDeParcela = 1;
 	for (unsigned int i = multiplicador + margenAncho; i < resolucionDeFoto[0];i += multiplicador) {
 
-		texto = convertirEnteroAString(numeroDeParcela).c_str();
-		PrintString(fotoTerreno, (char*) texto, i, margenAlto,
-				multiplicador - margenAncho, colorFuente);
+		strcpy(texto, convertirEnteroAString(numeroDeParcela).c_str());
+		PrintString(fotoTerreno, (char*) texto, i, margenAlto,multiplicador - margenAncho, colorFuente);
 		numeroDeParcela++;
 	}
 
@@ -78,12 +77,12 @@ DronAereo::DronAereo(unsigned int cantidadFilas,unsigned int cantidadColumnas) {
 	numeroDeParcela = 1;
 	for (unsigned int i = multiplicador + margenAlto; i < resolucionDeFoto[1];i += multiplicador) {
 
-		texto = convertirEnteroAString(numeroDeParcela).c_str();
+		strcpy(texto, convertirEnteroAString(numeroDeParcela).c_str());
 		PrintString(fotoTerreno, (char*) texto, margenAlto, i,multiplicador - margenAncho, colorFuente);
 		numeroDeParcela++;
 	}
 
-	delete texto;
+	delete[]  texto;
 	/*Crea el archivo plantilla, el cual las demas fotos tomaran como referente para
 	 *  su creacion(mas rapida, ya que leen de este archivo).*/
 	fotoTerreno.WriteToFile("Plantilla.bmp");
@@ -101,7 +100,7 @@ void DronAereo::tomarFoto(Jugador * jugadorRecibido,unsigned int numeroJugadorAc
 	colorFuente.Blue = 255;
 	colorFuente.Green = 255;
 
-	char * texto = new char();
+	char * texto = new char[5];
 
 	int numeroTerrenoActual = 1;
 
@@ -148,7 +147,7 @@ void DronAereo::tomarFoto(Jugador * jugadorRecibido,unsigned int numeroJugadorAc
 
 		numeroTerrenoActual++;
 	}
-	delete texto;
+	delete[]  texto;
 }
 
 std::string DronAereo::convertirEnteroAString(int enteroAConvertir) {
