@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "Jugador.h"
+#include "Destino.h"
+#include "Catalogo.h"
 
 class Acciones {
 private:
@@ -37,6 +39,10 @@ public:
 			unsigned int columnas);
 
 	bool tieneMasDeUnTerreno();
+
+	void obtenerDestinosValidos(Lista<Destino*>* lista, Cultivo* cultivo, CatalogoDe<Destino>* catalogoDestinos);
+
+	void imprimirListaDestinos(Lista<Destino*>* destinosValidos);
 
 private:
 	/*
