@@ -7,6 +7,7 @@
 
 #include "Secretario.h"
 #include <sstream>
+#include "Correo.h"
 
 using namespace std;
 
@@ -126,7 +127,7 @@ bool Secretario::administrarEleccion(unsigned int eleccion, Jugador* jugador, Ac
 			this->gestionarRiego(terreno, fila, columna, jugador);
 		break;
 		case 4:
-			//enviarCosecha();
+			this->gestionarEnvioCosecha(jugador, acciones);
 		break;
 		case 5: {
 			this->gestionarCompraTerreno(jugador);
@@ -188,8 +189,30 @@ void Secretario::gestionarRiego(Terreno* terreno, unsigned int fila, unsigned in
 	}
 }
 
-void Secretario::gestionarEnvioCosecha() {
-	//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+void Secretario::gestionarEnvioCosecha(Jugador* jugador, Acciones acciones) {
+
+	if (jugador->obtenerAlmacen()->contarCultivos() > 0) {
+		cout << "Escoja cual de sus cultivos quiere vender: "<<endl;
+		jugador->obtenerAlmacen()->mostrarNombresDeCultivosEnElAlmacen();
+		int numCultivoAEnviar=this->obtenerNumero(1,jugador->obtenerAlmacen()->contarCultivos(),"");
+		Lista<Destino*>* destinosValidos = new Lista<Destino*>;
+		acciones.obtenerDestinosValidos(destinosValidos, jugador->obtenerAlmacen()->
+										obtenerCultivoEnPosicion(numCultivoAEnviar),this->catalogoDestinos);
+		if (destinosValidos->contarElementos()!=0)
+		{
+			cout<<"¿A cual de estos destinos quiere enviar la cosecha?"<<endl;
+			acciones.imprimirListaDestinos(destinosValidos);
+			unsigned int destinoEscojido=this->obtenerNumero(1,destinosValidos->contarElementos(),"");
+			Correo correo(destinosValidos, jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
+			correo.enviarCultivo(numCultivoAEnviar, jugador->obtenerAlmacen());
+			correo.cobrar(destinosValidos->obtener(destinoEscojido), jugador->obtenerMonedero());
+		}
+		else {
+			cout<<"No hay ningun comprador que acepte su cosecha."<<endl;
+		}
+	}
+	else
+		cout<<"No posee cultivos en el almacen."<<endl;
 }
 
 void Secretario::gestionarCompraTerreno(Jugador* jugador) {
@@ -300,4 +323,5 @@ string Secretario::convertirIntAString(int i) {
 	resultado = convertidor.str();
 	return resultado;
 }
+
 
