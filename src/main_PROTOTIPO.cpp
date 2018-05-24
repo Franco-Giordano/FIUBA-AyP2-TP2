@@ -16,13 +16,10 @@
 #include "DronAereo.h"
 #include "Tiempo.h"
 
-
 #include <iostream>
-
 
 using namespace std;
 int main() {
-
 
 	LectorCSV lectorSemillas("cultivos.txt", 6);
 
@@ -38,27 +35,26 @@ int main() {
 
 	Secretario secretario(pCatalogoDeSemillas, pCatalogoDeDestinos);
 
-	Lista<Jugador*>* jugadores= new Lista<Jugador*>;
+	Lista<Jugador*>* jugadores = new Lista<Jugador*>;
 
-	for (int i=1; i<= secretario.obtenerNumeroDeJugadores(); i++){
-		Jugador* jugador= new Jugador(secretario.obtenerFilas(), secretario.obtenerColumnas(),secretario.obtenerDificultad());
+	for (int i = 1; i <= secretario.obtenerNumeroDeJugadores(); i++) {
+		Jugador* jugador = new Jugador(secretario.obtenerFilas(),
+				secretario.obtenerColumnas(), secretario.obtenerDificultad());
 		jugadores->agregar(jugador);
 	}
 
-
-	cout << "Preparando el dron, aguarde..."<<endl;
-	DronAereo dron(secretario.obtenerFilas(),secretario.obtenerColumnas());
+	cout << "Mandando a volar el dron, estara listo en unos momentos!..." << endl;
+	DronAereo dron(secretario.obtenerFilas(), secretario.obtenerColumnas());
 
 	Dado dado;
-
-
 
 	Marcador marcador;
 
 	unsigned int numeroJugador = 1;
-	for (int i=1; i <= secretario.obtenerCantidadTurnos(); i++) {
+	for (int i = 1; i <= secretario.obtenerCantidadTurnos(); i++) {
 
-		cout << "-----------------------TURNO "<<i<<"-----------------------"<< endl;
+		cout << "-----------------------TURNO " << i
+				<< "-----------------------" << endl;
 
 		jugadores->iniciarCursor();
 
@@ -69,25 +65,23 @@ int main() {
 			Tiempo tiempo(jugadorActual);
 			tiempo.madurarTodosLosTerrenosDelJugador();
 
-			cout << "/////Jugador nÂº "<<numeroJugador<<"/////"<<endl;
+			cout << "/////Jugador nº " << numeroJugador << "/////" << endl;
 			unsigned int resultadoDado = dado.obtenerNumeroRandom();
-			cout << "// Obtuviste "<<resultadoDado<<" en tu dado! Ganaste "<<resultadoDado*5<<" de agua."<<endl;
-			unsigned int aguaPerdida = jugadorActual->obtenerTanqueDeAgua()->agregarAgua(resultadoDado*5);
+			cout << "// Obtuviste " << resultadoDado << " en tu dado! Ganaste "<< resultadoDado * 5 << " de agua." << endl;
+			unsigned int aguaPerdida =
+					jugadorActual->obtenerTanqueDeAgua()->agregarAgua(resultadoDado * 5);
 			if (aguaPerdida != 0) {
-				std::cout <<"// ****Perdiste "<<aguaPerdida<<"unidad(es) de riego!****"<<endl;
+				std::cout << "// ****Perdiste " << aguaPerdida<< " unidad(es) de riego!****" << endl;
 			}
 
 			marcador.mostrarTurno(jugadorActual);
 
-
-			cout <<"Tomando fotos de todos sus terrenos, aguarde un momento..."<<endl;
+			cout << "++Tomando fotos de  sus terrenos al principio de turno, aguarde un momento...++"<< endl;
 			dron.tomarFoto(jugadorActual, numeroJugador, i);
-
-
-
 			secretario.atenderJugador(jugadorActual);
 
-
+			cout << "++Tomando fotos de sus terrenos al final de turno, aguarde un momento...++"<< endl;
+			dron.tomarFoto(jugadorActual, numeroJugador, i);
 
 			numeroJugador++;
 		}
@@ -97,19 +91,11 @@ int main() {
 
 	//imprimir score final (ganador)
 
-
-
-
-
-
-
-
 	jugadores->iniciarCursor();
 	while (jugadores->avanzarCursor()) {
 		delete jugadores->obtenerCursor();
 	}
 	delete jugadores;
-
 
 	return 0;
 

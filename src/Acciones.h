@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Jugador.h"
 
-class Acciones{
+class Acciones {
 private:
 	unsigned int opcionElegida;
 	Jugador* jugador;
@@ -18,17 +18,23 @@ public:
 	 */
 	unsigned int obtenerAccionDeJugador();
 
-	bool esSiembraValida(Terreno* terreno,unsigned int fila,unsigned int columna, Cultivo* cultivoElegido);
+	bool esSiembraValida(Terreno* terreno, unsigned int fila,
+			unsigned int columna, Cultivo* cultivoElegido);
 
-	bool esCosechaValida(Terreno* terreno,unsigned int fila,unsigned int columna);
+	bool esCosechaValida(Terreno* terreno, unsigned int fila,
+			unsigned int columna);
 
-	bool esRiegoValido(Terreno* terreno,unsigned int fila,unsigned int columna);
+	bool esRiegoValido(Terreno* terreno, unsigned int fila,
+			unsigned int columna);
 
-	bool compraCapacidadTanqueValida(unsigned int ampliacionElegida, unsigned int dificultad);
+	bool compraCapacidadTanqueValida(unsigned int ampliacionElegida,
+			unsigned int dificultad);
 
-	bool compraCapacidadAlmacenValida(unsigned int ampliacionElegida, unsigned int dificultad);
+	bool compraCapacidadAlmacenValida(unsigned int ampliacionElegida,
+			unsigned int dificultad);
 
-	bool puedeComprarTerreno(unsigned int dificultad, unsigned int filas, unsigned int columnas);
+	bool puedeComprarTerreno(unsigned int dificultad, unsigned int filas,
+			unsigned int columnas);
 
 	bool tieneMasDeUnTerreno();
 
@@ -36,7 +42,8 @@ private:
 	/*
 	 * post: valida si la opcion ingresada es correcta
 	 */
-	bool opcionValida(unsigned int minimo,unsigned int maximo, unsigned int opcion);
+	bool opcionValida(unsigned int minimo, unsigned int maximo,
+			unsigned int opcion);
 };
 
 #endif /* ACCIONES_H_ */
