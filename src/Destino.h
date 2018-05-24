@@ -16,7 +16,6 @@ private:
 	int distanciaKM;
 	int precio;
 	std::string cultivo;
-
 public:
 
 	//POST: Crea un objeto Destino con todos sus atributos inicializados en nulo ("" o 0 segun corresponda)
@@ -36,8 +35,9 @@ public:
 	//POST: Devuelve el precio del Destino como entero
 	int obtenerPrecio();
 
-	//POST: Devuelve el cultivo del Destino como string
-	std::string obtenerCultivo();
+	//POST: Devuelve el nombre del cultivo del Destino como string
+	std::string obtenerNombreCultivo();
+
 
 };
 
