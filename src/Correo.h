@@ -1,24 +1,29 @@
-/*
- * Correo.h
- *
- *  Created on: 20 may. 2018
- *      Author: frank
- */
+#ifndef CORREO_H_
+#define CORREO_H_
+#include "Destino.h"
+#include "Cultivo.h"
+#include "Almacen.h"
+#include "Catalogo.h"
 
-#ifndef SRC_CORREO_H_
-#define SRC_CORREO_H_
-
-class Correo {
+class Correo{
 private:
-
+	CatalogoDe<Destino*>* destinos;
+	int costoEnvio;
+	Cultivo* cultivoAEnviar;
 public:
 
-	void enviarCultivo();
+	Correo(CatalogoDe<Destino*>* destinos, Cultivo* cultivoAEnviar);
 
+	Cultivo* cultivoParaEnviar();
 
+	void enviarCultivo(Almacen* almacen);
 
+	void cobrar(Almacen* almacen, Destino* destino, Monedero* monedero);
+
+	unsigned int obtenerRentabilidad(Almacen* almacen, Destino* destino);
+
+	int calcularCostoEnvio(Destino* destino);
 };
 
 
-
-#endif /* SRC_CORREO_H_ */
+#endif /* CORREO_H_ */
