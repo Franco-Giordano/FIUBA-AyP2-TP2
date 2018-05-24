@@ -58,7 +58,6 @@ public:
 
     void gestionarRiego(Terreno* terreno, unsigned int fila, unsigned int columna, Jugador* jugador);
 
-    void gestionarEnvioCosecha();
 
     void gestionarCompraTerreno(Jugador* jugador);
 
@@ -67,6 +66,8 @@ public:
     void gestionarAmpliarTanque(Jugador* jugador);
 
     void gestionarAmpliarAlmacen(Jugador* jugador);
+
+    void gestionarEnvioCosecha(Jugador* jugador, Acciones acciones);
 
     Cultivo* seleccionarCultivoDeCatalogo();
 };
