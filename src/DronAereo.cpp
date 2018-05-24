@@ -60,7 +60,7 @@ DronAereo::DronAereo(unsigned int cantidadFilas, unsigned int cantidadColumnas){
 		colorFuente.Green = 255;
 		colorFuente.Blue = 255;
 
-		char* texto = new char();
+		const char* texto = new char();
 		std::string numeroConvertido;
 		std::stringstream conversor;
 
@@ -73,8 +73,8 @@ DronAereo::DronAereo(unsigned int cantidadFilas, unsigned int cantidadColumnas){
 			numeroConvertido = conversor.str();
 			conversor.str(std::string());
 
-			strcpy (texto,numeroConvertido.c_str());
-			PrintString(fotoTerreno,texto,i,margenAlto,multiplicador-margenAncho,colorFuente);
+			texto = numeroConvertido.c_str();
+			PrintString(fotoTerreno,(char*)texto,i,margenAlto,multiplicador-margenAncho,colorFuente);
 			numeroDeParcela++;
 		}
 
@@ -86,8 +86,8 @@ DronAereo::DronAereo(unsigned int cantidadFilas, unsigned int cantidadColumnas){
 			numeroConvertido = conversor.str();
 			conversor.str(std::string());
 
-			strcpy (texto,numeroConvertido.c_str());
-			PrintString(fotoTerreno,texto,margenAlto,i,multiplicador-margenAncho,colorFuente);
+			texto = numeroConvertido.c_str();
+			PrintString(fotoTerreno,(char*)texto,margenAlto,i,multiplicador-margenAncho,colorFuente);
 			numeroDeParcela++;
 		}
 
@@ -129,28 +129,25 @@ DronAereo::DronAereo(unsigned int cantidadFilas, unsigned int cantidadColumnas){
 
 			            Parcela* parcelaActual = filaActual->obtener(j);
 
-						bool escribir = false;
+						if (parcelaActual->estaRegada() && parcelaActual->obtenerEstado() != Recuperando){
+							texto = "P";
 
-							if (parcelaActual->estaRegada() && parcelaActual->obtenerEstado() != Recuperando){
-								strcpy(texto,"P");
-								escribir = true;
-							}
+						}
 
 						else if (!parcelaActual->estaRegada() && parcelaActual->obtenerEstado() != Recuperando){
-							strcpy(texto,"S");
-							escribir = true;
+							texto = "S";
+
 						}
 
 						else if (parcelaActual->obtenerEstado() == Recuperando){
-							strcpy(texto,"R");
-							escribir = true;
+							texto = "R";
+
 						}
 
-						if (escribir){
 						PrintString(fotoTerreno,texto,filaActual ->obtenerCoordenadaDeLaPosicion(j)*multiplicador+margenAnchoLetra,
 												terrenoActual->obtenerListaFilas()->obtenerCoordenadaDeLaPosicion(i)*multiplicador+margenAltoLetra,
 												multiplicador-margenAlto,colorFuente);
-						}
+
 					}
 				}
 
