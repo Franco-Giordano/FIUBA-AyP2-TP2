@@ -30,45 +30,4 @@ public:
 
 };
 
-
-
-
-
-
-
-
-
-
-
-/*
- * Marcador.h
- *
- *  Created on: 23 may. 2018
- *      Author: frank
- */
-
-#ifndef MARCADOR_H_
-#define MARCADOR_H_
-
-#include "Jugador.h"
-#include <iostream>
-
-class Marcador {
-private:
-
-public:
-	
-
-
-
-
-
-
-};
-
-
-#endif /* MARCADOR_H_ */
-
-
-
-#endif /* MARCADOR_H_ */
+#endif
