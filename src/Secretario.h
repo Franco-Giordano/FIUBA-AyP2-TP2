@@ -18,7 +18,7 @@
 class Secretario {
 
 private:
-	unsigned int turnos, numeroDeJugadores, filas, columnas, dificultad;
+	unsigned int filas, columnas, dificultad;
     CatalogoDe<Cultivo>* catalogoSemillas;
     CatalogoDe<Destino>* catalogoDestinos;
     Jugador* jugador;
@@ -32,7 +32,7 @@ public:
     // el numero de turnos, la cantidad de jugadores, el tamaño del terreno y la dificultad del juego.
     // Incluso posee los catalogos, de semillas y de destinos, que son las semillas que se pueden sembrar,
     // en una parcela y los lugares a donde se pueden enviar una vez cosechadas.
-	Secretario(Jugador* jugador, CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos);
+	Secretario(Jugador* jugador, CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos, unsigned int filas, unsigned int columnas, unsigned int dificultad);
 
 	//Post:  valida que el numero ingresado este en el rango (minimo, maximo).
 	int obtenerNumero(int minimo, int maximo, std::string textoOpcional = "");
@@ -40,21 +40,14 @@ public:
 	//Post: valida que el numero ingresado sea mayor al minimo recibido por parametro.
 	int obtenerNumero(int minimo, std::string textoOpcional = "");
 
-	//Post: devuelve la cantidad de turnos.
-	int obtenerCantidadTurnos();
-
 	//Post: devuelve N, que hace referencia a la cantidad de filas.
 	int obtenerFilas();
 
 	//Post: devuelve M, que hace referencia a la cantidad de columnas.
 	int obtenerColumnas();
 
-	//Post: devuelve el numero de jugadores.
-	int obtenerNumeroDeJugadores();
-
 	//Post: devuelve la dificultad.
 	int obtenerDificultad();
-
 
 	//Post: El jugador elige la accion dentro del rango de opciones que posee.
 	void atenderJugador();
