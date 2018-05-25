@@ -112,6 +112,8 @@ void DirectorDeJuego::coordinarJuego() {
 		while (jugadores->avanzarCursor()) {
 			jugadorActual = jugadores->obtenerCursor();
 
+			secretario.cambiarJugador(jugadorActual);
+
 			Tiempo tiempo(jugadorActual);
 			tiempo.madurarTodosLosTerrenosDelJugador();
 
@@ -120,7 +122,7 @@ void DirectorDeJuego::coordinarJuego() {
 			cout <<endl<<"++Tomando fotos de  sus terrenos al principio de turno, aguarde un momento...++"<< endl<<endl;
 			dron.tomarFoto(jugadorActual, numeroJugador, i);
 
-			secretario.atenderJugador(jugadorActual);
+			secretario.atenderJugador();
 
 			cout << "++Tomando fotos de sus terrenos al final de turno, aguarde un momento...++"<< endl<<endl;
 			dron.tomarFoto(jugadorActual, numeroJugador, i);
@@ -148,3 +150,4 @@ void DirectorDeJuego::anunciarJugadorYregalarAgua(unsigned int numeroJugador) {
 		std::cout << "// ****Perdiste " << aguaPerdida<< " unidad(es) de riego!****" << endl;
 	}
 }
+

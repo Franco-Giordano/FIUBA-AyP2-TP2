@@ -1,4 +1,4 @@
-* Secretario.h
+/* Secretario.h
  *
  *  Created on: 20 may. 2018
  *      Author: frank
@@ -27,12 +27,12 @@ private:
 
 public:
 
-    //Pre: se reciben los catálogo, los cuales se suponen válidos y el jugador el cual sera atendido por el secretario.
+    //Pre: se reciben los catï¿½logo, los cuales se suponen vï¿½lidos y el jugador el cual sera atendido por el secretario.
     //Post: Crea un secretario, cuya funcion es la de atender al jugador durante el juego, este conoce
-    // el numero de turnos, la cantidad de jugadores, el tamaño del terreno y la dificultad del juego.
+    // el numero de turnos, la cantidad de jugadores, el tamaï¿½o del terreno y la dificultad del juego.
     // Incluso posee los catalogos, de semillas y de destinos, que son las semillas que se pueden sembrar,
     // en una parcela y los lugares a donde se pueden enviar una vez cosechadas.
-	Secretario(Jugador* jugador, CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos, unsigned int filas, unsigned int columnas, unsigned int dificultad);
+	Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos, unsigned int filas, unsigned int columnas, unsigned int dificultad);
 
 	//Post:  valida que el numero ingresado este en el rango (minimo, maximo).
 	int obtenerNumero(int minimo, int maximo, std::string textoOpcional = "");
@@ -92,7 +92,7 @@ public:
     void gestionarAmpliarTanque();
 
 
-    //Post: Amplia el almacen si el jugador posee el dinero suficiente con el tamaño ingresado, en caso contrario
+    //Post: Amplia el almacen si el jugador posee el dinero suficiente con el tamaï¿½o ingresado, en caso contrario
     // le avisa al jugador que no se pudo llevar a cabo la accion.
     void gestionarAmpliarAlmacen();
 

@@ -11,7 +11,7 @@
 
 using namespace std;
 
-Secretario::Secretario(Jugador* jugador, CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos) {
+Secretario::Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos, unsigned int filas, unsigned int columnas, unsigned int dificultad) {
 
 	this->filas = filas;
 	this->columnas = columnas;
@@ -21,7 +21,7 @@ Secretario::Secretario(Jugador* jugador, CatalogoDe<Cultivo>* pCatalogoSemillas,
 	this->catalogoSemillas = pCatalogoSemillas;
 	this->catalogoDestinos = pCatalogoDestinos;
 
-	this -> jugador = jugador;
+	this -> jugador = NULL;
 }
 
 
