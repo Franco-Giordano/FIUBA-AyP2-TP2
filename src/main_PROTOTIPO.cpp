@@ -5,6 +5,7 @@
  *      Author: frank
  */
 
+#include "DirectorDeJuego.h"
 #include "Terreno.h"
 #include "Parcela.h"
 #include "Jugador.h"
@@ -15,8 +16,8 @@
 #include "Marcador.h"
 #include "DronAereo.h"
 #include "Tiempo.h"
-
 #include <iostream>
+#include "Participantes.h"
 
 using namespace std;
 int main() {
@@ -33,71 +34,17 @@ int main() {
 
 	CatalogoDe<Destino>* pCatalogoDeDestinos = &catalogoDeDestinos;
 
-	Secretario secretario(pCatalogoDeSemillas, pCatalogoDeDestinos);
+	DirectorDeJuego director(pCatalogoDeSemillas, pCatalogoDeDestinos);
 
-	Lista<Jugador*>* jugadores = new Lista<Jugador*>;
+	Participantes participantes(director.obtenerNumeroDeJugadores(), director.obtenerFilas(), director.obtenerColumnas(), director.obtenerDificultad());
 
-	for (int i = 1; i <= secretario.obtenerNumeroDeJugadores(); i++) {
-		Jugador* jugador = new Jugador(secretario.obtenerFilas(),
-				secretario.obtenerColumnas(), secretario.obtenerDificultad());
-		jugadores->agregar(jugador);
-	}
+	director.invitarJugadoresApartida(participantes.obtenerListaParticipantes());
 
-	cout << "Mandando a volar el dron, estara listo en unos momentos!..." << endl;
-	DronAereo dron(secretario.obtenerFilas(), secretario.obtenerColumnas());
-
-	Dado dado;
+	director.coordinarJuego();
 
 	Marcador marcador;
-
-	unsigned int numeroJugador = 1;
-	for (int i = 1; i <= secretario.obtenerCantidadTurnos(); i++) {
-
-		cout << "-----------------------TURNO " << i
-				<< "-----------------------" << endl;
-
-		jugadores->iniciarCursor();
-
-		Jugador* jugadorActual;
-		while (jugadores->avanzarCursor()) {
-			jugadorActual = jugadores->obtenerCursor();
-
-			Tiempo tiempo(jugadorActual);
-			tiempo.madurarTodosLosTerrenosDelJugador();
-
-			cout << "/////Jugador nº " << numeroJugador << "/////" << endl;
-			unsigned int resultadoDado = dado.obtenerNumeroRandom();
-			cout << "// Obtuviste " << resultadoDado << " en tu dado! Ganaste "<< resultadoDado * 5 << " de agua." << endl;
-			unsigned int aguaPerdida =
-					jugadorActual->obtenerTanqueDeAgua()->agregarAgua(resultadoDado * 5);
-			if (aguaPerdida != 0) {
-				std::cout << "// ****Perdiste " << aguaPerdida<< " unidad(es) de riego!****" << endl;
-			}
-
-			marcador.mostrarTurno(jugadorActual);
-
-			cout << "++Tomando fotos de  sus terrenos al principio de turno, aguarde un momento...++"<< endl;
-			dron.tomarFoto(jugadorActual, numeroJugador, i);
-			secretario.atenderJugador(jugadorActual);
-
-			cout << "++Tomando fotos de sus terrenos al final de turno, aguarde un momento...++"<< endl;
-			dron.tomarFoto(jugadorActual, numeroJugador, i);
-
-			numeroJugador++;
-		}
-		numeroJugador = 1;
-
-	}
-
-	//imprimir score final (ganador)
-
-	jugadores->iniciarCursor();
-	while (jugadores->avanzarCursor()) {
-		delete jugadores->obtenerCursor();
-	}
-	delete jugadores;
+	marcador.mostrarPuntuacionFinal(participantes.obtenerListaParticipantes());
 
 	return 0;
 
 }
-
