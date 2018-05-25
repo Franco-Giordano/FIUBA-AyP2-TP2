@@ -62,13 +62,13 @@ DronAereo::DronAereo(unsigned int cantidadFilas,unsigned int cantidadColumnas) {
 	colorFuente.Green = 255;
 	colorFuente.Blue = 255;
 
-	const char* texto = new char();
+	char* texto = new char[5];
 
 	//Imprime en la foto el indice horizontal de la matriz.
 	unsigned int numeroDeParcela = 1;
 	for (unsigned int i = multiplicador + margenAncho; i < resolucionDeFoto[0];i += multiplicador) {
 
-		texto = convertirEnteroAString(numeroDeParcela).c_str();
+		strcpy(texto, convertirEnteroAString(numeroDeParcela).c_str());
 		PrintString(fotoTerreno, (char*) texto, i, margenAlto,
 				multiplicador - margenAncho, colorFuente);
 		numeroDeParcela++;
@@ -78,12 +78,12 @@ DronAereo::DronAereo(unsigned int cantidadFilas,unsigned int cantidadColumnas) {
 	numeroDeParcela = 1;
 	for (unsigned int i = multiplicador + margenAlto; i < resolucionDeFoto[1];i += multiplicador) {
 
-		texto = convertirEnteroAString(numeroDeParcela).c_str();
+		strcpy(texto, convertirEnteroAString(numeroDeParcela).c_str());
 		PrintString(fotoTerreno, (char*) texto, margenAlto, i,multiplicador - margenAncho, colorFuente);
 		numeroDeParcela++;
 	}
 
-	delete texto;
+	delete[] texto;
 	/*Crea el archivo plantilla, el cual las demas fotos tomaran como referente para
 	 *  su creacion(mas rapida, ya que leen de este archivo).*/
 	fotoTerreno.WriteToFile("Plantilla.bmp");
@@ -101,7 +101,7 @@ void DronAereo::tomarFoto(Jugador * jugadorRecibido,unsigned int numeroJugadorAc
 	colorFuente.Blue = 255;
 	colorFuente.Green = 255;
 
-	char * texto = new char();
+	char * texto = new char[5];
 
 	int numeroTerrenoActual = 1;
 
@@ -148,7 +148,7 @@ void DronAereo::tomarFoto(Jugador * jugadorRecibido,unsigned int numeroJugadorAc
 
 		numeroTerrenoActual++;
 	}
-	delete texto;
+	delete[] texto;
 }
 
 std::string DronAereo::convertirEnteroAString(int enteroAConvertir) {
