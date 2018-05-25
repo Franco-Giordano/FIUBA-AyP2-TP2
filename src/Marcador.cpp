@@ -27,6 +27,9 @@ void Marcador::mostrarTurno(Jugador* jugadorActual) {
 
 void Marcador::mostrarPuntuacionFinal(Lista<Jugador*>* jugadores) {
 	unsigned int ganador = 1;
+
+	std::cout << "--------------------------FIN DE JUEGO--------------------------"<<endl;
+
 	for (unsigned int j = 1; j <= jugadores->contarElementos(); j++) {
 		Jugador* jugadorActual = jugadores->obtener(j);
 

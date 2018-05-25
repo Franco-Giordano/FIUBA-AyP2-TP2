@@ -39,6 +39,8 @@ void Mercado::venderTerrenoAJugador(Jugador* jugador, unsigned int filas, unsign
 
 	jugador->obtenerListaTerreno()->agregar(nuevoTerreno);
 
+
+	delete nuevoTerreno;
 }
 
 void Mercado::comprarTerrenoDeJugador(Jugador* jugador, unsigned int posicionTerreno, unsigned int costoActual) {

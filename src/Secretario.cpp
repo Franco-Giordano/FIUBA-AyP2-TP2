@@ -124,7 +124,7 @@ bool Secretario::administrarEleccion(unsigned int eleccion, Acciones acciones) {
 		break;
 	}
 	case 9:
-		this->mostrarTerreno();
+		this->mostrarTerrenos();
 		break;
 	case 10:
 		pasarTurno = true;
@@ -268,14 +268,15 @@ Cultivo* Secretario::seleccionarCultivoDeCatalogo() {
 		cout << i + 1 << ". " << catalogoSemillas->obtenerPosicion(i)->obtenerNombre() << " //";
 		cout << " Precio: " << catalogoSemillas->obtenerPosicion(i)->obtenerCostoSemilla() << " //";
 		cout << " Rentabilidad: " << catalogoSemillas->obtenerPosicion(i)->obtenerRentabilidad() << " //";
-		cout << " Tiempo hasta cosecha: " << catalogoSemillas->obtenerPosicion(i)->obtenerTiempoCosecha() << "." << endl;
+		cout << " Tiempo hasta cosecha: " << catalogoSemillas->obtenerPosicion(i)->obtenerTiempoCosecha() << " //";
+		cout << " Tiempo de recuperacion: " << catalogoSemillas->obtenerPosicion(i)->obtenerTiempoRecuperacion() << " //";
+		cout << " Consumo de agua: " << catalogoSemillas->obtenerPosicion(i)->obtenerConsumoAgua() << "." << endl;
 
 		cout << endl;
 	}
 
 	return catalogoSemillas->obtenerPosicion(this->obtenerNumero(1, catalogoSemillas->obtenerCantidadDisponible()) - 1);
 }
-
 bool Secretario::advertirQuePuedePerderCosechas(unsigned int posicionTerreno) {
 	bool deseaContinuar = true;
 	if (!jugador->obtenerListaTerreno()->obtener(posicionTerreno)->estaTodoVacio()) {
@@ -299,42 +300,51 @@ string Secretario::convertirIntAString(int i) {
 	return resultado;
 }
 
-void Secretario::mostrarTerreno() {
+void Secretario::mostrarTerrenos() {
 	Lista<Terreno*>* terrenos = this->jugador->obtenerListaTerreno();
 
 	terrenos->iniciarCursor();
 	unsigned int numeroTerreno = 1;
-	terrenos->avanzarCursor();
-	Terreno* terrenoActual = terrenos->obtenerCursor();
 
-	int i;
-	int j;
+	while (terrenos->avanzarCursor()) {
+		Terreno* terrenoActual = terrenos->obtenerCursor();
 
-	for (i = 1; i <= terrenoActual->obtenerFilas(); i++) {
+		cout << "Terreno " << numeroTerreno << endl << endl;
 
-		for (j = 1; j <= terrenoActual->obtenerColumnas(); j++) {
+		string terreno = "";
+		for (int k = 0; k < terrenoActual->obtenerColumnas() * terrenoActual->obtenerFilas(); k++) {
+			terreno += "#";
+		}
 
-			if (terrenoActual->estaOcupada(i, j)) {
+		for (unsigned int i = 1; i <= terrenoActual->obtenerListaFilas()->contarElementos(); i++) {
 
-				Parcela* parcelaActual = terrenoActual->obtenerParcela(i, j);
+			ListaCoordenada<Parcela*>* filaActual = terrenoActual->obtenerListaFilas()->obtener(i);
 
-				if (parcelaActual->estaPlantada()) {
-					cout << "| P ";
-				} else {
-					if (parcelaActual->obtenerEstado() == Recuperando) {
-						cout << "| R ";
-					} else {
-						cout << "| C ";  // de listo para Cosechar.
-					}
+			for (unsigned int j = 1; j <= filaActual->contarElementos(); j++) {
+				Parcela* parcelaActual = filaActual->obtener(j);
 
+				int coordFil = terrenoActual->obtenerListaFilas()->obtenerCoordenadaDeLaPosicion(i);
+				int coordCol = filaActual->obtenerCoordenadaDeLaPosicion(j);
+				int maxCol = filaActual->obtenerLimite();
+				int cantDeFilasPrevias = coordFil - 1;
+
+				if (parcelaActual->obtenerEstado() == Plantada && parcelaActual->estaRegada()) {
+					terreno[cantDeFilasPrevias * maxCol + coordCol - 1] = 'P';
+				} else if (parcelaActual->obtenerEstado() == Plantada && !parcelaActual->estaRegada()) {
+					terreno[cantDeFilasPrevias * maxCol + coordCol - 1] = 'N';
+				} else if (parcelaActual->obtenerEstado() == Recuperando) {
+					terreno[cantDeFilasPrevias * maxCol + coordCol - 1] = 'R';
+				} else if (parcelaActual->obtenerEstado() == ListaParaCosecha) {
+					terreno[cantDeFilasPrevias * maxCol + coordCol - 1] = 'C';  // de listo para Cosechar.
 				}
-
-			} else {
-				cout << "| # ";
-
 			}
 		}
-		cout << "|" << endl;
+
+		for (int u = 0; u < terrenoActual->obtenerFilas(); u++) {
+			cout << terreno.substr(u * terrenoActual->obtenerColumnas(), terrenoActual->obtenerColumnas()) << endl;
+		}
+
+		numeroTerreno++;
+		cout << endl;
 	}
 }
-

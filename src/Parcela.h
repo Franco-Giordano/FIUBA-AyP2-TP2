@@ -48,6 +48,10 @@ public:
 	//Post: Devuelve true si esta libre, false si no lo esta.
 	bool estaLibre();
 
+
+	//Post: Devuelve true si esta lista para cosechar, false en caso contrario.
+	bool estaListaParaCosechar();
+
 	//Post:  Libera la parcela, dejando al cultivo en NULL y el estado en Libre.
 	void liberarParcela();
 

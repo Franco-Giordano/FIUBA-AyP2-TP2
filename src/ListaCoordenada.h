@@ -126,7 +126,7 @@ public:
 	/*
 	 * post: libera los recursos asociados a la Lista.
 	 */
-	~ListaCoordenada();
+	virtual ~ListaCoordenada();
 
 private:
 

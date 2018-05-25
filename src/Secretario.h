@@ -99,7 +99,8 @@ public:
 	// Post: asigna al secretario el nuevo jugador.
 	void cambiarJugador(Jugador* jugador);
 
-	void mostrarTerreno();
+	// Post: imprime por pantalla todos los terrenos del jugador, mostrando cuales parcelas estan vacias, plantadas, recuperando o listas para cosechar.
+	void mostrarTerrenos();
 };
 
 #endif /* SRC_SECRETARIO_H_ */

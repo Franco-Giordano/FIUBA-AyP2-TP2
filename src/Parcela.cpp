@@ -24,6 +24,10 @@ bool Parcela::estaPlantada() {
 	return this->estado == Plantada;
 }
 
+bool Parcela::estaListaParaCosechar() {
+	return this->estado == ListaParaCosecha;
+}
+
 bool Parcela::estaLibre() {
 
 	return this->estado == Libre;
@@ -84,6 +88,6 @@ bool Parcela::sePuedeSembrar() {
 }
 
 bool Parcela::sePuedeCosechar() {
-	return obtenerTiempoCosecha() == 0 && estaPlantada();
+	return obtenerTiempoCosecha() == 0 && estaListaParaCosechar();
 }
 

@@ -47,7 +47,7 @@ public:
 	bool estaTodoVacio();
 
 	//Post: Libera la memoria utilizada por Terreno.
-	~Terreno();
+	virtual ~Terreno();
 };
 
 #endif /* TERRENO_H_ */

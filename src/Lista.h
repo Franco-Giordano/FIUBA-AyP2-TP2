@@ -107,7 +107,7 @@ public:
 	/*
 	 * post: libera los recursos asociados a la Lista.
 	 */
-	~Lista();
+	virtual ~Lista();
 
 private:
 
