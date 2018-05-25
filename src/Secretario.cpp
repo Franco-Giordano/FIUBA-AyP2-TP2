@@ -226,7 +226,7 @@ void Secretario::gestionarCompraTerreno(Jugador* jugador) {
 	bool quiereContinuar = this->obtenerNumero(0, 1, "El precio es de "+costoSTR+" creditos, escoja 0 para CANCELAR, 1 para CONTINUAR. ");
 
 	if (quiereContinuar && acciones.puedeComprarTerreno(this->dificultad, this->filas, this->columnas)){
-		mercado.venderTerrenoAjugador(jugador, this->filas, this->columnas);
+		mercado.venderTerrenoAJugador(jugador, this->filas, this->columnas);
 		cout<<"**Compra exitosa**"<<endl<<endl;
 	}
 	else {
@@ -264,7 +264,7 @@ void Secretario::gestionarAmpliarTanque(Jugador* jugador) {
 
 	unsigned int ampliacionElegida = this->obtenerNumero(1, "Determine en cuantas unidades desea ampliar su tanque. ");
 	if (acciones.compraCapacidadTanqueValida(columnas, this->dificultad)) {
-		mercado.comprarCapacidadTanque(jugador, ampliacionElegida);
+		mercado.venderCapacidadDeTanque(jugador, ampliacionElegida);
 		cout << "**Ampliacion exitosa**"<<endl<<endl;
 	}
 	else {
@@ -278,7 +278,7 @@ void Secretario::gestionarAmpliarAlmacen(Jugador* jugador){
 
 	unsigned int capacidadElegida = this->obtenerNumero(1, "Determine en cuantas unidades desea ampliar su almacen. ");
 	if (acciones.compraCapacidadAlmacenValida(capacidadElegida, this->dificultad)) {
-		mercado.comprarCapacidadTanque(jugador, capacidadElegida);
+		mercado.venderCapacidadDeTanque(jugador, capacidadElegida);
 		cout << "**Ampliacion exitosa**"<<endl<<endl;
 	}
 	else {

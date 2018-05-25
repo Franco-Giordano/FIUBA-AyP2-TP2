@@ -1,3 +1,9 @@
+#ifndef MERCADO_H_
+#define MERCADO_H_
+
+#include <iostream>
+#include "Jugador.h"
+
 class Mercado{
 private:
 	unsigned int dificultad;
@@ -24,4 +30,4 @@ public:
 
 
 
-#endif /* MERCADO_H_ */
+#endif /* MERCADO_H */

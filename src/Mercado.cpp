@@ -13,7 +13,7 @@ Mercado::Mercado(unsigned int dificultad){
 	this->dificultad= dificultad;
 }
 
-void Mercado::comprarCapacidadTanque(Jugador* jugador, unsigned int ampliacionElegida) {
+void Mercado::venderCapacidadDeTanque(Jugador* jugador, unsigned int ampliacionElegida) {
 		jugador->obtenerTanqueDeAgua()->ampliarTanque(ampliacionElegida);
 
 		int dineroGastado= ampliacionElegida*dificultad;
@@ -21,7 +21,7 @@ void Mercado::comprarCapacidadTanque(Jugador* jugador, unsigned int ampliacionEl
 
 	}
 
-void Mercado::comprarCapacidadAlmacen(Jugador* jugador, unsigned int ampliacionElegida) {
+void Mercado::venderCapacidadDeAlmacen(Jugador* jugador, unsigned int ampliacionElegida) {
 		jugador->obtenerAlmacen()->agrandarAlmacen(ampliacionElegida);
 
 		int dineroGastado= (ampliacionElegida + dificultad) *10;
@@ -29,7 +29,7 @@ void Mercado::comprarCapacidadAlmacen(Jugador* jugador, unsigned int ampliacionE
 
 }
 
-void Mercado::venderTerrenoAjugador(Jugador* jugador, unsigned int filas, unsigned int columnas) {
+void Mercado::venderTerrenoAJugador(Jugador* jugador, unsigned int filas, unsigned int columnas) {
 
 	unsigned int cantidadTerrenos = jugador->obtenerListaTerreno()->contarElementos();
 
