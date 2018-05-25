@@ -13,15 +13,15 @@ using namespace std;
 
 Secretario::Secretario(Jugador* jugador, CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos) {
 
-	this -> turnos = obtenerNumero(1, "Determine la cantidad de turnos totales. ");
-	this -> numeroDeJugadores = obtenerNumero(1, "Determine la cantidad de jugadores. ");
-	this -> filas = obtenerNumero(1,"Determine la cantidad de filas del terreno. ");
-	this -> columnas = obtenerNumero(1,"Determine la cantidad de columnas del terreno. ");
-	this -> dificultad = obtenerNumero(1, 3, "Determine la dificultad, siendo 1 la mas facil y 3 la mas dificil. ");
+	this->filas = filas;
+	this->columnas = columnas;
+
+	this->dificultad = dificultad;
+
+	this->catalogoSemillas = pCatalogoSemillas;
+	this->catalogoDestinos = pCatalogoDestinos;
 
 	this -> jugador = jugador;
-	this -> catalogoSemillas = pCatalogoSemillas;
-	this -> catalogoDestinos = pCatalogoDestinos;
 }
 
 
@@ -59,12 +59,6 @@ int Secretario::obtenerNumero(int minimo, std::string textoOpcional /*= ""*/) {
 	return numero;
 }
 
-
-int Secretario::obtenerCantidadTurnos() {
-	return this -> turnos;
-}
-
-
 int Secretario::obtenerFilas() {
 	return this -> filas;
 }
@@ -73,12 +67,6 @@ int Secretario::obtenerFilas() {
 int Secretario::obtenerColumnas() {
 	return this -> columnas;
 }
-
-
-int Secretario::obtenerNumeroDeJugadores() {
-	return this -> numeroDeJugadores;
-}
-
 
 int Secretario::obtenerDificultad() {
 	return this -> dificultad;
@@ -198,7 +186,7 @@ void Secretario::gestionarEnvioCosecha(Acciones acciones) {
 										obtenerCultivoEnPosicion(numCultivoAEnviar),this->catalogoDestinos);
 		if (destinosValidos->contarElementos()!=0)
 		{
-			cout<<"¿A cual de estos destinos quiere enviar la cosecha?"<<endl;
+			cout<<"ï¿½A cual de estos destinos quiere enviar la cosecha?"<<endl;
 			acciones.imprimirListaDestinos(destinosValidos);
 			unsigned int destinoEscojido=this->obtenerNumero(1,destinosValidos->contarElementos(),"");
 			Correo correo(destinosValidos, this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
