@@ -25,9 +25,10 @@ unsigned int Acciones::obtenerAccionDeJugador() {
 	cout << "6. Vender un terreno" << endl;
 	cout << "7. Comprar capacidad del tanque de agua" << endl;
 	cout << "8. Comprar capacidad del almacen" << endl;
-	cout << "9. Pasar de turno" << endl;
+	cout << "9. Mostrar todos mis ternaodsidaunsAAAAAAAAAAAAAAAAA"<<endl;
+	cout << "10. Pasar de turno" << endl;
 	cin >> opcion;
-	while (!opcionValida(1, 9, opcion)) {
+	while (!opcionValida(1, 10, opcion)) {
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Opcion invalida, ingrese otra: " << endl;

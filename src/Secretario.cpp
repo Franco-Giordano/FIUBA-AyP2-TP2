@@ -128,6 +128,9 @@ bool Secretario::administrarEleccion(unsigned int eleccion, Acciones acciones) {
 			this->gestionarAmpliarAlmacen();
 		break; }
 		case 9:
+			this->mostrarTerreno();
+		break;
+		case 10:
 			pasarTurno = true;
 		break;
 
@@ -319,5 +322,48 @@ string Secretario::convertirIntAString(int i) {
 	resultado = convertidor.str();
 	return resultado;
 }
+
+void Secretario::mostrarTerreno(){
+		Lista<Terreno*>* terrenos = this->jugador->obtenerListaTerreno();
+
+		terrenos->iniciarCursor();
+		unsigned int numeroTerreno = 1;
+		terrenos->avanzarCursor();
+		Terreno* terrenoActual = terrenos->obtenerCursor();
+
+		unsigned int i;
+		unsigned int j;
+
+		for (i= 1; i <= terrenoActual->obtenerFilas(); i++) {
+
+			for (j = 1; j<= terrenoActual->obtenerColumnas(); j++) {
+
+				if (terrenoActual-> estaOcupada(i,j)) {
+
+		          Parcela* parcelaActual = terrenoActual->obtenerParcela(i,j);
+
+		          if ( parcelaActual->estaPlantada()){
+		        	  cout << "| P ";
+		          }
+		          else{
+		        	  if (parcelaActual->obtenerEstado()==Recuperando){
+		        	  	cout << "| R ";
+		        	    }
+		        	  else{
+		        		  cout << "| C ";  // de listo para Cosechar.
+		        	  }
+
+		          }
+
+
+		        }
+		        else {
+		          cout <<"| # " ;
+
+		        }
+          }
+		cout<<"|"<< endl;
+        }
+      }
 
 

@@ -103,6 +103,8 @@ public:
     // Pre: recibe al jugador el cual llevara a cabo acciones durante su turno
     // Post: asigna al secretario el nuevo jugador.
     void cambiarJugador(Jugador* jugador);
+
+    void mostrarTerreno();
 };
 
 
