@@ -7,7 +7,6 @@
 
 #include "Destino.h"
 
-
 Destino::Destino() {
 	nombreLugar = "";
 	distanciaKM = 0;
@@ -15,9 +14,7 @@ Destino::Destino() {
 	cultivo = "";
 }
 
-
-void Destino::modificarDestino(std::string nombreLugarRecibido,int distanciaKMRecibido,
-								int precioRecibido,std::string cultivoRecibido) {
+void Destino::modificarDestino(std::string nombreLugarRecibido, int distanciaKMRecibido, int precioRecibido, std::string cultivoRecibido) {
 	nombreLugar = nombreLugarRecibido;
 	distanciaKM = distanciaKMRecibido;
 	precio = precioRecibido;
@@ -28,19 +25,15 @@ std::string Destino::obtenerNombre() {
 	return nombreLugar;
 }
 
-
 int Destino::obtenerDistancia() {
 	return distanciaKM;
 }
-
 
 int Destino::obtenerPrecio() {
 	return precio;
 }
 
-
 std::string Destino::obtenerNombreCultivo() {
 	return cultivo;
 }
-
 

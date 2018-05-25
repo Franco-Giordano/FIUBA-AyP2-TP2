@@ -21,36 +21,29 @@ public:
 	unsigned int obtenerAccionDeJugador();
 
 	//Post: devuelve true si es posible sembrar en la parcela.
-	bool esSiembraValida(Terreno* terreno, unsigned int fila,
-			unsigned int columna, Cultivo* cultivoElegido);
+	bool esSiembraValida(Terreno* terreno, unsigned int fila, unsigned int columna, Cultivo* cultivoElegido);
 
 	//Post: devuelve true si es posible cosechar en la parcela.
-	bool esCosechaValida(Terreno* terreno, unsigned int fila,
-			unsigned int columna);
+	bool esCosechaValida(Terreno* terreno, unsigned int fila, unsigned int columna);
 
 	//Post: devuelve true si es posible regar en la parcela.
-	bool esRiegoValido(Terreno* terreno, unsigned int fila,
-			unsigned int columna);
+	bool esRiegoValido(Terreno* terreno, unsigned int fila, unsigned int columna);
 
 	//Post: devuelve true si el jugador posee el dinero suficiente para comprar la ampliacion elegida.
-	bool compraCapacidadTanqueValida(unsigned int ampliacionElegida,
-			unsigned int dificultad);
+	bool compraCapacidadTanqueValida(unsigned int ampliacionElegida, unsigned int dificultad);
 
 	//Post: devuelve true si el jugador posee el dinero suficiente para comprar la ampliacion elegida.
-	bool compraCapacidadAlmacenValida(unsigned int ampliacionElegida,
-			unsigned int dificultad);
+	bool compraCapacidadAlmacenValida(unsigned int ampliacionElegida, unsigned int dificultad);
 
 	//Post: devuelve true si el jugador posee el dinero suficiente para comprar un terreno.
-	bool puedeComprarTerreno(unsigned int dificultad, unsigned int filas,
-			unsigned int columnas);
+	bool puedeComprarTerreno(unsigned int dificultad, unsigned int filas, unsigned int columnas);
 
 	//Post: devuelve true si el jugador posee mas de un terreno.
 	bool tieneMasDeUnTerreno();
 
 	//Pre: recibe una lista de destinos validos, el catalogo y el cultivo.
-	//Post: añade a la lista los posibles destinos para el cultivo recibido.
-	void obtenerDestinosValidos(Lista<Destino*>* listaDestinos, Cultivo* cultivo,
-			CatalogoDe<Destino>* catalogoDestinos);
+	//Post: aï¿½ade a la lista los posibles destinos para el cultivo recibido.
+	void obtenerDestinosValidos(Lista<Destino*>* listaDestinos, Cultivo* cultivo, CatalogoDe<Destino>* catalogoDestinos);
 
 	//Post: muestra por pantalla la lista de destinos validos.
 	void imprimirListaDestinos(Lista<Destino*>* destinosValidos);
@@ -59,8 +52,7 @@ private:
 	/*
 	 * post: valida si la opcion ingresada es correcta
 	 */
-	bool opcionValida(unsigned int minimo, unsigned int maximo,
-			unsigned int opcion);
+	bool opcionValida(unsigned int minimo, unsigned int maximo, unsigned int opcion);
 };
 
 #endif /* ACCIONES_H_ */

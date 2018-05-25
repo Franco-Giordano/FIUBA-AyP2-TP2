@@ -7,23 +7,20 @@
 
 #include "Terreno.h"
 
-Terreno::Terreno(int cantidadFilasRecibidas, int cantidadColumnasRecibidas){
+Terreno::Terreno(int cantidadFilasRecibidas, int cantidadColumnasRecibidas) {
 
-		if (cantidadFilasRecibidas > 0 && cantidadColumnasRecibidas > 0)
-		{
+	if (cantidadFilasRecibidas > 0 && cantidadColumnasRecibidas > 0) {
 
-			this->limiteFilas = cantidadFilasRecibidas;
-			this -> limiteColumnas = cantidadColumnasRecibidas;
+		this->limiteFilas = cantidadFilasRecibidas;
+		this->limiteColumnas = cantidadColumnasRecibidas;
 
-			filas = new ListaCoordenada<ListaCoordenada<Parcela*>*>(limiteFilas);
-		}
-		else
-		{
-			throw std::string("La cantidad de filas o columnas es inválida.");
-		}
+		filas = new ListaCoordenada<ListaCoordenada<Parcela*>*>(limiteFilas);
+	} else {
+		throw std::string("La cantidad de filas o columnas es inválida.");
 	}
+}
 
-int Terreno::obtenerFilas(){
+int Terreno::obtenerFilas() {
 
 	return this->limiteFilas;
 }
@@ -32,13 +29,13 @@ ListaCoordenada<ListaCoordenada<Parcela*>*>* Terreno::obtenerListaFilas() {
 	return this->filas;
 }
 
-int Terreno::obtenerColumnas(){
+int Terreno::obtenerColumnas() {
 
 	return this->limiteColumnas;
 }
 
 //PRE:La Parcela existe
-Parcela*  Terreno::obtenerParcela(int filaElegida, int columnaElegida){
+Parcela* Terreno::obtenerParcela(int filaElegida, int columnaElegida) {
 
 	return filas->obtenerEnCoordenada(filaElegida)->obtenerEnCoordenada(columnaElegida);
 }
@@ -47,7 +44,6 @@ bool Terreno::estaOcupada(int filaRecibida, int columnaRecibida) {
 
 	return filas->estaOcupadaLaCoordenada(filaRecibida) && filas->obtenerEnCoordenada(filaRecibida)->estaOcupadaLaCoordenada(columnaRecibida);
 }
-
 
 void Terreno::prepararParcela(int fila, int columna) {
 	if (!estaOcupada(fila, columna)) {
@@ -67,12 +63,11 @@ void Terreno::prepararParcela(int fila, int columna) {
 	}
 }
 
-
 bool Terreno::estaTodoVacio() {
 	return this->obtenerListaFilas()->contarElementos() == 0;
 }
 
-Terreno::~Terreno(){
+Terreno::~Terreno() {
 	filas->iniciarCursor();
 	while (filas->avanzarCursor()) {
 		ListaCoordenada<Parcela*>* colActual = filas->obtenerCursor();
@@ -83,4 +78,5 @@ Terreno::~Terreno(){
 		delete colActual;
 	}
 	delete filas;
-};
+}
+;

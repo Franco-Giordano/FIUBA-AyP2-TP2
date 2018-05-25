@@ -13,17 +13,11 @@
 #include "TanqueDeAgua.h"
 #include "Almacen.h"
 
+enum Estado {
+	Libre, Plantada, Recuperando, ListaParaCosecha,
+};
 
-enum Estado
-	{
-		Libre,
-		Plantada,
-		Recuperando,
-		ListaParaCosecha,
-	};
-
-class Parcela
-{
+class Parcela {
 
 private:
 
@@ -36,8 +30,6 @@ private:
 	int tiempoCosecha;
 
 	int tiempoRecuperacion;
-
-
 
 public:
 
@@ -99,6 +91,5 @@ public:
 	bool sePuedeCosechar();
 
 };
-
 
 #endif /* PARCELA_H_ */

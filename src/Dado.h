@@ -2,16 +2,15 @@
 #define DADO_H_
 
 class Dado {
-	private:
+private:
 	int numeroRandom;
 
-	public:
+public:
 
 	//PRE: El dado no depende de ningun parametro.
 	//POST: crea el dado.
 	Dado();
 
-	
 	//POST: guarda en el atributo numeroRandom, el numero obtenido de forma aleatoria.
 	void tirarDado();
 

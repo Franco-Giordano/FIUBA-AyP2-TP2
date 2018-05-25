@@ -8,16 +8,16 @@
 #include "Participantes.h"
 
 Participantes::Participantes(unsigned int numeroDeJugadores, int N, int M, int dificultad) {
-	this->participantes= new Lista<Jugador*>;
+	this->participantes = new Lista<Jugador*>;
 
-	for (unsigned int i=1; i<= numeroDeJugadores; i++){
-			Jugador* jugador= new Jugador(N, M,dificultad);
-			participantes->agregar(jugador);
-		}
+	for (unsigned int i = 1; i <= numeroDeJugadores; i++) {
+		Jugador* jugador = new Jugador(N, M, dificultad);
+		participantes->agregar(jugador);
+	}
 
 }
 
-Lista<Jugador*>* Participantes::obtenerListaParticipantes(){
+Lista<Jugador*>* Participantes::obtenerListaParticipantes() {
 	return this->participantes;
 }
 

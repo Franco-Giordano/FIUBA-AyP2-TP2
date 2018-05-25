@@ -15,7 +15,7 @@ public:
 	Participantes(unsigned int numeroDeJugadores, int M, int N, int dificultad);
 
 	//Post: devuelve la lista de jugadores.
-	Lista <Jugador*>* obtenerListaParticipantes();
+	Lista<Jugador*>* obtenerListaParticipantes();
 
 	~Participantes();
 };

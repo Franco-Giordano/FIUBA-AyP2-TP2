@@ -14,23 +14,21 @@
 class DirectorDeJuego {
 private:
 	unsigned int turnos, numeroDeJugadores, filas, columnas, dificultad;
-    CatalogoDe<Cultivo>* catalogoSemillas;
-    CatalogoDe<Destino>* catalogoDestinos;
+	CatalogoDe<Cultivo>* catalogoSemillas;
+	CatalogoDe<Destino>* catalogoDestinos;
 
-    Lista<Jugador*>* jugadores;
+	Lista<Jugador*>* jugadores;
 
 	int obtenerNumero(int minimo, int maximo, std::string textoOpcional = "");
 
 	int obtenerNumero(int minimo, std::string textoOpcional = "");
 
-
 public:
 
-    /* PRE: Recibe un puntero a un CatalogoDe<Cultivo> y un puntero a un CatalogoDe<Destino> que seran todos los cultivos y destinos disponibles, respectivamente
-     * POST: Crea DirectorDeJuego con estos datos, y ademas PREGUNTA POR CONSOLA cuantos turnos, numero de jugadores, filas y columnas maximas, y dificultad integraran el juego.
-     */
+	/* PRE: Recibe un puntero a un CatalogoDe<Cultivo> y un puntero a un CatalogoDe<Destino> que seran todos los cultivos y destinos disponibles, respectivamente
+	 * POST: Crea DirectorDeJuego con estos datos, y ademas PREGUNTA POR CONSOLA cuantos turnos, numero de jugadores, filas y columnas maximas, y dificultad integraran el juego.
+	 */
 	DirectorDeJuego(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos);
-
 
 	/* PRE: Recibe un puntero a una lista de punteros a jugadores, cada uno inicializado.
 	 * POST: ahora Director podra coordinar el Juego con estos jugadores.

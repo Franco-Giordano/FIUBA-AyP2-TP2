@@ -8,13 +8,11 @@
 #ifndef SRC_CATALOGO_H_
 #define SRC_CATALOGO_H_
 
-
 #include "Lista.h"
 #include "ConversorDeDatos.h"
 
-
 //Representa TODOS los tipos de <objetos> disponibles en el juego. (Ej: Papa, Zanahoria, Soja, etc...)
-template <class T>
+template<class T>
 class CatalogoDe {
 private:
 	unsigned int cantidadDisponible;
@@ -68,8 +66,6 @@ public:
 		delete[] catalogo;
 	}
 
-
 };
-
 
 #endif /* SRC_CATALOGO_H_ */

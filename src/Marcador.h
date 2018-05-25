@@ -27,7 +27,6 @@ public:
 	//Post: imprime por consola la cant de terrenos y creditos de cada jugador, y anuncia el ganador (aquel jugador con mayores creditos)	
 	void mostrarPuntuacionFinal(Lista<Jugador*>* jugadores);
 
-
 };
 
 #endif

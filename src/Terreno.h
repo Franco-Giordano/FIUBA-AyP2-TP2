@@ -11,8 +11,7 @@
 #include "Parcela.h"
 #include "ListaCoordenada.h"
 
-class Terreno
-{
+class Terreno {
 private:
 
 	int limiteFilas;

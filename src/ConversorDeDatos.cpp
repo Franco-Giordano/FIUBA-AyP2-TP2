@@ -7,13 +7,10 @@
 
 #include "ConversorDeDatos.h"
 
-ConversorDeDatos::ConversorDeDatos() {};
-
-
-void ConversorDeDatos::convertirAobjeto(std::string* datos, Cultivo &cultivoAmodificar){
+void ConversorDeDatos::convertirAobjeto(std::string* datos, Cultivo &cultivoAmodificar) {
 	std::string nombre = datos[0];
 
-	ui precio,rentabilidad,tiempoCosecha,tiempoRecuperacion,consumoAgua;
+	ui precio, rentabilidad, tiempoCosecha, tiempoRecuperacion, consumoAgua;
 	std::istringstream(datos[1]) >> precio;
 	std::istringstream(datos[2]) >> tiempoCosecha;
 	std::istringstream(datos[3]) >> rentabilidad;
@@ -23,14 +20,13 @@ void ConversorDeDatos::convertirAobjeto(std::string* datos, Cultivo &cultivoAmod
 	cultivoAmodificar.modificarCultivo(nombre, precio, tiempoCosecha, rentabilidad, tiempoRecuperacion, consumoAgua);
 }
 
+void ConversorDeDatos::convertirAobjeto(std::string* datos, Destino &destinoAmodificar) {
+	std::string nombre = datos[0];
+	ui distancia, precio;
+	std::istringstream(datos[1]) >> distancia;
+	std::istringstream(datos[2]) >> precio;
+	std::string cultivo = datos[3];
 
-void ConversorDeDatos::convertirAobjeto(std::string* datos, Destino &destinoAmodificar){
-		std::string nombre = datos[0];
-		ui distancia, precio;
-		std::istringstream(datos[1]) >> distancia;
-		std::istringstream(datos[2]) >> precio;
-		std::string cultivo = datos[3];
-
-		destinoAmodificar.modificarDestino(nombre, distancia, precio, cultivo);
+	destinoAmodificar.modificarDestino(nombre, distancia, precio, cultivo);
 }
 

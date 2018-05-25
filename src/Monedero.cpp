@@ -1,24 +1,24 @@
 #include "Monedero.h"
 
-Monedero::Monedero(unsigned int N, unsigned int M, unsigned int dificultad){
+Monedero::Monedero(unsigned int N, unsigned int M, unsigned int dificultad) {
 
-	this->dinero= (2*N*M) / dificultad;
+	this->dinero = (2 * N * M) / dificultad;
 
 }
 
-int Monedero::obtenerDineroActual(){
+int Monedero::obtenerDineroActual() {
 	return this->dinero;
 }
 
-bool Monedero::dineroSuficiente(unsigned int dineroAGastar){
+bool Monedero::dineroSuficiente(unsigned int dineroAGastar) {
 	return (this->dinero >= dineroAGastar);
 }
-void Monedero::sumarDinero(unsigned int dineroASumar){
+void Monedero::sumarDinero(unsigned int dineroASumar) {
 	this->dinero += dineroASumar;
 
 }
 
-void Monedero::gastarDinero(unsigned int dineroAGastar){
+void Monedero::gastarDinero(unsigned int dineroAGastar) {
 	this->dinero -= dineroAGastar;
 }
 

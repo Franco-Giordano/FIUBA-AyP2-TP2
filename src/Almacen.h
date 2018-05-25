@@ -46,9 +46,8 @@ public:
 	// Post: quita un elemento de la lista de cultivos-
 	void quitarCultivo(int posicion);
 
-
 	//Funcion creada para probar la funcionalidad del codigo.
-	void  mostrarNombresDeCultivosEnElAlmacen();
+	void mostrarNombresDeCultivosEnElAlmacen();
 
 	//Pre: recibe la posicion del cultivo que se desea obtener.
 	//Post: devuelve el cultivo en la posicion pasada por parametro.

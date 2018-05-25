@@ -3,16 +3,16 @@
 #include <ctime>
 
 Dado::Dado() {
-	this->numeroRandom=0;
+	this->numeroRandom = 0;
 
 }
 
-void Dado::tirarDado(){
-	srand (time(0));
-	this->numeroRandom= (1 + rand() % 6);
+void Dado::tirarDado() {
+	srand(time(0));
+	this->numeroRandom = (1 + rand() % 6);
 }
 
-int Dado::obtenerNumeroRandom(){
+int Dado::obtenerNumeroRandom() {
 	tirarDado();
 	return this->numeroRandom;
 }

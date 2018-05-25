@@ -5,7 +5,7 @@
 #include "Almacen.h"
 #include "Catalogo.h"
 
-class Correo{
+class Correo {
 private:
 	Lista<Destino*>* destinosValidos;
 	int costoEnvio;
@@ -33,6 +33,5 @@ public:
 	//Post: calcula el costo del envio como la multiplicacion entre el precio y la distancia.
 	int calcularCostoEnvio(Destino* destino);
 };
-
 
 #endif /* CORREO_H_ */

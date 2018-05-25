@@ -10,7 +10,7 @@
 
 #include <string>
 
-class Cultivo{
+class Cultivo {
 
 private:
 
@@ -23,11 +23,11 @@ private:
 
 public:
 
-	//Post: Crea un Cultivo inicializado con sus valores numéricos en 0 y con nombre "VACIO".
+	//Post: Crea un Cultivo inicializado con sus valores numï¿½ricos en 0 y con nombre "VACIO".
 	Cultivo();
 
 	//Pre:  Los datos deben de ser validos.
-	//Post:  Modifica las propiedades del Cultivo con los datos recibidos por parámetro.
+	//Post:  Modifica las propiedades del Cultivo con los datos recibidos por parï¿½metro.
 	void modificarCultivo(std::string nombreRecibido, int costoSemillaRecibido, int tiempoCosechaRecibido, int rentabilidadRecibida, int tiempoRecuperacionRecibido, int consumoAguaRecibido);
 
 	//Post: Devuelve el nombre.
@@ -42,12 +42,11 @@ public:
 	//Post: Devuelve el tiempo de cosecha.
 	int obtenerTiempoCosecha();
 
-	//Post: Devuelve el tiempo de recuperación.
+	//Post: Devuelve el tiempo de recuperaciï¿½n.
 	int obtenerTiempoRecuperacion();
 
 	//Post: Devuelve el consumo de agua del cultivo.
 	int obtenerConsumoAgua();
-
 
 };
 

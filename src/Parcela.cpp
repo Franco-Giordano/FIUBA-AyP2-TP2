@@ -7,12 +7,11 @@
 
 #include "Parcela.h"
 
+Parcela::Parcela() {
 
-Parcela::Parcela(){
-
-	this -> cultivo = NULL;
-	this -> estado = Libre;
-	this -> regada = true;
+	this->cultivo = NULL;
+	this->estado = Libre;
+	this->regada = true;
 	this->tiempoRecuperacion = 0;
 	this->tiempoCosecha = 0;
 }
@@ -21,70 +20,63 @@ Estado Parcela::obtenerEstado() {
 	return this->estado;
 }
 
-bool Parcela::estaPlantada(){
+bool Parcela::estaPlantada() {
 	return this->estado == Plantada;
 }
 
-
-bool Parcela::estaLibre(){
+bool Parcela::estaLibre() {
 
 	return this->estado == Libre;
 }
 
-
-Cultivo* Parcela::obtenerCultivo(){
+Cultivo* Parcela::obtenerCultivo() {
 
 	return this->cultivo;
 }
 
-
-int Parcela::obtenerTiempoCosecha(){
+int Parcela::obtenerTiempoCosecha() {
 
 	return this->tiempoCosecha;
 }
 
-
-int Parcela::obtenerTiempoRecuperacion(){
+int Parcela::obtenerTiempoRecuperacion() {
 
 	return this->tiempoRecuperacion;
 }
 
+void Parcela::modificarTiempoCosecha(int tiempoCosechaRecibido) {
 
-void Parcela::modificarTiempoCosecha(int tiempoCosechaRecibido){
-
-	this -> tiempoCosecha = tiempoCosechaRecibido;
+	this->tiempoCosecha = tiempoCosechaRecibido;
 }
 
+void Parcela::modificarTiempoRecuperacion(int tiempoRecuperacionRecibido) {
 
-void Parcela::modificarTiempoRecuperacion(int tiempoRecuperacionRecibido){
-
-	this -> tiempoRecuperacion = tiempoRecuperacionRecibido;
+	this->tiempoRecuperacion = tiempoRecuperacionRecibido;
 }
 
+void Parcela::modificarEstado(Estado estadoRecibido) {
 
-void Parcela:: modificarEstado(Estado estadoRecibido){
-
-	this -> estado = estadoRecibido;
+	this->estado = estadoRecibido;
 }
 
-void Parcela:: modificarCultivo(Cultivo* cultivoRecibido){
+void Parcela::modificarCultivo(Cultivo* cultivoRecibido) {
 
-	this -> cultivo = cultivoRecibido;
+	this->cultivo = cultivoRecibido;
 }
 
-void Parcela:: regar(){
+void Parcela::regar() {
 
-	this -> regada = true;
+	this->regada = true;
 }
 
-void Parcela:: secar(){
+void Parcela::secar() {
 
-	this -> regada = false;
+	this->regada = false;
 }
 
-bool Parcela:: estaRegada(){
+bool Parcela::estaRegada() {
 
-	return this -> regada;
+	return this->regada;
 }
 
 bool Parcela::sePuedeSembrar() {

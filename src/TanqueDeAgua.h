@@ -40,7 +40,6 @@ public:
 	//Post: devuelve true si la cantidad de agua en el tanque es mayor a 0.
 	bool hayAguaEnElTanque();
 
-
 	//Pre: La ampliacion depende de la dificultad y de la eleccion del usuario. El usuario podr�
 	//elegir una ampliacion de 5, 10 o 15 unidades, y la dificultad cambiara el dinero requerido para
 	//llevar a cabo esa accion. Recibe el monedero para poder modificar el haber del jugador.

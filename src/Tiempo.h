@@ -10,7 +10,7 @@
 
 #include "Jugador.h"
 
-class Tiempo{
+class Tiempo {
 
 private:
 
@@ -19,7 +19,7 @@ private:
 public:
 
 	/*Post: Crea el objeto tiempo, a partir de un jugador recibido. Cada jugador tendr� su tiempo,
-	el mismo es el encargado de madurar las parcelas, secarlas, y liberarlas. */
+	 el mismo es el encargado de madurar las parcelas, secarlas, y liberarlas. */
 	Tiempo(Jugador* jugadorRecibido);
 
 	/*Post: Enjevece en un turno la parcela. */
@@ -35,6 +35,5 @@ public:
 	void madurarTodosLosTerrenosDelJugador();
 
 };
-
 
 #endif /* SRC_TIEMPO_H_ */

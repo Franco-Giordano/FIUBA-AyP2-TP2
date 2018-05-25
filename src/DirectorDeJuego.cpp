@@ -36,43 +36,37 @@ void DirectorDeJuego::invitarJugadoresApartida(Lista<Jugador*>* jugadores) {
 }
 
 int DirectorDeJuego::obtenerNumeroDeJugadores() {
-	return this -> numeroDeJugadores;
+	return this->numeroDeJugadores;
 }
-
 
 int DirectorDeJuego::obtenerCantidadTurnos() {
-	return this -> turnos;
+	return this->turnos;
 }
-
 
 int DirectorDeJuego::obtenerFilas() {
-	return this -> filas;
+	return this->filas;
 }
-
 
 int DirectorDeJuego::obtenerColumnas() {
-	return this -> columnas;
+	return this->columnas;
 }
-
 
 int DirectorDeJuego::obtenerDificultad() {
-	return this -> dificultad;
+	return this->dificultad;
 }
-
 
 int DirectorDeJuego::obtenerNumero(int minimo, int maximo, std::string textoOpcional /*= ""*/) {
 	std::string input;
 	int numero;
 
 	do {
-		std::cout << textoOpcional <<  "Ingrese un numero entre "<< minimo << " y "<<maximo<<": ";
+		std::cout << textoOpcional << "Ingrese un numero entre " << minimo << " y " << maximo << ": ";
 		std::cin >> input;
 		std::istringstream(input) >> numero;
 
-	}
-	while (numero < minimo || numero > maximo);
+	} while (numero < minimo || numero > maximo);
 
-	std::cout<< std::endl;
+	std::cout << std::endl;
 
 	return numero;
 }
@@ -82,21 +76,18 @@ int DirectorDeJuego::obtenerNumero(int minimo, std::string textoOpcional /*= ""*
 	int numero;
 
 	do {
-		std::cout << textoOpcional << "Ingrese un numero mayor a " << minimo <<": ";
+		std::cout << textoOpcional << "Ingrese un numero mayor a " << minimo << ": ";
 		std::cin >> input;
 		std::istringstream(input) >> numero;
-	}
-	while (numero < minimo);
-	std::cout<< std::endl;
+	} while (numero < minimo);
+	std::cout << std::endl;
 
 	return numero;
 }
 
-
-
 void DirectorDeJuego::coordinarJuego() {
 
-	cout << "Mandando a volar el dron, estara listo en unos momentos..." << endl<<endl;
+	cout << "Mandando a volar el dron, estara listo en unos momentos..." << endl << endl;
 	DronAereo dron(this->filas, this->columnas);
 
 	Secretario secretario(catalogoSemillas, catalogoDestinos, filas, columnas, dificultad);
@@ -104,7 +95,7 @@ void DirectorDeJuego::coordinarJuego() {
 	unsigned int numeroJugador = 1;
 	for (unsigned int i = 1; i <= this->turnos; i++) {
 
-		cout << "-----------------------TURNO " << i<< "-----------------------" << endl;
+		cout << "-----------------------TURNO " << i << "-----------------------" << endl;
 
 		jugadores->iniciarCursor();
 
@@ -119,12 +110,12 @@ void DirectorDeJuego::coordinarJuego() {
 
 			this->anunciarJugadorYregalarAgua(numeroJugador);
 
-			cout <<endl<<"++Tomando fotos de  sus terrenos al principio de turno, aguarde un momento...++"<< endl<<endl;
+			cout << endl << "++Tomando fotos de  sus terrenos al principio de turno, aguarde un momento...++" << endl << endl;
 			dron.tomarFoto(jugadorActual, numeroJugador, i);
 
 			secretario.atenderJugador();
 
-			cout << "++Tomando fotos de sus terrenos al final de turno, aguarde un momento...++"<< endl<<endl;
+			cout << "++Tomando fotos de sus terrenos al final de turno, aguarde un momento...++" << endl << endl;
 			dron.tomarFoto(jugadorActual, numeroJugador, i);
 
 			numeroJugador++;
@@ -143,11 +134,11 @@ void DirectorDeJuego::anunciarJugadorYregalarAgua(unsigned int numeroJugador) {
 	cout << "/////Jugador " << numeroJugador << "/////" << endl;
 
 	unsigned int resultadoDado = dado.obtenerNumeroRandom();
-	cout << "// Obtuviste " << resultadoDado << " en tu dado! Ganaste "<< resultadoDado * 5 << " de agua." << endl;
+	cout << "// Obtuviste " << resultadoDado << " en tu dado! Ganaste " << resultadoDado * 5 << " de agua." << endl;
 
 	unsigned int aguaPerdida = jugadorActual->obtenerTanqueDeAgua()->agregarAgua(resultadoDado * 5);
 	if (aguaPerdida != 0) {
-		std::cout << "// ****Perdiste " << aguaPerdida<< " unidad(es) de riego!****" << endl;
+		std::cout << "// ****Perdiste " << aguaPerdida << " unidad(es) de riego!****" << endl;
 	}
 }
 

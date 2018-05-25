@@ -7,29 +7,29 @@
 
 #include "Peon.h"
 
-void Peon::regar(Parcela* parcelaATrabajar,TanqueDeAgua* tanqueAgua){
+void Peon::regar(Parcela* parcelaATrabajar, TanqueDeAgua* tanqueAgua) {
 
 	int consumoAgua = parcelaATrabajar->obtenerCultivo()->obtenerConsumoAgua();
-    parcelaATrabajar->regar();
-    tanqueAgua->restarAgua(consumoAgua);
+	parcelaATrabajar->regar();
+	tanqueAgua->restarAgua(consumoAgua);
 
 }
 
-void Peon::cosechar(Parcela* parcelaATrabajar, Almacen* almacen){
+void Peon::cosechar(Parcela* parcelaATrabajar, Almacen* almacen) {
 
-    parcelaATrabajar->modificarTiempoRecuperacion(parcelaATrabajar->obtenerCultivo()->obtenerTiempoRecuperacion());
+	parcelaATrabajar->modificarTiempoRecuperacion(parcelaATrabajar->obtenerCultivo()->obtenerTiempoRecuperacion());
 
-    almacen->agregarCultivo(parcelaATrabajar->obtenerCultivo());
-    parcelaATrabajar->modificarCultivo(NULL);
-    parcelaATrabajar->modificarEstado(Recuperando);
+	almacen->agregarCultivo(parcelaATrabajar->obtenerCultivo());
+	parcelaATrabajar->modificarCultivo(NULL);
+	parcelaATrabajar->modificarEstado(Recuperando);
 
 }
 
-void Peon::sembrar(Parcela* parcelaATrabajar,Monedero* monedero ,Cultivo* cultivo){
+void Peon::sembrar(Parcela* parcelaATrabajar, Monedero* monedero, Cultivo* cultivo) {
 
 	monedero->gastarDinero(cultivo->obtenerCostoSemilla());
-    parcelaATrabajar->modificarCultivo(cultivo);
-    parcelaATrabajar->modificarEstado(Plantada);
-    parcelaATrabajar->modificarTiempoCosecha(cultivo->obtenerTiempoCosecha());
+	parcelaATrabajar->modificarCultivo(cultivo);
+	parcelaATrabajar->modificarEstado(Plantada);
+	parcelaATrabajar->modificarTiempoCosecha(cultivo->obtenerTiempoCosecha());
 }
 

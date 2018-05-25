@@ -10,25 +10,25 @@
 using namespace std;
 
 Almacen::Almacen(int N, int M, int dificultad) {
-	this->capacidad= (2*(N+M))/dificultad;
-	this->cultivos= new Lista<Cultivo*>;
+	this->capacidad = (2 * (N + M)) / dificultad;
+	this->cultivos = new Lista<Cultivo*>;
 }
 
-int Almacen::obtenerCapacidad(){
+int Almacen::obtenerCapacidad() {
 	return this->capacidad;
 }
 
-bool Almacen:: capacidadValida(){
+bool Almacen::capacidadValida() {
 	return (cultivos->contarElementos() <= capacidad);
 }
 
-void Almacen::agrandarAlmacen(unsigned int capacidadAAgregar){
+void Almacen::agrandarAlmacen(unsigned int capacidadAAgregar) {
 
 	this->capacidad += capacidadAAgregar;
 }
 
-void Almacen::agregarCultivo(Cultivo* cultivo){
-		cultivos->agregar(cultivo);
+void Almacen::agregarCultivo(Cultivo* cultivo) {
+	cultivos->agregar(cultivo);
 }
 
 int Almacen::contarCultivos() {
@@ -39,22 +39,21 @@ bool Almacen::hayEspacioLibre() {
 	return this->obtenerCapacidad() > this->contarCultivos();
 }
 
-
-void Almacen::quitarCultivo(int posicion){
+void Almacen::quitarCultivo(int posicion) {
 	cultivos->remover(posicion);
 }
 
-void Almacen:: mostrarNombresDeCultivosEnElAlmacen(){
+void Almacen::mostrarNombresDeCultivosEnElAlmacen() {
 	cultivos->iniciarCursor();
-	int i=1;
-	while ( cultivos->avanzarCursor()){
+	int i = 1;
+	while (cultivos->avanzarCursor()) {
 		cout << i << ". " << cultivos->obtener(i)->obtenerNombre() << endl;
 		i++;
 	}
 
 }
 
-Cultivo* Almacen::obtenerCultivoEnPosicion(unsigned int posicion){
+Cultivo* Almacen::obtenerCultivoEnPosicion(unsigned int posicion) {
 	return this->cultivos->obtener(posicion);
 }
 

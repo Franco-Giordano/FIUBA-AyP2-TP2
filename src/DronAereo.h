@@ -44,11 +44,9 @@ public:
 
 	//PRE:  Los par�metros recibidos deben de est�r validados previamente.
 	//POST: Crea un archivo ".bmp" del estado actual de TODOS los terrenos del jugador recibido por par�metro.
-	void tomarFoto(Jugador * jugadorRecibido, unsigned int numeroJugadorActual,
-			unsigned int turnoActual);
+	void tomarFoto(Jugador * jugadorRecibido, unsigned int numeroJugadorActual, unsigned int turnoActual);
 
 private:
-
 
 	//POST: Convierte el entero recibido por parametro en una cadena de caracteres de tipo string.
 	std::string convertirEnteroAString(int enteroAConvetir);

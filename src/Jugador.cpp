@@ -12,43 +12,40 @@
 
 using namespace std;
 
-Jugador::Jugador (int N, int M, int dificultad) {
+Jugador::Jugador(int N, int M, int dificultad) {
 
 	this->monedero = new Monedero(N, M, dificultad);
-	this->terrenos= new Lista<Terreno*>;
-	Terreno* terreno=new Terreno(N,M);
+	this->terrenos = new Lista<Terreno*>;
+	Terreno* terreno = new Terreno(N, M);
 	terrenos->agregar(terreno);
-	this->tanque= new TanqueDeAgua (N, M, dificultad);
-	this->almacen= new Almacen (N, M, dificultad);
+	this->tanque = new TanqueDeAgua(N, M, dificultad);
+	this->almacen = new Almacen(N, M, dificultad);
 }
 
-Lista<Terreno*>* Jugador::obtenerListaTerreno(){
+Lista<Terreno*>* Jugador::obtenerListaTerreno() {
 
 	return this->terrenos;
 }
 
-
-Monedero* Jugador::obtenerMonedero(){
+Monedero* Jugador::obtenerMonedero() {
 
 	return this->monedero;
 }
 
-TanqueDeAgua* Jugador::obtenerTanqueDeAgua(){
+TanqueDeAgua* Jugador::obtenerTanqueDeAgua() {
 
 	return this->tanque;
 }
 
-Almacen* Jugador:: obtenerAlmacen(){
+Almacen* Jugador::obtenerAlmacen() {
 
 	return this->almacen;
 }
 
-
-void Jugador::venderTerreno(int terrenoAVender){
+void Jugador::venderTerreno(int terrenoAVender) {
 
 	this->terrenos->remover(terrenoAVender);
 }
-
 
 Jugador::~Jugador() {
 	delete monedero;
@@ -56,7 +53,7 @@ Jugador::~Jugador() {
 	delete almacen;
 
 	terrenos->iniciarCursor();
-	while(terrenos->avanzarCursor()) {
+	while (terrenos->avanzarCursor()) {
 		delete terrenos->obtenerCursor();
 	}
 
