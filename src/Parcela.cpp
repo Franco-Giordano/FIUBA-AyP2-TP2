@@ -12,7 +12,7 @@ Parcela::Parcela(){
 
 	this -> cultivo = NULL;
 	this -> estado = Libre;
-	this -> regada = false;
+	this -> regada = true;
 	this->tiempoRecuperacion = 0;
 	this->tiempoCosecha = 0;
 }

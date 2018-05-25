@@ -200,7 +200,7 @@ void Secretario::gestionarEnvioCosecha(Jugador* jugador, Acciones acciones) {
 										obtenerCultivoEnPosicion(numCultivoAEnviar),this->catalogoDestinos);
 		if (destinosValidos->contarElementos()!=0)
 		{
-			cout<<"Â¿A cual de estos destinos quiere enviar la cosecha?"<<endl;
+			cout<<"¿A cual de estos destinos quiere enviar la cosecha?"<<endl;
 			acciones.imprimirListaDestinos(destinosValidos);
 			unsigned int destinoEscojido=this->obtenerNumero(1,destinosValidos->contarElementos(),"");
 			Correo correo(destinosValidos, jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
@@ -293,7 +293,8 @@ unsigned int Secretario::obtenerTerrenoDeJugador(Jugador* jugador) {
 
 
 
-Cultivo* Secretario::seleccionarCultivoDeCatalogo() { //----------------------------------------------------MOSTRAR MAS INFO POR CULTIVO-----------------------
+//----------------------------------------------------MOSTRAR MAS INFO POR CULTIVO-----------------------
+Cultivo* Secretario::seleccionarCultivoDeCatalogo() {
 	std::cout << "Seleccione un cultivo a sembrar: "<<std::endl;
 	for (unsigned int i =0; i < catalogoSemillas->obtenerCantidadDisponible(); i++) {
 		std::cout<< i+1 << ". " << catalogoSemillas->obtenerPosicion(i)->obtenerNombre()<<std::endl;
@@ -303,12 +304,13 @@ Cultivo* Secretario::seleccionarCultivoDeCatalogo() { //------------------------
 }
 
 
-bool Secretario::advertirQuePuedePerderCosechas(Jugador* jugador, unsigned int posicionT) {
+bool Secretario::advertirQuePuedePerderCosechas(Jugador* jugador, unsigned int posicionTerreno) {
 	bool deseaContinuar = true;
-	if (!jugador->obtenerListaTerreno()->obtener(posicionT)->estaTodoVacio()) {
-		string posicionSTR = this->convertirIntAString(posicionT);
+	if (!jugador->obtenerListaTerreno()->obtener(posicionTerreno)->estaTodoVacio()) {
+		string posicionSTR = this->convertirIntAString(posicionTerreno);
 		deseaContinuar = this->obtenerNumero(0, 1, "Advertencia! El terreno "+posicionSTR+" NO esta vacio."+
-				" Esto significa que cualquier cultivo y potencial ganancia seran perdidas. Escoja 0 para CANCELAR, 1 para CONTINUAR. ");
+				" Esto significa que cualquier cultivo y potencial ganancia seran perdidas."
+				" Escoja 0 para CANCELAR, 1 para CONTINUAR. ");
 	}
 
 	return deseaContinuar;

@@ -37,6 +37,7 @@ public:
 	//Post: devuelve la capacidad maxima del tanque de agua.
 	int obtenerCantidadDeAguaMaxima();
 
+	//Post: devuelve true si la cantidad de agua en el tanque es mayor a 0.
 	bool hayAguaEnElTanque();
 
 

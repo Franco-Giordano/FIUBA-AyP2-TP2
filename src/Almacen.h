@@ -31,11 +31,12 @@ public:
 	// que la capacidad, devuelve false.
 	bool capacidadValida();
 
+	//Post: devuelve true si hay espacio libre para agregar algun cultivo en el almacen.
 	bool hayEspacioLibre();
 
+	//Post: devuelve el numero de cultivos cosechadas que hay guardados en el almacen.
 	int contarCultivos();
 
-	//Pre:
 	//Post: incrementa la capacidad del almacen para poder seguir agregando elementos a la lista.
 	void agrandarAlmacen(unsigned int capacidadAAgregar);
 
@@ -49,8 +50,11 @@ public:
 	//Funcion creada para probar la funcionalidad del codigo.
 	void  mostrarNombresDeCultivosEnElAlmacen();
 
+	//Pre: recibe la posicion del cultivo que se desea obtener.
+	//Post: devuelve el cultivo en la posicion pasada por parametro.
 	Cultivo* obtenerCultivoEnPosicion(unsigned int posicion);
 
+	//Post: hace delete de la lista de cultivos del almacen.
 	~Almacen();
 };
 

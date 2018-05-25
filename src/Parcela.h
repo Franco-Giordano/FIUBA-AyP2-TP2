@@ -41,7 +41,9 @@ private:
 
 public:
 
-	//Post: Crea una parcela, con un cultivo NULL (o vacio), con estado Libre, y sin regar.
+	//Post: Crea una parcela, con un puntero a cultivo NULL (o vacio), con estado Libre, y ya regada. Luego tiene
+	// los atributos tiempo de recuperacion y tiempo de cosecha los cuales son inicializados en 0, luego los
+	// mismos seran modificados dependiendo del cultivo que se siembre en la parcela.
 	Parcela();
 
 	//Post: Devuelve true si estaplantada, false si no lo esta
@@ -66,24 +68,34 @@ public:
 	//Post:Devuelve el tiempo de recuperacion actual de la parcela.
 	int obtenerTiempoRecuperacion();
 
+	//Post: devuelve el estado de la parcela.
 	Estado obtenerEstado();
 
 	//Post: modificar el tiempo de cosecha por el recibido por par�metro.
 	void modificarTiempoCosecha(int tiempoCosechaRecibido);
 
-
+	//Pre:  Recibe el tiempo de recuperacion del cultivo que se va a cultivar.
+	//Post: Asigna el tiempo de recuperacion del cultivo en la parcela, el cual se restara a lo largo de los turnos.
 	void modificarTiempoRecuperacion(int tiempoRecuperacionRecibido);
 
+	//Pre: Recibe un enum estado.
+	//Post: Le asigna el Estado recibidio a la parcela.
 	void modificarEstado(Estado estadoRecibido);
 
+	//Pre: Recibe un puntero del cultivo.
+	//Post: Le asigna el cultivo recibido a la parcela.
 	void modificarCultivo(Cultivo* cultivoRecibido);
 
+	//Post: cambia el bool de la parcela a regada.
 	void regar();
 
+	//Post: cambia el bool de la parcela a !regada.
 	void secar();
 
+	//Post: si se puede sembrar la parcela devuelve true.
 	bool sePuedeSembrar();
 
+	//Post: si se puede cosechar la parcela devuelve true.
 	bool sePuedeCosechar();
 
 };

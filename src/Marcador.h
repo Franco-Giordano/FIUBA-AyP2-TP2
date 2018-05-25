@@ -15,22 +15,17 @@ class Marcador {
 private:
 
 public:
-	void mostrarTurno(Jugador* jugadorActual){
-		Almacen* almacen = jugadorActual->obtenerAlmacen();
-		Monedero* monedero = jugadorActual->obtenerMonedero();
-		TanqueDeAgua* tanque = jugadorActual->obtenerTanqueDeAgua();
+	//Post: crea un objeto marcador, el cual sera utilizado para mostrar por pantalla al jugador el estado actual
+	// de su granja.
+	Marcador();
 
+	//Pre: recibe por parametro un puntero al jugador al cual se le mostrara su estado.
+	//Post: Muestra por pantalla la cantidad de terrenos que posee, su dinero, su uso del tanque de agua y del almacen.
+	void mostrarTurno(Jugador* jugadorActual);
 
-
-		std::cout<<"//Cantidad de terrenos propios: "<< jugadorActual->obtenerListaTerreno()->contarElementos()<<std::endl;
-		std::cout<<"//Dinero disponible: "<< monedero->obtenerDineroActual()<<std::endl;
-		std::cout<<"//Uso del tanque de agua: "<< tanque->obtenerCantidadDeAguaActual()<<"/"<<tanque->obtenerCantidadDeAguaMaxima()<<std::endl;
-		std::cout<<"//Uso del almacen: "<<almacen->contarCultivos()<<"/"<<almacen->obtenerCapacidad()<<std::endl<<std::endl;
-
-	}
 
 	void mostrarPuntuacionFinal() {
-
+		//FALTA HACERJKFALJSDKLÑFJADFJADFJKLASDFJADFJFJ
 	}
 
 

@@ -31,6 +31,7 @@ public:
 	//Hacer que recorra la lista de terrenos, y a su vez, todas las parcelas de cada terreno, xd
 	void madurarTerreno(Terreno* terrenoActual);
 
+	//Post: cambia el estado inicial cada parcela de cada terreno de cada jugador.
 	void madurarTodosLosTerrenosDelJugador();
 
 };

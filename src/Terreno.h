@@ -37,10 +37,14 @@ public:
 	//Post: Devuelve como booleano indicando si la parcela esta ocupada (no vacia).
 	bool estaOcupada(int filaRecibida, int columnaRecibida);
 
+	//Pre: recibe la fila y la columna de donde se desea crear la parcela.
+	//Post: crea una parcela, en la posicion pedida, para poder ser usada.
 	void prepararParcela(int fila, int columna);
 
+	//Post: devuelve la lista de filas la cual contiene listas de columnas.
 	ListaCoordenada<ListaCoordenada<Parcela*>*>* obtenerListaFilas();
 
+	//Post: devuelve true si no hay ningun elemento creado en el terreno (osea en la lista de listas).
 	bool estaTodoVacio();
 
 	//Post: Libera la memoria utilizada por Terreno.

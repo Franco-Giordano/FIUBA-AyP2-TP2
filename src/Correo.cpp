@@ -33,5 +33,5 @@ unsigned int Correo::obtenerRentabilidad()
 
 int Correo::calcularCostoEnvio(Destino* destino)
 {
-	return destino->obtenerPrecio()*destino->obtenerDistancia();
+	return destino->obtenerPrecio() * destino->obtenerDistancia();
 }

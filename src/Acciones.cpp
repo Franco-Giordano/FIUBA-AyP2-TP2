@@ -13,7 +13,7 @@ unsigned int Acciones::obtenerAccionDeJugador() {
 	unsigned int opcion;
 
 	Marcador marcador;
-	marcador.mostrarTurno(jugador);
+	marcador.mostrarTurno(this->jugador);
 
 	cout << "Estas son las acciones que puede realizar, elija la que desea:"
 			<< endl;
@@ -113,14 +113,15 @@ bool Acciones::tieneMasDeUnTerreno() {
 }
 
 
-void Acciones::obtenerDestinosValidos(Lista<Destino*>* lista, Cultivo* cultivo, CatalogoDe<Destino>* catalogoDestinos) {
+void Acciones::obtenerDestinosValidos(Lista<Destino*>* listaDestinos, Cultivo* cultivo,
+									CatalogoDe<Destino>* catalogoDestinos) {
 
 	unsigned int cantidad = catalogoDestinos->obtenerCantidadDisponible();
 
 	for (unsigned int i=0; i < cantidad; i++) {
 		Destino* destinoActual = catalogoDestinos->obtenerPosicion(i);
-		if (destinoActual->obtenerNombreCultivo()==cultivo->obtenerNombre()) {
-			lista->agregar(destinoActual);
+		if (destinoActual->obtenerNombreCultivo() == cultivo->obtenerNombre()) {
+			listaDestinos->agregar(destinoActual);
 		}
 	}
 }

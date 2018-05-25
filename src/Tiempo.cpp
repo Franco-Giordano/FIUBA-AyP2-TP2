@@ -80,6 +80,7 @@ void Tiempo::madurarTerreno(Terreno* terrenoRecibido) {
 
 
 void Tiempo::madurarTodosLosTerrenosDelJugador() {
+
 	this->jugador->obtenerListaTerreno()->iniciarCursor();
 
 	while (this->jugador->obtenerListaTerreno()->avanzarCursor()){
