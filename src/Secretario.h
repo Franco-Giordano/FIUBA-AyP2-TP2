@@ -103,7 +103,8 @@ public:
     // le avisa al jugador que no se pudo llevar a cabo la accion.
     void gestionarAmpliarAlmacen(Jugador* jugador);
 
-    // FALTA AMPLIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR.
+    // Post: Muestra la informacion de cada cultivo dentro del catalogo para informar al usuario de que pasaria en caso de
+    // elegir cada una de las opciones.
     Cultivo* seleccionarCultivoDeCatalogo();
 };
 

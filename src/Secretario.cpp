@@ -293,11 +293,15 @@ unsigned int Secretario::obtenerTerrenoDeJugador(Jugador* jugador) {
 
 
 
-//----------------------------------------------------MOSTRAR MAS INFO POR CULTIVO-----------------------
 Cultivo* Secretario::seleccionarCultivoDeCatalogo() {
-	std::cout << "Seleccione un cultivo a sembrar: "<<std::endl;
+	cout << "Seleccione un cultivo a sembrar: "<<std::endl;
 	for (unsigned int i =0; i < catalogoSemillas->obtenerCantidadDisponible(); i++) {
-		std::cout<< i+1 << ". " << catalogoSemillas->obtenerPosicion(i)->obtenerNombre()<<std::endl;
+		cout<< i+1 << ". " << catalogoSemillas->obtenerPosicion(i)->obtenerNombre() << " //";
+		cout << " Precio: " << catalogoSemillas->obtenerPosicion(i)->obtenerCostoSemilla() << " //";
+		cout << " Rentabilidad: "<<catalogoSemillas->obtenerPosicion(i)->obtenerRentabilidad() << " //";
+		cout << " Tiempo hasta cosecha: " << catalogoSemillas->obtenerPosicion(i)->obtenerTiempoCosecha() << "."<<endl;
+
+		cout << endl;
 	}
 
 	return catalogoSemillas->obtenerPosicion(this->obtenerNumero(1, catalogoSemillas->obtenerCantidadDisponible()) - 1);
