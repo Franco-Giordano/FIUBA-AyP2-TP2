@@ -11,19 +11,17 @@
 
 using namespace std;
 
-Secretario::Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos) {
+Secretario::Secretario(Jugador* jugador, CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos) {
 
 	this -> turnos = obtenerNumero(1, "Determine la cantidad de turnos totales. ");
-
 	this -> numeroDeJugadores = obtenerNumero(1, "Determine la cantidad de jugadores. ");
-
 	this -> filas = obtenerNumero(1,"Determine la cantidad de filas del terreno. ");
 	this -> columnas = obtenerNumero(1,"Determine la cantidad de columnas del terreno. ");
-
 	this -> dificultad = obtenerNumero(1, 3, "Determine la dificultad, siendo 1 la mas facil y 3 la mas dificil. ");
 
-  this -> catalogoSemillas = pCatalogoSemillas;
-  this -> catalogoDestinos = pCatalogoDestinos;
+	this -> jugador = jugador;
+	this -> catalogoSemillas = pCatalogoSemillas;
+	this -> catalogoDestinos = pCatalogoDestinos;
 }
 
 
@@ -87,20 +85,20 @@ int Secretario::obtenerDificultad() {
 }
 
 
-void Secretario::atenderJugador(Jugador* jugador) {
+void Secretario::atenderJugador() {
 
-	Acciones acciones(jugador);
+	Acciones acciones(this->jugador);
 	bool pasarTurno = false;
 
 	while (!pasarTurno) {
 		unsigned int eleccion = acciones.obtenerAccionDeJugador();
-		pasarTurno = this->administrarEleccion(eleccion, jugador, acciones);
+		pasarTurno = this->administrarEleccion(eleccion, acciones);
 
 	}
 }
 
 
-bool Secretario::administrarEleccion(unsigned int eleccion, Jugador* jugador, Acciones acciones) {
+bool Secretario::administrarEleccion(unsigned int eleccion, Acciones acciones) {
 
 	bool pasarTurno = false;
 
@@ -110,7 +108,7 @@ bool Secretario::administrarEleccion(unsigned int eleccion, Jugador* jugador, Ac
 
 	if (eleccion >= 1 && eleccion <= 3) { //Si la eleccion es sembrar, cosechar o regar.
 
-		terreno = jugador-> obtenerListaTerreno() -> obtener(this->obtenerTerrenoDeJugador(jugador)) ;
+		terreno = jugador-> obtenerListaTerreno() -> obtener(this->obtenerTerrenoDeJugador()) ;
 		fila = this->obtenerNumero(1, this->filas,"Determine numero de fila. ");
 		columna = this->obtenerNumero(1, this->columnas,"Determine numero de columna. ");
 	}
@@ -118,28 +116,28 @@ bool Secretario::administrarEleccion(unsigned int eleccion, Jugador* jugador, Ac
 
 	switch (eleccion) {
 		case 1: {
-			this->gestionarSiembra(terreno, fila, columna, jugador);
+			this->gestionarSiembra(terreno, fila, columna);
 		break; }
 		case 2:
-			this->gestionarCosecha(terreno, fila, columna, jugador);
+			this->gestionarCosecha(terreno, fila, columna);
 		break;
 		case 3:
-			this->gestionarRiego(terreno, fila, columna, jugador);
+			this->gestionarRiego(terreno, fila, columna);
 		break;
 		case 4:
-			this->gestionarEnvioCosecha(jugador, acciones);
+			this->gestionarEnvioCosecha(acciones);
 		break;
 		case 5: {
-			this->gestionarCompraTerreno(jugador);
+			this->gestionarCompraTerreno();
 		break; }
 		case 6: {
-			this->gestionarVentaTerreno(jugador);
+			this->gestionarVentaTerreno();
 		break; }
 		case 7: {
-			this->gestionarAmpliarTanque(jugador);
+			this->gestionarAmpliarTanque();
 		break; }
 		case 8: {
-			this->gestionarAmpliarAlmacen(jugador);
+			this->gestionarAmpliarAlmacen();
 		break; }
 		case 9:
 			pasarTurno = true;
@@ -152,12 +150,12 @@ bool Secretario::administrarEleccion(unsigned int eleccion, Jugador* jugador, Ac
 
 
 
-void Secretario::gestionarSiembra(Terreno* terreno, unsigned int fila, unsigned int columna, Jugador* jugador) {
-	Acciones acciones(jugador);
+void Secretario::gestionarSiembra(Terreno* terreno, unsigned int fila, unsigned int columna) {
+	Acciones acciones(this->jugador);
 	Peon peon;
 	Cultivo* cultivoElegido = seleccionarCultivoDeCatalogo();
 	if (acciones.esSiembraValida(terreno, fila, columna,cultivoElegido)) {
-		peon.sembrar(terreno->obtenerParcela(fila, columna), jugador->obtenerMonedero(), cultivoElegido);
+		peon.sembrar(terreno->obtenerParcela(fila, columna), this->jugador->obtenerMonedero(), cultivoElegido);
 		cout << "**Siembra correcta**"<<endl<<endl;
 	}
 	else {
@@ -165,9 +163,9 @@ void Secretario::gestionarSiembra(Terreno* terreno, unsigned int fila, unsigned 
 	}
 }
 
-void Secretario::gestionarCosecha(Terreno* terreno, unsigned int fila, unsigned int columna, Jugador* jugador) {
+void Secretario::gestionarCosecha(Terreno* terreno, unsigned int fila, unsigned int columna) {
 	Peon peon;
-	Acciones acciones(jugador);
+	Acciones acciones(this->jugador);
 	if (acciones.esCosechaValida(terreno, fila, columna)){
 		peon.cosechar(terreno->obtenerParcela(fila, columna), jugador->obtenerAlmacen());
 		cout << "**Cosecha exitosa**" <<endl<<endl;
@@ -177,11 +175,11 @@ void Secretario::gestionarCosecha(Terreno* terreno, unsigned int fila, unsigned 
 	}
 }
 
-void Secretario::gestionarRiego(Terreno* terreno, unsigned int fila, unsigned int columna, Jugador* jugador) {
+void Secretario::gestionarRiego(Terreno* terreno, unsigned int fila, unsigned int columna) {
 	Peon peon;
 	Acciones acciones(jugador);
 	if (acciones.esRiegoValido(terreno,fila,columna)) {
-		peon.regar(terreno->obtenerParcela(fila,columna), jugador->obtenerTanqueDeAgua());
+		peon.regar(terreno->obtenerParcela(fila,columna), this->jugador->obtenerTanqueDeAgua());
 		cout<< "**Riego exitoso**"<<endl<<endl;
 	}
 	else {
@@ -189,23 +187,23 @@ void Secretario::gestionarRiego(Terreno* terreno, unsigned int fila, unsigned in
 	}
 }
 
-void Secretario::gestionarEnvioCosecha(Jugador* jugador, Acciones acciones) {
+void Secretario::gestionarEnvioCosecha(Acciones acciones) {
 
-	if (jugador->obtenerAlmacen()->contarCultivos() > 0) {
+	if (this->jugador->obtenerAlmacen()->contarCultivos() > 0) {
 		cout << "Escoja cual de sus cultivos quiere vender: "<<endl;
-		jugador->obtenerAlmacen()->mostrarNombresDeCultivosEnElAlmacen();
-		int numCultivoAEnviar=this->obtenerNumero(1,jugador->obtenerAlmacen()->contarCultivos(),"");
+		this->jugador->obtenerAlmacen()->mostrarNombresDeCultivosEnElAlmacen();
+		int numCultivoAEnviar=this->obtenerNumero(1,this->jugador->obtenerAlmacen()->contarCultivos(),"");
 		Lista<Destino*>* destinosValidos = new Lista<Destino*>;
-		acciones.obtenerDestinosValidos(destinosValidos, jugador->obtenerAlmacen()->
+		acciones.obtenerDestinosValidos(destinosValidos, this->jugador->obtenerAlmacen()->
 										obtenerCultivoEnPosicion(numCultivoAEnviar),this->catalogoDestinos);
 		if (destinosValidos->contarElementos()!=0)
 		{
 			cout<<"¿A cual de estos destinos quiere enviar la cosecha?"<<endl;
 			acciones.imprimirListaDestinos(destinosValidos);
 			unsigned int destinoEscojido=this->obtenerNumero(1,destinosValidos->contarElementos(),"");
-			Correo correo(destinosValidos, jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
-			correo.enviarCultivo(numCultivoAEnviar, jugador->obtenerAlmacen());
-			correo.cobrar(destinosValidos->obtener(destinoEscojido), jugador->obtenerMonedero());
+			Correo correo(destinosValidos, this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
+			correo.enviarCultivo(numCultivoAEnviar, this->jugador->obtenerAlmacen());
+			correo.cobrar(destinosValidos->obtener(destinoEscojido), this->jugador->obtenerMonedero());
 		}
 		else {
 			cout<<"No hay ningun comprador que acepte su cosecha."<<endl;
@@ -215,9 +213,9 @@ void Secretario::gestionarEnvioCosecha(Jugador* jugador, Acciones acciones) {
 		cout<<"No posee cultivos en el almacen."<<endl;
 }
 
-void Secretario::gestionarCompraTerreno(Jugador* jugador) {
+void Secretario::gestionarCompraTerreno() {
 	Mercado mercado(this->dificultad);
-	Acciones acciones(jugador);
+	Acciones acciones(this->jugador);
 
 	unsigned int costoNuevoTerreno = filas*columnas*dificultad*jugador->obtenerListaTerreno()->contarElementos();
 
@@ -235,13 +233,14 @@ void Secretario::gestionarCompraTerreno(Jugador* jugador) {
 
 }
 
-void Secretario::gestionarVentaTerreno(Jugador* jugador) {
-	Acciones acciones(jugador);
+void Secretario::gestionarVentaTerreno() {
+	Acciones acciones(this->jugador);
 	Mercado mercado(this->dificultad);
 
 	if (acciones.tieneMasDeUnTerreno()) {
-		unsigned int posicionT = obtenerNumero(1, jugador->obtenerListaTerreno()->contarElementos(), "Cual de sus terrenos desea vender? ");
-		bool aceptaPerderCosechas = this->advertirQuePuedePerderCosechas(jugador, posicionT);
+		unsigned int posicionT = obtenerNumero(1, jugador->obtenerListaTerreno()->contarElementos(),
+				"Cual de sus terrenos desea vender? ");
+		bool aceptaPerderCosechas = this->advertirQuePuedePerderCosechas(posicionT);
 
 		if (aceptaPerderCosechas){
 			unsigned int costoActual = filas*columnas*dificultad*jugador->obtenerListaTerreno()->contarElementos() / 2;
@@ -258,13 +257,13 @@ void Secretario::gestionarVentaTerreno(Jugador* jugador) {
 	}
 }
 
-void Secretario::gestionarAmpliarTanque(Jugador* jugador) {
-	Acciones acciones(jugador);
+void Secretario::gestionarAmpliarTanque() {
+	Acciones acciones(this->jugador);
 	Mercado mercado(this->dificultad);
 
 	unsigned int ampliacionElegida = this->obtenerNumero(1, "Determine en cuantas unidades desea ampliar su tanque. ");
 	if (acciones.compraCapacidadTanqueValida(columnas, this->dificultad)) {
-		mercado.venderCapacidadDeTanque(jugador, ampliacionElegida);
+		mercado.venderCapacidadDeTanque(this->jugador, ampliacionElegida);
 		cout << "**Ampliacion exitosa**"<<endl<<endl;
 	}
 	else {
@@ -272,7 +271,7 @@ void Secretario::gestionarAmpliarTanque(Jugador* jugador) {
 	}
 }
 
-void Secretario::gestionarAmpliarAlmacen(Jugador* jugador){
+void Secretario::gestionarAmpliarAlmacen(){
 	Acciones acciones(jugador);
 	Mercado mercado(this->dificultad);
 
@@ -287,8 +286,8 @@ void Secretario::gestionarAmpliarAlmacen(Jugador* jugador){
 }
 
 
-unsigned int Secretario::obtenerTerrenoDeJugador(Jugador* jugador) {
-	return obtenerNumero(1, jugador->obtenerListaTerreno()->contarElementos(), "Cual de sus terrenos desea trabajar? ");
+unsigned int Secretario::obtenerTerrenoDeJugador() {
+	return obtenerNumero(1, this->jugador->obtenerListaTerreno()->contarElementos(), "Cual de sus terrenos desea trabajar? ");
 }
 
 
@@ -308,7 +307,7 @@ Cultivo* Secretario::seleccionarCultivoDeCatalogo() {
 }
 
 
-bool Secretario::advertirQuePuedePerderCosechas(Jugador* jugador, unsigned int posicionTerreno) {
+bool Secretario::advertirQuePuedePerderCosechas(unsigned int posicionTerreno) {
 	bool deseaContinuar = true;
 	if (!jugador->obtenerListaTerreno()->obtener(posicionTerreno)->estaTodoVacio()) {
 		string posicionSTR = this->convertirIntAString(posicionTerreno);
@@ -320,6 +319,9 @@ bool Secretario::advertirQuePuedePerderCosechas(Jugador* jugador, unsigned int p
 	return deseaContinuar;
 }
 
+void Secretario::cambiarJugador(Jugador* jugador){
+	this->jugador= jugador;
+}
 
 
 string Secretario::convertirIntAString(int i) {
