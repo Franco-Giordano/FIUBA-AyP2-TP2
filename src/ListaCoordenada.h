@@ -5,7 +5,11 @@
 #include <string>
 
 
-
+/*
+ * Representa una lista pero donde cada elemento tambien posee un atributo COORDENADA, no puede haber dos coordenadas iguales.
+ * Los elementos de la misma estan ordenados segun dicho atributo (menor a mayor), donde la coordenada maxima posible sera el atributo LIMITE.
+ * Asi, la posicion del elemento en la lista pierde peso, tomando COORDENADA un rol mas importante.
+ */
 template<class T> class ListaCoordenada {
 
     private:
@@ -14,14 +18,14 @@ template<class T> class ListaCoordenada {
 
         unsigned int tamanio;
 
-        unsigned int limite;
+        unsigned int limiteCoordenada;
 
         NodoCoordenado<T>* cursor;
 
     public:
 
         /*
-         * post: Lista vacía.
+         * post: Lista vacía, capaz de almacenar hasta las coordenada limiteRecibido.
          */
         ListaCoordenada(unsigned int limiteRecibido);
 
@@ -36,15 +40,15 @@ template<class T> class ListaCoordenada {
          */
         unsigned int contarElementos();
 
-        /*atom://teletype/portal/6488400d-1a41-4798-bf7c-59b92e8c95e2
-         * post: agrega el elemento al final de la Lista, en la posición:
+        /*
+         * post: agrega el elemento al final de la Lista, en la POSICION:
          *       contarElementos() + 1.
          */
         void agregar(T elemento);
 
         /*
-         * pre : posición pertenece al intervalo: [1, contarElementos() + 1]
-         * post: agrega el elemento en la posición indicada.
+         * pre : coordenada pertenece al intervalo: [1, obtenerLimite()] y la misma NO esta ocupada.
+         * post: agrega el elemento en la coordenada indicada de forma ordenada.
          *
          */
         void agregarEnCoordenada(T elemento, unsigned int coordenada);
@@ -52,16 +56,9 @@ template<class T> class ListaCoordenada {
 
         /*
          * pre : posición pertenece al intervalo: [1, contarElementos()]
-         * post: devuelve el elemento en la posición indicada.
+         * post: devuelve el elemento en la POSICION indicada.
          */
         T obtener(unsigned int posicion);
-
-        /*
-         * pre : posicion pertenece al intervalo: [1, contarElementos()]
-         * post: cambia el elemento en la posición indicada por el
-         *       elemento dado.
-         */
-        void asignar(T elemento, unsigned int posicion);
 
         /*
          * pre : posición pertenece al intervalo: [1, contarElementos()]
@@ -70,7 +67,9 @@ template<class T> class ListaCoordenada {
         void remover(unsigned int posicion);
 
 
-
+        /* PRE: La coordenada pertenece a [1, obtenerLimite()] y esta ocupada.
+         * POST: Remueve el elemento con dicha coordenada de la lista, manteniendo el orden.
+         */
         void removerCoordenada(unsigned int coordenada);
 
         /*
@@ -99,14 +98,35 @@ template<class T> class ListaCoordenada {
          */
         T obtenerCursor();
 
+        /*
+         * POST: Devuelve la maxima coordenada que puede almacenar la lista.
+         */
         unsigned int obtenerLimite();
 
+        /*
+         * PRE: coordenada pertenece a [1, obtenerLimite()]
+         * POST: Devuelve si la coordenada dada esta ocupada,
+         */
         bool estaOcupadaLaCoordenada(unsigned int coordenada);
 
+        /* PRE: Lista no vacia
+         * POST: Devuelve la minima coordenada en toda la lista.
+         * (esencialmente, la coordenada del primero ya que esta ordenada)
+         */
         unsigned int verMinimaCoordenada();
 
+
+        /*
+         * PRE: Coordenada esta en [1, obtenerLimite()] y esta ocupada.
+         * POST: Devuelve el elemento en la COORDENADA indicada.
+         */
         T obtenerEnCoordenada(unsigned int coordenada);
 
+
+        /*
+         * PRE: posicion entre [1, contarElementos()], lista no vacia
+         * POST: Devuelve la coordenada correspondiente a la posicion recibida.
+         */
         unsigned int obtenerCoordenadaDeLaPosicion(unsigned int posicion);
 
         /*
@@ -116,11 +136,7 @@ template<class T> class ListaCoordenada {
 
     private:
 
-        /*
-         * pre : posición pertenece al intervalo: [1, contarElementos()]
-         * post: devuelve el NodoCoordenado en la posición indicada.
-         */
-        NodoCoordenado<T>* obtenerNodoConCoordenada(unsigned int coordenada); // NOTA: primitiva PRIVADA
+        NodoCoordenado<T>* obtenerNodoConCoordenada(unsigned int coordenada);
 
         NodoCoordenado<T>* obtenerNodo(unsigned int posicion);
 
@@ -134,7 +150,7 @@ template<class T> ListaCoordenada<T>::ListaCoordenada(unsigned int limiteRecibid
     this->primero = NULL;
     this->tamanio = 0;
     this->cursor = NULL;
-    this->limite = limiteRecibido;
+    this->limiteCoordenada = limiteRecibido;
 }
 
 
@@ -153,10 +169,10 @@ template<class T> unsigned int ListaCoordenada<T>::contarElementos() {
 }
 
 
-//PRE: La coordenada no esta ocupada en la lista y + cosas
+
 template<class T> void ListaCoordenada<T>::agregarEnCoordenada(T elemento, unsigned int coordenada) {
 
-    if ((coordenada > 0) && (coordenada <= this->limite)) {
+    if ((coordenada > 0) && (coordenada <= this->limiteCoordenada)) {
 
         NodoCoordenado<T>* nuevo = new NodoCoordenado<T>(elemento, coordenada);
 
@@ -227,14 +243,6 @@ template<class T> T ListaCoordenada<T>::obtenerEnCoordenada(unsigned int coorden
     return elemento;
 }
 
-template<class T> void ListaCoordenada<T>::asignar(T elemento, unsigned int posicion) {
-
-    if ((posicion > 0) && (posicion <= this->tamanio)) {
-
-        this->obtenerNodo(posicion)->cambiarDato(elemento);
-    }
-}
-
 template<class T> void ListaCoordenada<T>::remover(unsigned int posicion) {
 
     if ((posicion > 0) && (posicion <= this->tamanio)) {
@@ -290,7 +298,7 @@ template<class T> void ListaCoordenada<T>::removerCoordenada(unsigned int coorde
 }
 
 
-//PRE: Lista no vacia y + cosas
+
 template<class T> unsigned int ListaCoordenada<T>::verMinimaCoordenada() {
     return this-> primero-> obtenerCoordenada();
 }
@@ -349,7 +357,7 @@ template<class T> ListaCoordenada<T>::~ListaCoordenada() {
     }
 }
 
-//PRE: coordenada esta ocupada. 
+
 template<class T>
 NodoCoordenado<T>* ListaCoordenada<T>::obtenerNodoConCoordenada(unsigned int coordenada) {
 
@@ -376,8 +384,6 @@ NodoCoordenado<T>* ListaCoordenada<T>::obtenerNodo(unsigned int posicion) {
     return actual;
 }
 
-
-//PRE: Lista no vacia , coordenada > this->verMinimaCoordenada() y + cosas
 template<class T>
 NodoCoordenado<T>* ListaCoordenada<T>::obtenerNodoAnteriorALaCoordenada( unsigned int coordenada){
 
@@ -394,7 +400,7 @@ NodoCoordenado<T>* ListaCoordenada<T>::obtenerNodoAnteriorALaCoordenada( unsigne
 
 template<class T>
 unsigned int ListaCoordenada<T>::obtenerLimite() {
-	return this->limite;
+	return this->limiteCoordenada;
 }
 
 

@@ -49,7 +49,7 @@ int Secretario::obtenerNumero(int minimo, std::string textoOpcional /*= ""*/) {
 	int numero;
 
 	do {
-		std::cout << textoOpcional << "Ingrese un numero mayor a " << minimo <<": ";
+		std::cout << textoOpcional << "Ingrese un numero mayor o igual a " << minimo <<": ";
 		std::cin >> input;
 		std::istringstream(input) >> numero;
 	}
@@ -331,8 +331,8 @@ void Secretario::mostrarTerreno(){
 		terrenos->avanzarCursor();
 		Terreno* terrenoActual = terrenos->obtenerCursor();
 
-		unsigned int i;
-		unsigned int j;
+		int i;
+		int j;
 
 		for (i= 1; i <= terrenoActual->obtenerFilas(); i++) {
 

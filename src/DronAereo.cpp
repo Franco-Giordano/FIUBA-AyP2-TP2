@@ -27,7 +27,7 @@ DronAereo::DronAereo(unsigned int cantidadFilas,unsigned int cantidadColumnas) {
 	this->fotoTerreno.SetBitDepth(8);
 
 	/*Imprime en la foto el pasto de fondo. Lo hace hasta resolucion menos 2 asi queda un recuadro
-	 blanco (solamente estético)*/
+	 blanco (solamente estï¿½tico)*/
 	for (unsigned int i = 1; i < resolucionDeFoto[0] - 1; i++) {
 		for (unsigned int j = 1; j < resolucionDeFoto[1] - 1; j++) {
 			fotoTerreno(i, j)->Green = rand() % 161 + 255;
@@ -133,7 +133,7 @@ void DronAereo::tomarFoto(Jugador * jugadorRecibido,unsigned int numeroJugadorAc
 
 				}
 				else if (parcelaActual->obtenerEstado() == ListaParaCosecha){
-					strcpy(texto,"L");
+					strcpy(texto,"C");
 				}
 
 				PrintString(fotoTerreno, texto,filaActual->obtenerCoordenadaDeLaPosicion(j)* multiplicador + margenAnchoLetra,

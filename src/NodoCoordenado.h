@@ -21,8 +21,8 @@ template<class T> class NodoCoordenado {
 
         /*
          * pre: coordenada esta en el intervalo [1, maximo de la lista].
-         * post: el NodoCoordenadoresulta inicializado con el dato dado
-         *       y sin un NodoCoordenadosiguiente.
+         * post: el NodoCoordenado resulta inicializado con el dato dado
+         *       y sin un NodoCoordenado siguiente.
          *
          */
         NodoCoordenado(T dato, unsigned int coordenada) {
@@ -57,17 +57,24 @@ template<class T> class NodoCoordenado {
         }
 
         /*
-         * post: cambia el siguiente NodoCoordenadopor nuevoSiguiente.
+         * post: cambia el siguiente NodoCoordenado por nuevoSiguiente.
          */
         void cambiarSiguiente(NodoCoordenado<T>* nuevoSiguiente) {
 
             this->siguiente = nuevoSiguiente;
         }
 
+
+        /*
+         * POST: Devuelve la coordenada del Nodo.
+         */
         unsigned int obtenerCoordenada(){
         	return this->coordenada;
         }
 
+        /* POST: Devuelve la coordenada del Nodo que le sigue, devuelve 0 si es el ultimo.
+         *
+         */
         unsigned int obtenerCoordenadaSiguiente(){
         	if (this->obtenerSiguiente()!= NULL){
         		return this->obtenerSiguiente()->obtenerCoordenada();
