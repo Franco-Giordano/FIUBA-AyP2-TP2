@@ -1,5 +1,4 @@
-/*
- * Secretario.h
+* Secretario.h
  *
  *  Created on: 20 may. 2018
  *      Author: frank
@@ -22,17 +21,18 @@ private:
 	unsigned int turnos, numeroDeJugadores, filas, columnas, dificultad;
     CatalogoDe<Cultivo>* catalogoSemillas;
     CatalogoDe<Destino>* catalogoDestinos;
+    Jugador* jugador;
 
     std::string convertirIntAString(int i);
 
 public:
 
-    //Pre: se reciben los catálogo, los cuales se suponen válidos.
+    //Pre: se reciben los catálogo, los cuales se suponen válidos y el jugador el cual sera atendido por el secretario.
     //Post: Crea un secretario, cuya funcion es la de atender al jugador durante el juego, este conoce
     // el numero de turnos, la cantidad de jugadores, el tamaño del terreno y la dificultad del juego.
     // Incluso posee los catalogos, de semillas y de destinos, que son las semillas que se pueden sembrar,
     // en una parcela y los lugares a donde se pueden enviar una vez cosechadas.
-	Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos);
+	Secretario(Jugador* jugador, CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos);
 
 	//Post:  valida que el numero ingresado este en el rango (minimo, maximo).
 	int obtenerNumero(int minimo, int maximo, std::string textoOpcional = "");
@@ -55,57 +55,61 @@ public:
 	//Post: devuelve la dificultad.
 	int obtenerDificultad();
 
-	//Pre: recibe al jugador el cual va a realizar la accion.
+
 	//Post: El jugador elige la accion dentro del rango de opciones que posee.
-	void atenderJugador(Jugador* jugador);
+	void atenderJugador();
 
 	//Post: realiza la accion elegida por el jugador en atenderJugador().
-	bool administrarEleccion(unsigned int eleccion, Jugador* jugador, Acciones acciones);
+	bool administrarEleccion(unsigned int eleccion, Acciones acciones);
 
 	//Post: devuelve el terreno en el cual se va a realizar la accion deseada.
-    unsigned int obtenerTerrenoDeJugador(Jugador* jugador);
+    unsigned int obtenerTerrenoDeJugador();
 
     //Post: si el terreno no esta vacio te avisa que se puede llegar a perder una cosecha.
-    bool advertirQuePuedePerderCosechas(Jugador* jugador, unsigned int posicionT);
+    bool advertirQuePuedePerderCosechas(unsigned int posicionT);
 
     //Post: siembra el cultivo y larga un mensaje indicandole al jugador que fue correcto su intento de sembrar,
     // en caso contrario le avisa que no se pudo llevar a cabo la accion.
-    void gestionarSiembra(Terreno* terreno, unsigned int fila, unsigned int columna, Jugador* jugador);
+    void gestionarSiembra(Terreno* terreno, unsigned int fila, unsigned int columna);
 
     //Post: cosecha el cultivo y larga un mensaje indicandole al jugador que fue correcto su intento de cosechar,
     // en caso contrario le avisa que no se pudo llevar a cabo la accion.
-    void gestionarCosecha(Terreno* terreno, unsigned int fila, unsigned int columna, Jugador* jugador);
+    void gestionarCosecha(Terreno* terreno, unsigned int fila, unsigned int columna);
 
     //Post: riega el cultivo y larga un mensaje indicandole al jugador que fue correcto su intento de regar,
     // en caso contrario le avisa que no se pudo llevar a cabo la accion.
-    void gestionarRiego(Terreno* terreno, unsigned int fila, unsigned int columna, Jugador* jugador);
+    void gestionarRiego(Terreno* terreno, unsigned int fila, unsigned int columna);
 
-    //Pre: recibe al jugador que llevara a cabo la accion.
+
     //Post: envia el cultivo al destino indicado chequeando previamente que se cumpla cada condicion.
-    void gestionarEnvioCosecha(Jugador* jugador, Acciones acciones);
+    void gestionarEnvioCosecha(Acciones acciones);
 
-    //Pre: recibe al jugador que llevara a cabo la accion.
+
     //Post: compra un terreno para el usuario si posee el dinero necesario como para comprar.
-    void gestionarCompraTerreno(Jugador* jugador);
+    void gestionarCompraTerreno();
 
-    //Pre: recibe al jugador que llevara a cabo la accion.
+
     //Post: Chequea que el usuario pueda vender un terreno, luego le muestra el potencial dinero que podria llegar
     // a ganar luego de la venta del terreno. Luego puede, si lo desea, realizarse la venta.
-    void gestionarVentaTerreno(Jugador* jugador);
+    void gestionarVentaTerreno();
 
-    //Pre: recibe al jugador que llevara a cabo la accion.
+
     //Post: El jugador ingresa en cuantas unidades desea ampliar el tanque, una vez hecho esto, chequea que posea
     // el dinero suficiente, en caso positivo, amplia el tanque.
-    void gestionarAmpliarTanque(Jugador* jugador);
+    void gestionarAmpliarTanque();
 
-    //Pre: recibe al jugador que llevara a cabo la accion.
+
     //Post: Amplia el almacen si el jugador posee el dinero suficiente con el tamaño ingresado, en caso contrario
     // le avisa al jugador que no se pudo llevar a cabo la accion.
-    void gestionarAmpliarAlmacen(Jugador* jugador);
+    void gestionarAmpliarAlmacen();
 
     // Post: Muestra la informacion de cada cultivo dentro del catalogo para informar al usuario de que pasaria en caso de
     // elegir cada una de las opciones.
     Cultivo* seleccionarCultivoDeCatalogo();
+
+    // Pre: recibe al jugador el cual llevara a cabo acciones durante su turno
+    // Post: asigna al secretario el nuevo jugador.
+    void cambiarJugador(Jugador* jugador);
 };
 
 
