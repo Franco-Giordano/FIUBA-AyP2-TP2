@@ -46,7 +46,7 @@ public:
 	//Post: se amplia el tanque restando el dinero del monedero.
 	void ampliarTanque(int ampliacionElegida);
 
-	~TanqueDeAgua();
+	virtual ~TanqueDeAgua();
 };
 
 #endif /* TANQUEDEAGUA_H_ */

@@ -25,7 +25,7 @@ public:
 	//Post: Resta el dinero del haber del jugador.
 	void gastarDinero(unsigned int dineroAGastar);
 
-	~Monedero();
+	virtual ~Monedero();
 };
 
 #endif /* MONEDERO_H_ */

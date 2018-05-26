@@ -54,7 +54,7 @@ public:
 	Cultivo* obtenerCultivoEnPosicion(unsigned int posicion);
 
 	//Post: hace delete de la lista de cultivos del almacen.
-	~Almacen();
+	virtual ~Almacen();
 };
 
 #endif /* ALMACEN_H_ */

@@ -62,7 +62,7 @@ public:
 	}
 
 	// Post: libera la memoria que uso el catalogo.
-	~CatalogoDe() {
+	virtual ~CatalogoDe() {
 		delete[] catalogo;
 	}
 

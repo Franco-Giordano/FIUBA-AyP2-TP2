@@ -27,6 +27,10 @@ void ConversorDeDatos::convertirAobjeto(std::string* datos, Destino &destinoAmod
 	std::istringstream(datos[2]) >> precio;
 	std::string cultivo = datos[3];
 
+	if (cultivo[0] == ' '){
+		cultivo = cultivo.substr(1, cultivo.size());
+	}
+
 	destinoAmodificar.modificarDestino(nombre, distancia, precio, cultivo);
 }
 

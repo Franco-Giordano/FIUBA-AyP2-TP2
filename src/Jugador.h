@@ -47,7 +47,7 @@ public:
 	//POST: quita el terreno elegido por el usuario (ingreso por teclado)
 	void venderTerreno(int terrenoAVender);
 
-	~Jugador();
+	virtual ~Jugador();
 };
 
 #endif /* JUGADOR_H_ */

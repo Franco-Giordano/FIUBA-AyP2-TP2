@@ -17,7 +17,7 @@ public:
 	//Post: devuelve la lista de jugadores.
 	Lista<Jugador*>* obtenerListaParticipantes();
 
-	~Participantes();
+	virtual ~Participantes();
 };
 
 #endif /* PARTICIPANTES_H_ */

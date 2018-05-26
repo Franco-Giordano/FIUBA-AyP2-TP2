@@ -178,7 +178,7 @@ void Secretario::gestionarEnvioCosecha(Acciones acciones) {
 		Lista<Destino*>* destinosValidos = new Lista<Destino*>;
 		acciones.obtenerDestinosValidos(destinosValidos, this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar), this->catalogoDestinos);
 		if (destinosValidos->contarElementos() != 0) {
-			cout << "�A cual de estos destinos quiere enviar la cosecha?" << endl;
+			cout << "A cual de estos destinos quiere enviar la cosecha?" << endl;
 			acciones.imprimirListaDestinos(destinosValidos);
 			unsigned int destinoEscojido = this->obtenerNumero(1, destinosValidos->contarElementos(), "");
 			Correo correo(destinosValidos, this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
@@ -187,8 +187,10 @@ void Secretario::gestionarEnvioCosecha(Acciones acciones) {
 		} else {
 			cout << "No hay ningun comprador que acepte su cosecha." << endl;
 		}
+		delete destinosValidos;
 	} else
 		cout << "No posee cultivos en el almacen." << endl;
+
 }
 
 void Secretario::gestionarCompraTerreno() {

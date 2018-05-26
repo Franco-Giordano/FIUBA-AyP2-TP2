@@ -32,7 +32,7 @@ public:
 	unsigned int obtenerCantParametros();
 
 	//Destructor
-	~LectorCSV();
+	virtual ~LectorCSV();
 
 };
 
