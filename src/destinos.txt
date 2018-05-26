@@ -1,2 +1,2 @@
-San Luis, 604, 3,Papa
-Cordoba, 720, 2, Zanahoria
+San Luis, 60, 1, Papa
+Cordoba, 72, 2, Zanahoria

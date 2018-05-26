@@ -44,6 +44,7 @@ Almacen* Jugador::obtenerAlmacen() {
 
 void Jugador::venderTerreno(int terrenoAVender) {
 
+	delete terrenos->obtener(terrenoAVender);
 	this->terrenos->remover(terrenoAVender);
 }
 
@@ -52,10 +53,11 @@ Jugador::~Jugador() {
 	delete tanque;
 	delete almacen;
 
-	terrenos->iniciarCursor();
-	while (terrenos->avanzarCursor()) {
-		delete terrenos->obtenerCursor();
+	this->terrenos->iniciarCursor();
+	while (this->terrenos->avanzarCursor()) {
+		Terreno* terrenoActual = this->terrenos->obtenerCursor();
+		delete terrenoActual;
 	}
 
-	delete terrenos;
+	delete this->terrenos;
 }

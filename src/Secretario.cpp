@@ -230,7 +230,7 @@ void Secretario::gestionarVentaTerreno() {
 			}
 		}
 	} else {
-		cout << "**Debe poseer al menos dos terrenos para continuar la venta**";
+		cout << "**Debe poseer al menos dos terrenos para continuar la venta**"<<endl<<endl;
 	}
 }
 
