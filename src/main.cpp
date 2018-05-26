@@ -7,16 +7,10 @@
 
 #include "DirectorDeJuego.h"
 #include "Terreno.h"
-#include "Parcela.h"
-#include "Jugador.h"
 #include "Secretario.h"
 #include "LectorCSV.h"
-#include "Peon.h"
-#include "Dado.h"
 #include "Marcador.h"
 #include "DronAereo.h"
-#include "Tiempo.h"
-#include <iostream>
 #include "Participantes.h"
 
 using namespace std;
@@ -43,6 +37,7 @@ int main() {
 	director.coordinarJuego();
 
 	Marcador marcador;
+
 	marcador.mostrarPuntuacionFinal(participantes.obtenerListaParticipantes());
 
 	return 0;

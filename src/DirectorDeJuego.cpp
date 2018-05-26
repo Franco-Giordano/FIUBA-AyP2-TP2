@@ -93,9 +93,9 @@ void DirectorDeJuego::coordinarJuego() {
 	Secretario secretario(catalogoSemillas, catalogoDestinos, filas, columnas, dificultad);
 
 	unsigned int numeroJugador = 1;
-	for (unsigned int i = 1; i <= this->turnos; i++) {
+	for (unsigned int turnoActual = 1; turnoActual <= this->turnos; turnoActual++) {
 
-		cout << "-----------------------TURNO " << i << "-----------------------" << endl;
+		cout << "-----------------------TURNO " << turnoActual << "-----------------------" << endl;
 
 		jugadores->iniciarCursor();
 
@@ -111,12 +111,12 @@ void DirectorDeJuego::coordinarJuego() {
 			this->anunciarJugadorYregalarAgua(numeroJugador);
 
 			cout << endl << "++Tomando fotos de  sus terrenos al principio de turno, aguarde un momento...++" << endl << endl;
-			dron.tomarFoto(jugadorActual, numeroJugador, i);
+			dron.tomarFoto(jugadorActual, numeroJugador, turnoActual);
 
 			secretario.atenderJugador();
 
 			cout << "++Tomando fotos de sus terrenos al final de turno, aguarde un momento...++" << endl << endl;
-			dron.tomarFoto(jugadorActual, numeroJugador, i);
+			dron.tomarFoto(jugadorActual, numeroJugador, turnoActual);
 
 			numeroJugador++;
 		}
