@@ -30,11 +30,11 @@ void TanqueDeAgua::restarAgua(int cantidad) {
 	this->cantidadDeAguaActual -= cantidad;
 }
 
-int TanqueDeAgua::obtenerCantidadDeAguaActual() {
+unsigned int TanqueDeAgua::obtenerCantidadDeAguaActual() {
 	return this->cantidadDeAguaActual;
 }
 
-int TanqueDeAgua::obtenerCantidadDeAguaMaxima() {
+unsigned int TanqueDeAgua::obtenerCantidadDeAguaMaxima() {
 	return this->capacidadMaxima;
 }
 

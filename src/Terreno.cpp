@@ -7,7 +7,7 @@
 
 #include "Terreno.h"
 
-Terreno::Terreno(int cantidadFilasRecibidas, int cantidadColumnasRecibidas) {
+Terreno::Terreno(unsigned int cantidadFilasRecibidas, unsigned int cantidadColumnasRecibidas) {
 
 	if (cantidadFilasRecibidas > 0 && cantidadColumnasRecibidas > 0) {
 
@@ -20,7 +20,7 @@ Terreno::Terreno(int cantidadFilasRecibidas, int cantidadColumnasRecibidas) {
 	}
 }
 
-int Terreno::obtenerFilas() {
+unsigned int Terreno::obtenerFilas() {
 
 	return this->limiteFilas;
 }
@@ -29,23 +29,22 @@ ListaCoordenada<ListaCoordenada<Parcela*>*>* Terreno::obtenerListaFilas() {
 	return this->filas;
 }
 
-int Terreno::obtenerColumnas() {
+unsigned int Terreno::obtenerColumnas() {
 
 	return this->limiteColumnas;
 }
 
-//PRE:La Parcela existe
-Parcela* Terreno::obtenerParcela(int filaElegida, int columnaElegida) {
+Parcela* Terreno::obtenerParcela(unsigned int filaElegida, unsigned int columnaElegida) {
 
 	return filas->obtenerEnCoordenada(filaElegida)->obtenerEnCoordenada(columnaElegida);
 }
 
-bool Terreno::estaOcupada(int filaRecibida, int columnaRecibida) {
+bool Terreno::estaOcupada(unsigned int filaRecibida, unsigned int columnaRecibida) {
 
 	return filas->estaOcupadaLaCoordenada(filaRecibida) && filas->obtenerEnCoordenada(filaRecibida)->estaOcupadaLaCoordenada(columnaRecibida);
 }
 
-void Terreno::prepararParcela(int fila, int columna) {
+void Terreno::prepararParcela(unsigned int fila, unsigned int columna) {
 	if (!estaOcupada(fila, columna)) {
 
 		Parcela* parcelaVacia = new Parcela;

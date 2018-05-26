@@ -17,7 +17,7 @@ private:
 	unsigned int capacidadMaxima;
 public:
 	//Pre: se recibe N,M y la dificultad
-	//dado el tama�o del terreno como [N,M] y la dificultad en el intervalo [1,3]
+	//dado el tamanio del terreno como [N,M] y la dificultad en el intervalo [1,3]
 	// ambas ingresadas por el usuario
 	//Post: se crea el tanque de agua vacio (cantidad de agua = 0)
 	TanqueDeAgua(unsigned int N, unsigned int M, unsigned int dificultad);
@@ -32,21 +32,21 @@ public:
 	void restarAgua(int cantidad);
 
 	//Post: devuelve los potenciadores de agua disponibles para el usuario
-	int obtenerCantidadDeAguaActual();
+	unsigned int obtenerCantidadDeAguaActual();
 
 	//Post: devuelve la capacidad maxima del tanque de agua.
-	int obtenerCantidadDeAguaMaxima();
+	unsigned int obtenerCantidadDeAguaMaxima();
 
 	//Post: devuelve true si la cantidad de agua en el tanque es mayor a 0.
 	bool hayAguaEnElTanque();
 
-	//Pre: La ampliacion depende de la dificultad y de la eleccion del usuario. El usuario podr�
+	//Pre: La ampliacion depende de la dificultad y de la eleccion del usuario. El usuario podra
 	//elegir una ampliacion de 5, 10 o 15 unidades, y la dificultad cambiara el dinero requerido para
 	//llevar a cabo esa accion. Recibe el monedero para poder modificar el haber del jugador.
 	//Post: se amplia el tanque restando el dinero del monedero.
 	void ampliarTanque(int ampliacionElegida);
 
-	virtual ~TanqueDeAgua();
+	~TanqueDeAgua();
 };
 
 #endif /* TANQUEDEAGUA_H_ */

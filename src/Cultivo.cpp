@@ -9,7 +9,7 @@
 
 Cultivo::Cultivo() {
 
-	this->nombre = "VACIO";
+	this->nombre = "";
 	this->costoSemilla = 0;
 	this->tiempoCosecha = 0;
 	this->rentabilidad = 0;
@@ -17,7 +17,8 @@ Cultivo::Cultivo() {
 	this->consumoAgua = 0;
 }
 
-void Cultivo::modificarCultivo(std::string nombreRecibido, int costoSemillaRecibido, int tiempoCosechaRecibido, int rentabilidadRecibida, int tiempoRecuperacionRecibido, int consumoAguaRecibido) {
+void Cultivo::modificarCultivo(std::string nombreRecibido, unsigned int costoSemillaRecibido, unsigned int tiempoCosechaRecibido,
+															unsigned int rentabilidadRecibida, unsigned int tiempoRecuperacionRecibido, unsigned int consumoAguaRecibido) {
 
 	this->nombre = nombreRecibido;
 	this->costoSemilla = costoSemillaRecibido;
@@ -32,27 +33,27 @@ std::string Cultivo::obtenerNombre() {
 	return this->nombre;
 }
 
-int Cultivo::obtenerCostoSemilla() {
+unsigned int Cultivo::obtenerCostoSemilla() {
 
 	return this->costoSemilla;
 }
 
-int Cultivo::obtenerRentabilidad() {
+unsigned int Cultivo::obtenerRentabilidad() {
 
 	return this->rentabilidad;
 }
 
-int Cultivo::obtenerTiempoCosecha() {
+unsigned int Cultivo::obtenerTiempoCosecha() {
 
 	return this->tiempoCosecha;
 }
 
-int Cultivo::obtenerTiempoRecuperacion() {
+unsigned int Cultivo::obtenerTiempoRecuperacion() {
 
 	return this->tiempoRecuperacion;
 }
 
-int Cultivo::obtenerConsumoAgua() {
+unsigned int Cultivo::obtenerConsumoAgua() {
 	return this->consumoAgua;
 }
 

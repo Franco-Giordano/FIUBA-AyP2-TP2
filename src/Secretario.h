@@ -27,9 +27,10 @@ private:
 
 public:
 
-	//Pre: se reciben los cat�logo, los cuales se suponen v�lidos y el jugador el cual sera atendido por el secretario.
+	//Pre: se reciben los catalogos, los cuales se suponen y el jugador el cual sera atendido por el secretario. Ambos se suponen existentes.
+	//Los parametros numericos deben de ser mayores a 0.
 	//Post: Crea un secretario, cuya funcion es la de atender al jugador durante el juego, este conoce
-	// el numero de turnos, la cantidad de jugadores, el tama�o del terreno y la dificultad del juego.
+	// el numero de turnos, la cantidad de jugadores, el tamaao del terreno y la dificultad del juego.
 	// Incluso posee los catalogos, de semillas y de destinos, que son las semillas que se pueden sembrar,
 	// en una parcela y los lugares a donde se pueden enviar una vez cosechadas.
 	Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos, unsigned int filas, unsigned int columnas, unsigned int dificultad);

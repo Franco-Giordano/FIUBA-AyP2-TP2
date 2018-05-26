@@ -42,11 +42,6 @@ Almacen* Jugador::obtenerAlmacen() {
 	return this->almacen;
 }
 
-void Jugador::venderTerreno(int terrenoAVender) {
-
-	delete terrenos->obtener(terrenoAVender);
-	this->terrenos->remover(terrenoAVender);
-}
 
 Jugador::~Jugador() {
 	delete monedero;

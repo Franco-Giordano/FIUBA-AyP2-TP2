@@ -11,7 +11,6 @@
 #include "Lista.h"
 #include "ConversorDeDatos.h"
 
-//Representa TODOS los tipos de <objetos> disponibles en el juego. (Ej: Papa, Zanahoria, Soja, etc...)
 template<class T>
 class CatalogoDe {
 private:

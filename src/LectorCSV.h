@@ -20,19 +20,17 @@ private:
 
 public:
 
-	/* PRE: Recibe la ruta del archivo CSV a analizar como rutaArchivo, y la 'cantidad de datos separados por coma por linea' como cantidadParametros
-	 * POST: datosGuardados sera un puntero a una lista , donde cada elemento es una linea representada por un array.
-	 */
+	//Pre: Recibe la ruta del archivo CSV a analizar como rutaArchivo, y la 'cantidad de datos separados por coma por linea' como cantidadParametros.
+	// Post: datosGuardados sera un puntero a una lista , donde cada elemento es una linea representada por un array.
 	LectorCSV(std::string rutaArchivo, unsigned int cantidadParametros);
 
-	//POST: Devuelve el puntero a la lista almacenada, dando control al usuario sobre sus datos.
+	//Post: Devuelve el puntero a la lista almacenada, dando control al usuario sobre sus datos.
 	Lista<std::string*>* obtenerLista();
 
-	//POST: Devuelve la cantidad de parametros por linea del CSV procesado
+	//Post: Devuelve la cantidad de parametros por linea del CSV procesado.
 	unsigned int obtenerCantParametros();
 
-	//Destructor
-	virtual ~LectorCSV();
+	~LectorCSV();
 
 };
 

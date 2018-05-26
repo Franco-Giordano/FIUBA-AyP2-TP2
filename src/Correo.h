@@ -12,8 +12,8 @@ private:
 	Cultivo* cultivoAEnviar;
 public:
 
-	//Pre: recibe una lista de destinos y el cultivo a enviar.
-	// Crea el objeto correo, el cual se encargara de los envios que desee realizar el jugador durante el juego
+	//Pre: recibe una lista de destinos validos y el cultivo a enviar.
+	// Post: crea el objeto correo, el cual se encargara de los envios que desee realizar el jugador durante el juego
 	Correo(Lista<Destino*>* destinosValidos, Cultivo* cultivoAEnviar);
 
 	// Post: devuelve el cultivo a enviar.
@@ -30,7 +30,7 @@ public:
 	// Post: devuelve la rentabilidad del cultivo.
 	unsigned int obtenerRentabilidad();
 
-	//Post: calcula el costo del envio como la multiplicacion entre el precio y la distancia.
+	//Post: calcula el costo del envio como el producto entre el precio y la distancia.
 	int calcularCostoEnvio(Destino* destino);
 };
 

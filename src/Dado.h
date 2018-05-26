@@ -7,15 +7,13 @@ private:
 
 public:
 
-	//PRE: El dado no depende de ningun parametro.
-	//POST: crea el dado.
+	//Post: crea el objeto dado.
 	Dado();
 
-	//POST: guarda en el atributo numeroRandom, el numero obtenido de forma aleatoria.
+	//Post: guarda en el atributo numeroRandom, el numero obtenido de forma aleatoria.
 	void tirarDado();
 
-	//PRE:
-	//POST: tira el dado y luego devuelve el numero obtenido.
+	//Post: tira el dado y luego devuelve el numero obtenido.
 
 	int obtenerNumeroRandom();
 

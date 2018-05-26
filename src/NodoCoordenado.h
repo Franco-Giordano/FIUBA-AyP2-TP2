@@ -63,13 +63,13 @@ public:
 	}
 
 	/*
-	 * POST: Devuelve la coordenada del Nodo.
+	 * Post: devuelve la coordenada del Nodo.
 	 */
 	unsigned int obtenerCoordenada() {
 		return this->coordenada;
 	}
 
-	/* POST: Devuelve la coordenada del Nodo que le sigue, devuelve 0 si es el ultimo.
+	/* Post: devuelve la coordenada del Nodo que le sigue, devuelve 0 si es el ultimo.
 	 *
 	 */
 	unsigned int obtenerCoordenadaSiguiente() {

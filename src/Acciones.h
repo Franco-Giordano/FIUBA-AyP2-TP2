@@ -11,13 +11,13 @@ private:
 	unsigned int opcionElegida;
 	Jugador* jugador;
 public:
-	/*
-	 * post: inicializa la opcionElegida en 0
-	 */
+
+	 //Post: inicializa la opcionElegida en 0.
+
 	Acciones(Jugador* pJugador);
-	/*
-	 * post: le muestra por pantalla a cada jugador las acciones que puede realizar durante el juego
-	 */
+
+	//Post: le muestra por pantalla a cada jugador las acciones que puede realizar durante el juego.
+
 	unsigned int obtenerAccionDeJugador();
 
 	//Post: devuelve true si es posible sembrar en la parcela.
@@ -42,16 +42,14 @@ public:
 	bool tieneMasDeUnTerreno();
 
 	//Pre: recibe una lista de destinos validos, el catalogo y el cultivo.
-	//Post: a�ade a la lista los posibles destinos para el cultivo recibido.
+	//Post: aniade a la lista los posibles destinos para el cultivo recibido.
 	void obtenerDestinosValidos(Lista<Destino*>* listaDestinos, Cultivo* cultivo, CatalogoDe<Destino>* catalogoDestinos);
 
 	//Post: muestra por pantalla la lista de destinos validos.
 	void imprimirListaDestinos(Lista<Destino*>* destinosValidos);
 
 private:
-	/*
-	 * post: valida si la opcion ingresada es correcta
-	 */
+
 	bool opcionValida(unsigned int minimo, unsigned int maximo, unsigned int opcion);
 };
 

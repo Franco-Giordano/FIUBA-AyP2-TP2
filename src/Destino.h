@@ -18,24 +18,24 @@ private:
 	std::string cultivo;
 public:
 
-	//POST: Crea un objeto Destino con todos sus atributos inicializados en nulo ("" o 0 segun corresponda)
+	//Post: Crea un objeto Destino con todos sus atributos inicializados en nulo ("" o 0 segun corresponda).
 	Destino();
 
-	/* PRE: Los parametros son del tipo indicado, con todos los enteros mayores a 0.
-	 * POST: Modifica los atributos del objeto Destino con los parametros dados.
+	/* Pre: Los parametros son del tipo indicado, con todos los enteros mayores a 0.
+	 * Post: Modifica los atributos del objeto Destino con los parametros dados.
 	 */
 	void modificarDestino(std::string nombreLugarRecibido, int distanciaKMRecibido, int precioRecibido, std::string cultivoRecibido);
 
-	//POST: Devuelve el nombre del Destino como string
+	//Post: Devuelve el nombre del Destino como string.
 	std::string obtenerNombre();
 
-	//POST: Devuelve la distancia del Destino como entero
+	//Post: Devuelve la distancia del Destino como entero.
 	int obtenerDistancia();
 
-	//POST: Devuelve el precio del Destino como entero
+	//Post: Devuelve el precio del Destino como entero.
 	int obtenerPrecio();
 
-	//POST: Devuelve el nombre del cultivo del Destino como string
+	//Post: Devuelve el nombre del cultivo del Destino como string.
 	std::string obtenerNombreCultivo();
 
 };

@@ -172,25 +172,31 @@ void Secretario::gestionarRiego(Terreno* terreno, unsigned int fila, unsigned in
 void Secretario::gestionarEnvioCosecha(Acciones acciones) {
 
 	if (this->jugador->obtenerAlmacen()->contarCultivos() > 0) {
+
 		cout << "Escoja cual de sus cultivos quiere vender: " << endl;
 		this->jugador->obtenerAlmacen()->mostrarNombresDeCultivosEnElAlmacen();
 		int numCultivoAEnviar = this->obtenerNumero(1, this->jugador->obtenerAlmacen()->contarCultivos(), "");
 		Lista<Destino*>* destinosValidos = new Lista<Destino*>;
 		acciones.obtenerDestinosValidos(destinosValidos, this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar), this->catalogoDestinos);
+
 		if (destinosValidos->contarElementos() != 0) {
+
 			cout << "A cual de estos destinos quiere enviar la cosecha?" << endl;
 			acciones.imprimirListaDestinos(destinosValidos);
 			unsigned int destinoEscojido = this->obtenerNumero(1, destinosValidos->contarElementos(), "");
 			Correo correo(destinosValidos, this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
 			correo.enviarCultivo(numCultivoAEnviar, this->jugador->obtenerAlmacen());
 			correo.cobrar(destinosValidos->obtener(destinoEscojido), this->jugador->obtenerMonedero());
+
 		} else {
+
 			cout << "No hay ningun comprador que acepte su cosecha." << endl;
 		}
 		delete destinosValidos;
-	} else
-		cout << "No posee cultivos en el almacen." << endl;
+	} else{
 
+		cout << "No posee cultivos en el almacen." << endl;
+	}
 }
 
 void Secretario::gestionarCompraTerreno() {
@@ -314,7 +320,7 @@ void Secretario::mostrarTerrenos() {
 		cout << "Terreno " << numeroTerreno << endl << endl;
 
 		string terreno = "";
-		for (int k = 0; k < terrenoActual->obtenerColumnas() * terrenoActual->obtenerFilas(); k++) {
+		for (unsigned int k = 0; k < terrenoActual->obtenerColumnas() * terrenoActual->obtenerFilas(); k++) {
 			terreno += "#";
 		}
 
@@ -337,12 +343,12 @@ void Secretario::mostrarTerrenos() {
 				} else if (parcelaActual->obtenerEstado() == Recuperando) {
 					terreno[cantDeFilasPrevias * maxCol + coordCol - 1] = 'R';
 				} else if (parcelaActual->obtenerEstado() == ListaParaCosecha) {
-					terreno[cantDeFilasPrevias * maxCol + coordCol - 1] = 'C';  // de listo para Cosechar.
+					terreno[cantDeFilasPrevias * maxCol + coordCol - 1] = 'C';
 				}
 			}
 		}
 
-		for (int u = 0; u < terrenoActual->obtenerFilas(); u++) {
+		for (unsigned int u = 0; u < terrenoActual->obtenerFilas(); u++) {
 			cout << terreno.substr(u * terrenoActual->obtenerColumnas(), terrenoActual->obtenerColumnas()) << endl;
 		}
 

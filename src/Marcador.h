@@ -15,16 +15,15 @@ class Marcador {
 private:
 
 public:
-	//Post: crea un objeto marcador, el cual sera utilizado para mostrar por pantalla al jugador el estado actual
-	// de su granja.
+	//Post: crea un objeto marcador, el cual sera utilizado para mostrar por pantalla al jugador.
 	Marcador();
 
 	//Pre: recibe por parametro un puntero al jugador al cual se le mostrara su estado.
-	//Post: Muestra por pantalla la cantidad de terrenos que posee, su dinero, su uso del tanque de agua y del almacen.
+	//Post: muestra por pantalla la cantidad de terrenos que posee, su dinero, su uso del tanque de agua y del almacen.
 	void mostrarTurno(Jugador* jugadorActual);
 
 	//Pre: recibe un puntero a una lista de punteros Jugador. Cada puntero Jugador ya apunta a un jugador previamente creado e inicializado.
-	//Post: imprime por consola la cant de terrenos y creditos de cada jugador, y anuncia el ganador (aquel jugador con mayores creditos)	
+	//Post: imprime por consola la cantidad de terrenos y creditos de cada jugador, y anuncia el ganador (aquel jugador con mayores creditos).
 	void mostrarPuntuacionFinal(Lista<Jugador*>* jugadores);
 
 };

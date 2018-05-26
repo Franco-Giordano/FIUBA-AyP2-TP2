@@ -23,9 +23,10 @@ private:
 	Peon peon;
 
 public:
-	//PRE: Para crear un jugador se reciben un monedero, un tanque y un almacen (todos recien creados) y ademas se
-	// reciben N y M, las cuales seran las dimensiones del terreno inicial del jugador. Cada jugador se crea con un
-	// terreno inicialmente.
+	/*Pre: Para crear un jugador se reciben un monedero, un tanque y un almacen (todos recien creados) y ademas se
+	*reciben N y M, las cuales seran las dimensiones del terreno inicial del jugador. Cada jugador se crea con un
+	 *terreno inicialmente.
+	 */
 	//Post: se crea el objeto jugador.
 	Jugador(int N, int M, int dificultad);
 
@@ -38,16 +39,10 @@ public:
 	//Post: Devuelve el puntero al almacen.
 	Almacen* obtenerAlmacen();
 
-	//Devuelve un puntero a la lista de punteros "Terreno".
+	//Post: Devuelve un puntero a la lista de punteros "Terreno".
 	Lista<Terreno*>* obtenerListaTerreno();
 
-	//Falta hacer el objeto "Servicio de envios".
-	void enviarADestino();
-
-	//POST: quita el terreno elegido por el usuario (ingreso por teclado)
-	void venderTerreno(int terrenoAVender);
-
-	virtual ~Jugador();
+	~Jugador();
 };
 
 #endif /* JUGADOR_H_ */
