@@ -1,5 +1,5 @@
-#ifndef LISTA_H_
-#define LISTA_H_
+#ifndef LISTA_NOMBRADA_H_
+#define LISTA_NOMBRADA_H_
 
 #ifndef NULL
 #define NULL 0
@@ -23,13 +23,13 @@ public:
 	/*
 	 * post: Lista vacía.
 	 */
-	ListaNombrada();
+	ListaNombrada<T>();
 
 	/*
 	 * post: Lista que tiene los mismos elementos que otraLista.
 	 *       La instancia resulta en una copia de otraLista.
 	 */
-	ListaNombrada(ListaNombrada<T>& otraLista);
+	ListaNombrada<T>(ListaNombrada<T>& otraLista);
 
 	/*
 	 * post: indica si la Lista tiene algún elemento.
@@ -108,6 +108,12 @@ public:
 	 */
 	T obtenerCursor();
 
+	bool yaExisteNombre(std::string nombre);
+
+
+	//pre: existe nodo con nombre 'nombre'
+	T obtenerDatoDeNombre(std::string nombre);
+
 	/*
 	 * post: libera los recursos asociados a la Lista.
 	 */
@@ -120,6 +126,10 @@ private:
 	 * post: devuelve el NodoNombrado en la posición indicada.
 	 */
 	NodoNombrado<T>* obtenerNodoNombrado(unsigned int posicion); // NOTA: primitiva PRIVADA
+
+
+	//si no esta devuelve NULL
+	NodoNombrado<T>* obtenerNodoConNombre(std::string nombre);
 };
 
 template<class T> ListaNombrada<T>::ListaNombrada() {
@@ -278,6 +288,17 @@ template<class T> T ListaNombrada<T>::obtenerCursor() {
 	return elemento;
 }
 
+template <class T>
+bool ListaNombrada<T>::yaExisteNombre(std::string nombre) {
+	return this->obtenerNodoConNombre(nombre) != NULL;
+}
+
+template <class T>
+T ListaNombrada<T>::obtenerDatoDeNombre(std::string nombre){
+	return this->obtenerNodoConNombre(nombre)->obtenerDato();
+}
+
+
 template<class T> ListaNombrada<T>::~ListaNombrada() {
 
 	while (this->primero != NULL) {
@@ -300,5 +321,22 @@ NodoNombrado<T>* ListaNombrada<T>::obtenerNodoNombrado(unsigned int posicion) {
 
 	return actual;
 }
+
+template <class T>
+NodoNombrado<T>* ListaNombrada<T>::obtenerNodoConNombre(std::string nombre) {
+
+	NodoNombrado<T>* devolver = NULL;
+	this->iniciarCursor();
+	bool encontrado = false;
+	while (this->avanzarCursor() && !encontrado) {
+		if (this->obtenerCursor()->obtenerNombre() == nombre) {
+			encontrado = true;
+			devolver = this->obtenerCursor();
+		}
+	}
+
+	return devolver;
+}
+
 
 #endif /* LISTA_H_ */
