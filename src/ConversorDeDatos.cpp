@@ -6,9 +6,11 @@
  */
 
 #include "ConversorDeDatos.h"
+#include <algorithm>
 
 void ConversorDeDatos::convertirAobjeto(std::string* datos, Cultivo &cultivoAmodificar) {
 	std::string nombre = datos[0];
+	hacerTodoMinusculas(nombre);
 
 	ui precio, rentabilidad, tiempoCosecha, tiempoRecuperacion, consumoAgua;
 	std::istringstream(datos[1]) >> precio;
@@ -21,16 +23,31 @@ void ConversorDeDatos::convertirAobjeto(std::string* datos, Cultivo &cultivoAmod
 }
 
 void ConversorDeDatos::convertirAobjeto(std::string* datos, Destino &destinoAmodificar) {
-	std::string nombre = datos[0];
-	ui distancia, precio;
-	std::istringstream(datos[1]) >> distancia;
-	std::istringstream(datos[2]) >> precio;
-	std::string cultivo = datos[3];
+	std::string nombre = datos[1];
+	hacerTodoMinusculas(nombre);
 
-	if (cultivo[0] == ' '){
+	ui distancia, precio;
+	std::istringstream(datos[2]) >> distancia;
+	std::istringstream(datos[3]) >> precio;
+
+	std::string cultivo = datos[4];
+	hacerTodoMinusculas(cultivo);
+
+	if (nombre[0] == ' '){ //quitar posible espacio (' ') al principio
+		nombre = nombre.substr(1, nombre.size());
+	}
+
+	if (cultivo[0] == ' '){ //quitar posible espacio (' ') al principio
 		cultivo = cultivo.substr(1, cultivo.size());
 	}
 
-	destinoAmodificar.modificarDestino(nombre, distancia, precio, cultivo);
+	std::string origen = datos[0];
+	hacerTodoMinusculas(origen);
+
+	destinoAmodificar.modificarDestino(origen, nombre, distancia, precio, cultivo);
+}
+
+void ConversorDeDatos::hacerTodoMinusculas(std::string& cadena) {
+	std::transform(cadena.begin(), cadena.end(), cadena.begin(), ::tolower);
 }
 

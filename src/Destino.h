@@ -12,10 +12,12 @@
 
 class Destino {
 private:
+	std::string origen;
 	std::string nombreLugar;
 	int distanciaKM;
 	int precio;
 	std::string cultivo;
+
 public:
 
 	//Post: Crea un objeto Destino con todos sus atributos inicializados en nulo ("" o 0 segun corresponda).
@@ -24,7 +26,7 @@ public:
 	/* Pre: Los parametros son del tipo indicado, con todos los enteros mayores a 0.
 	 * Post: Modifica los atributos del objeto Destino con los parametros dados.
 	 */
-	void modificarDestino(std::string nombreLugarRecibido, int distanciaKMRecibido, int precioRecibido, std::string cultivoRecibido);
+	void modificarDestino(std::string origenRecibido, std::string nombreLugarRecibido, int distanciaKMRecibido, int precioRecibido, std::string cultivoRecibido);
 
 	//Post: Devuelve el nombre del Destino como string.
 	std::string obtenerNombre();
@@ -37,6 +39,9 @@ public:
 
 	//Post: Devuelve el nombre del cultivo del Destino como string.
 	std::string obtenerNombreCultivo();
+
+	//Post: Devuelve el nombre del origen del Destino como string.
+	std::string obtenerOrigen();
 
 };
 

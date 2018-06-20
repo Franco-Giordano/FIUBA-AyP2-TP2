@@ -14,7 +14,7 @@
 #include "Almacen.h"
 
 enum Estado {
-	Libre, Plantada, Recuperando, ListaParaCosecha,
+	Libre, Plantada, Recuperando, ListaParaCosecha
 };
 
 class Parcela {

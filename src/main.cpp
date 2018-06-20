@@ -18,7 +18,7 @@ int main() {
 
 	LectorCSV lectorSemillas("src/cultivos.txt", 6);
 
-	LectorCSV lectorDestinos("src/destinos.txt", 4);
+	LectorCSV lectorDestinos("src/destinos.txt", 5);
 
 	CatalogoDe<Cultivo> catalogoDeSemillas(lectorSemillas.obtenerLista());
 

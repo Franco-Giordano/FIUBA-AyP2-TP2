@@ -183,19 +183,19 @@ void Secretario::gestionarEnvioCosecha(Acciones acciones) {
 
 			cout << "A cual de estos destinos quiere enviar la cosecha?" << endl;
 			acciones.imprimirListaDestinos(destinosValidos);
-			unsigned int destinoEscojido = this->obtenerNumero(1, destinosValidos->contarElementos(), "");
+			unsigned int destinoEscojido = this->obtenerNumero(1, destinosValidos->contarElementos(), ""); //todo hacer que costo sea perdida para usuario, no ganancia
 			Correo correo(destinosValidos, this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
 			correo.enviarCultivo(numCultivoAEnviar, this->jugador->obtenerAlmacen());
 			correo.cobrar(destinosValidos->obtener(destinoEscojido), this->jugador->obtenerMonedero());
 
 		} else {
 
-			cout << "No hay ningun comprador que acepte su cosecha." << endl;
+			cout << "**No hay ningun comprador que acepte su cosecha.**" << endl;
 		}
 		delete destinosValidos;
 	} else{
 
-		cout << "No posee cultivos en el almacen." << endl;
+		cout << "**No posee cultivos en el almacen.**" << endl;
 	}
 }
 

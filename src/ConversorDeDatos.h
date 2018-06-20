@@ -15,6 +15,7 @@ typedef unsigned int ui;
 
 class ConversorDeDatos {
 private:
+	void hacerTodoMinusculas(std::string& cadena);
 public:
 
 	/* PRE: Recibe un puntero a un array de strings de tamanio 6, donde cada posicion representa las propiedades

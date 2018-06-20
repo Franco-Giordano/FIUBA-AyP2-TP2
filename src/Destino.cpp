@@ -14,11 +14,13 @@ Destino::Destino() {
 	cultivo = "";
 }
 
-void Destino::modificarDestino(std::string nombreLugarRecibido, int distanciaKMRecibido, int precioRecibido, std::string cultivoRecibido) {
+void Destino::modificarDestino(std::string origenRecibido, std::string nombreLugarRecibido, int distanciaKMRecibido, int precioRecibido, std::string cultivoRecibido) {
+	origen = origenRecibido;
 	nombreLugar = nombreLugarRecibido;
 	distanciaKM = distanciaKMRecibido;
 	precio = precioRecibido;
 	cultivo = cultivoRecibido;
+
 }
 
 std::string Destino::obtenerNombre() {
@@ -35,5 +37,9 @@ int Destino::obtenerPrecio() {
 
 std::string Destino::obtenerNombreCultivo() {
 	return cultivo;
+}
+
+std::string Destino::obtenerOrigen() {
+	return origen;
 }
 

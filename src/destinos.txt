@@ -1,2 +1,2 @@
-San Luis, 60, 1, Papa
-Cordoba, 72, 2, Zanahoria
+Almacen, San Luis, 60, 1, Papa
+San Luis,Cordoba, 72, 2, Zanahoria
