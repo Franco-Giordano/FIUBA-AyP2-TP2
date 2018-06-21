@@ -20,6 +20,9 @@ int main() {
 
 	CatalogoDe<Destino> catalogoDeDestinos(lectorDestinos.obtenerLista());
 
-	cout << catalogoDeDestinos.obtenerPosicion(0)->obtenerOrigen() << catalogoDeDestinos.obtenerPosicion(1)->obtenerOrigen()<< endl;
+	GrafoDirigidoPonderado<Destino> grafoDestinos(&catalogoDeDestinos);
+
+	grafoDestinos.imprimirListaAdyacencia();
+
 
 }

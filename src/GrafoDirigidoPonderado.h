@@ -28,7 +28,7 @@ public:
 	GrafoDirigidoPonderado<T>(CatalogoDe<T>* catalogo /*, std::string verticeInteresante*/) {
 		listaAdyacencia = new ListaNombrada<ListaNombrada<unsigned int>*>();
 
-		for (int i=0; i < catalogo->obtenerCantidadDisponible(); i++){
+		for (unsigned int i=0; i < catalogo->obtenerCantidadDisponible(); i++){
 
 			T* actual = catalogo->obtenerPosicion(i);
 			std::string origenDeActual = catalogo->obtenerPosicion(i)->obtenerOrigen();
@@ -53,10 +53,26 @@ public:
 	}
 
 
+	void imprimirListaAdyacencia() { //todo DE MOMENTO SOLO UTILIZADO PARA PRUEBAS
+		listaAdyacencia->iniciarCursor();
+		while (listaAdyacencia->avanzarCursor()) {
+			ListaNombrada<unsigned int>* actual = listaAdyacencia->obtenerDatoCursor();
+
+			std::cout << listaAdyacencia->obtenerNombreCursor() << "|> ";
+
+			actual->iniciarCursor();
+			while (actual->avanzarCursor()) {
+				std::cout << "[" << actual->obtenerNombreCursor() << " $" << actual->obtenerDatoCursor()<<"] ";
+			}
+			std::cout<<std::endl;
+
+		}
+	}
+
 	~GrafoDirigidoPonderado<T>() {
 		listaAdyacencia->iniciarCursor();
 		while (listaAdyacencia->avanzarCursor()) {
-			ListaNombrada<unsigned int>* adyActual = listaAdyacencia->obtenerCursor();
+			ListaNombrada<unsigned int>* adyActual = listaAdyacencia->obtenerDatoCursor();
 			delete adyActual;
 		}
 		delete listaAdyacencia;

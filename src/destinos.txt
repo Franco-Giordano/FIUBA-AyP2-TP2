@@ -1,2 +1,3 @@
 Almacen, San Luis, 60, 1, Papa
+Almacen, Cordoba, 60, 1, Papa
 San Luis,Cordoba, 72, 2, Zanahoria

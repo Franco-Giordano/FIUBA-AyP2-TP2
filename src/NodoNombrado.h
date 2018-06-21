@@ -64,7 +64,7 @@ public:
 	/*
 	 * post: devuelve el valor del dato.
 	 */
-	T obtenerNombre() {
+	std::string obtenerNombre() {
 
 		return this->nombre;
 	}

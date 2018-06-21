@@ -26,12 +26,6 @@ public:
 	ListaNombrada<T>();
 
 	/*
-	 * post: Lista que tiene los mismos elementos que otraLista.
-	 *       La instancia resulta en una copia de otraLista.
-	 */
-	ListaNombrada<T>(ListaNombrada<T>& otraLista);
-
-	/*
 	 * post: indica si la Lista tiene algún elemento.
 	 */
 	bool estaVacia();
@@ -53,12 +47,6 @@ public:
 	 *
 	 */
 	void agregar(std::string nombre, T elemento, unsigned int posicion);
-
-	/*
-	 * post: agrega todos los elementos de otraLista
-	 *       a partir de la posición contarElementos() + 1.
-	 */
-	void agregar(ListaNombrada<T> &otraLista);
 
 	/*
 	 * pre : posición pertenece al intervalo: [1, contarElementos()]
@@ -106,7 +94,9 @@ public:
 	 * post: devuelve el elemento en la posición del cursor.
 	 *
 	 */
-	T obtenerCursor();
+	T obtenerDatoCursor();
+
+	std::string obtenerNombreCursor();
 
 	bool yaExisteNombre(std::string nombre);
 
@@ -139,15 +129,6 @@ template<class T> ListaNombrada<T>::ListaNombrada() {
 	this->cursor = NULL;
 }
 
-template<class T> ListaNombrada<T>::ListaNombrada(ListaNombrada<T>& otraLista) {
-
-	this->primero = NULL;
-	this->tamanio = 0;
-	this->cursor = NULL;
-
-	/* copia los elementos de otraLista */
-	this->agregar(otraLista);
-}
 
 template<class T> bool ListaNombrada<T>::estaVacia() {
 
@@ -190,13 +171,6 @@ template<class T> void ListaNombrada<T>::agregar(std::string nombre, T elemento,
 
 }
 
-template<class T> void ListaNombrada<T>::agregar(ListaNombrada<T> &otraLista) {
-
-	otraLista.iniciarCursor();
-	while (otraLista.avanzarCursor()) {
-		this->agregar(otraLista.obtenerCursor());
-	}
-}
 
 template<class T> T ListaNombrada<T>::obtenerDato(unsigned int posicion) {
 
@@ -276,7 +250,7 @@ template<class T> bool ListaNombrada<T>::avanzarCursor() {
 	return (this->cursor != NULL);
 }
 
-template<class T> T ListaNombrada<T>::obtenerCursor() {
+template<class T> T ListaNombrada<T>::obtenerDatoCursor() {
 
 	T elemento;
 
@@ -286,6 +260,18 @@ template<class T> T ListaNombrada<T>::obtenerCursor() {
 	}
 
 	return elemento;
+}
+
+template<class T> std::string ListaNombrada<T>::obtenerNombreCursor() {
+
+	std::string nombre;
+
+	if (this->cursor != NULL) {
+
+		nombre = this->cursor->obtenerNombre();
+	}
+
+	return nombre;
 }
 
 template <class T>
@@ -329,9 +315,9 @@ NodoNombrado<T>* ListaNombrada<T>::obtenerNodoConNombre(std::string nombre) {
 	this->iniciarCursor();
 	bool encontrado = false;
 	while (this->avanzarCursor() && !encontrado) {
-		if (this->obtenerCursor()->obtenerNombre() == nombre) {
+		if (this->obtenerNombreCursor() == nombre) {
 			encontrado = true;
-			devolver = this->obtenerCursor();
+			devolver = this->cursor;
 		}
 	}
 
