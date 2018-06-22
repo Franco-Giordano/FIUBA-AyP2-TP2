@@ -58,7 +58,7 @@ public:
 		while (listaAdyacencia->avanzarCursor()) {
 			ListaNombrada<unsigned int>* actual = listaAdyacencia->obtenerDatoCursor();
 
-			std::cout << listaAdyacencia->obtenerNombreCursor() << "|> ";
+			std::cout << listaAdyacencia->obtenerNombreCursor() << " |> ";
 
 			actual->iniciarCursor();
 			while (actual->avanzarCursor()) {
@@ -67,6 +67,10 @@ public:
 			std::cout<<std::endl;
 
 		}
+	}
+
+	ListaNombrada<ListaNombrada<unsigned int>*>* obtenerListaAdyacencia() {
+		return listaAdyacencia;
 	}
 
 	~GrafoDirigidoPonderado<T>() {
