@@ -12,6 +12,7 @@
 #include "DronAereo.h"
 #include "Participantes.h"
 #include "GrafoDirigidoPonderado.h"
+#include "MinHeap.h"
 
 using namespace std;
 int main() {
