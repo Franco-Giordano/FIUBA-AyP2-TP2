@@ -1,3 +1,6 @@
-Almacen, San Luis, 60, 2, Papa
 Almacen, Cordoba, 60, 1, Papa
+Almacen, Jujuy, 60, 3, Papa
+Almacen, Misiones, 60, 10, Papa
+Almacen, Corrientes, 60, 100, Papa
+Almacen, Buenos Aires, 60, 8, Papa
 San Luis,Cordoba, 72, 2, Zanahoria

@@ -27,7 +27,8 @@ int main() {
 
 	ListaNombrada<unsigned int>* adyacentesOrigen = grafoDestinos.obtenerListaAdyacencia()->obtenerDato(1);
 
-	MinHeap colaConPrioridad(adyacentesOrigen);
+	MinHeap colaConPrioridad(grafoDestinos.obtenerListaAdyacencia(), 1);
 
 	colaConPrioridad.imprimirHeap();
+
 }

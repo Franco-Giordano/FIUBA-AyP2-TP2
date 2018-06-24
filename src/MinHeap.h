@@ -8,6 +8,10 @@
 #ifndef SRC_MINHEAP_H_
 #define SRC_MINHEAP_H_
 
+#ifndef INFINITO
+#define INFINITO 99999999999999999999999999
+#endif
+
 #include <string>
 #include "ListaNombrada.h"
 #include "Candidato.h"
@@ -19,12 +23,14 @@ private:
 
 	Candidato<std::string>** candidatos; //se identificaran los vertices con strings (sus nombres) pero se ordenaran por peso minimo
 
-	void copiarListaEnArray(ListaNombrada<unsigned int>* listaOriginal, Candidato<std::string>** arrayDondeCopiar) {
-		listaOriginal->iniciarCursor();
-		unsigned int i = 0;
-		while (listaOriginal->avanzarCursor()) {
+	void copiarListaEnArray(ListaNombrada<ListaNombrada<unsigned int>*>* listaOriginal, Candidato<std::string>** arrayDondeCopiar, unsigned int origen) {
+		ListaNombrada<unsigned int>* adyacentesOrigen = listaOriginal->obtenerDato(origen);
 
-			Candidato<std::string>* nuevoElem = new Candidato<std::string>(listaOriginal->obtenerNombreCursor(), listaOriginal->obtenerDatoCursor());
+		adyacentesOrigen->iniciarCursor();
+		unsigned int i = 0;
+		while (adyacentesOrigen->avanzarCursor()) {
+
+			Candidato<std::string>* nuevoElem = new Candidato<std::string>(adyacentesOrigen->obtenerNombreCursor(), adyacentesOrigen->obtenerDatoCursor());
 
 			arrayDondeCopiar[i] = nuevoElem;
 
@@ -66,13 +72,13 @@ private:
 	}
 
 public:
-	MinHeap(ListaNombrada<unsigned int>* elementos) {
+	MinHeap(ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacencia, unsigned int origen) {
 		//TODO hace el HEAP solo con los adyacentes al origen, no tiene implementado manejar los de peso infinito
 
-		maximaCantidad = elementos->contarElementos();
+		maximaCantidad = listaAdyacencia->obtenerDato(origen)->contarElementos(); //TODO TA MAL AAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 		candidatos = new Candidato<std::string>*[maximaCantidad];
-		this->copiarListaEnArray(elementos, candidatos);
+		this->copiarListaEnArray(listaAdyacencia, candidatos, origen); //TODO ARREGLAR QUE AGREGUE VERTICES NO APUNTADOS POR EL ORIGEN
 
 
 		//Inicio Algoritmo de Floyd para construir HEAP desde array
@@ -89,6 +95,14 @@ public:
 
 
 	//TODO destructor xd
+	~MinHeap() {
+		for (unsigned int i = 0; i < maximaCantidad; i++) {
+			delete candidatos[i];
+		}
+
+		delete[] candidatos;
+	}
+
 };
 
 #endif /* SRC_HEAP_H_ */

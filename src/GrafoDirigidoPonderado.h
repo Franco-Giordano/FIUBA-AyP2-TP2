@@ -16,6 +16,8 @@
  * TENER LOS METODOS PUBLICOS: -obtenerNombre(): devuelve std::string, representa el nombre del vertice
  * 							   -obtenerOrigen(): devuelve std::string, representa de quien es adyacente el vertice
  * 							   -obtenerPrecio(): devuelve unsigned int, representa ponderacion de la arista que une obtenerOrigen() con obtenerNombre()
+ *
+ * 	En nuestro caso, T = Destino.
  */
 template <class T>
 class GrafoDirigidoPonderado { //todo metodos para interactuar con el grafo
@@ -47,6 +49,13 @@ public:
 
 				listaAdyacencia->agregar(origenDeActual, nuevosAdyacentes);
 			}
+
+			if (!listaAdyacencia->yaExisteNombre(actual->obtenerNombre())){
+				ListaNombrada<unsigned int>* nuevosAdyacentes = new ListaNombrada<unsigned int>();
+
+				listaAdyacencia->agregar(actual->obtenerNombre(), nuevosAdyacentes);
+			}
+
 		}
 
 //		adyacentesAlVerticeInteresante = listaAdyacencia->obtenerDatoDeNombre(verticeInteresante);
