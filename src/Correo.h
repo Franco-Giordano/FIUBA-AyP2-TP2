@@ -23,15 +23,15 @@ public:
 	//Post: quita el cultivo que va a ser enviado de la lista de cultivos.
 	void enviarCultivo(unsigned int posicionCultivoAEnviar, Almacen* almacen);
 
-	//Post: suma en el monedero del jugador que vende el cultivo la rentabilidad, que se calcula como la suma
-	// de lo que cuesta el envio y del valor del cultivo.
+	//Post: suma en el monedero del jugador que vende el cultivo la rentabilidad, que se calcula como la resta
+	// entre lo que cuesta el envio y del valor del cultivo.
 	void cobrar(Destino* destino, Monedero* monedero);
 
 	// Post: devuelve la rentabilidad del cultivo.
 	unsigned int obtenerRentabilidad();
 
-	//Post: calcula el costo del envio como el producto entre el precio y la distancia.
-	int calcularCostoEnvio(Destino* destino);
+ //Post: calcula el costo del envio como el producto entre el precio y la distancia.
+//	int calcularCostoEnvio(Destino* destino);
 };
 
 #endif /* CORREO_H_ */

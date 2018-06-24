@@ -185,13 +185,22 @@ void Secretario::gestionarEnvioCosecha(Acciones acciones) {
 			acciones.imprimirListaDestinos(destinosValidos);
 			unsigned int destinoEscojido = this->obtenerNumero(1, destinosValidos->contarElementos(), ""); //todo hacer que costo sea perdida para usuario, no ganancia
 			Correo correo(destinosValidos, this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
-			correo.enviarCultivo(numCultivoAEnviar, this->jugador->obtenerAlmacen());
-			correo.cobrar(destinosValidos->obtener(destinoEscojido), this->jugador->obtenerMonedero());
 
+			Destino* destinoElegido= destinosValidos->obtener(destinoEscojido);
+
+			if(acciones.esEnvioValido(destinoElegido, correo)){
+				correo.enviarCultivo(numCultivoAEnviar, this->jugador->obtenerAlmacen());
+				correo.cobrar(destinoElegido, this->jugador->obtenerMonedero());
+			}
+			else{
+				cout << "El destino no es valido ya que el coste de envio supera a la rentabilidad del cultivo. No se han "
+						"realizado cambios." << endl;
+			}
 		} else {
 
 			cout << "**No hay ningun comprador que acepte su cosecha.**" << endl;
 		}
+
 		delete destinosValidos;
 	} else{
 

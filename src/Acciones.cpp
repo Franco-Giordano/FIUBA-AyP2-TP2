@@ -93,6 +93,13 @@ bool Acciones::tieneMasDeUnTerreno() {
 	return jugador->obtenerListaTerreno()->contarElementos() > 1;
 }
 
+bool Acciones::esEnvioValido(Destino* destino, Correo correo){
+
+	int ganancia= correo.obtenerRentabilidad() - destino->obtenerPrecio();
+
+	return (ganancia > 0);
+}
+
 void Acciones::obtenerDestinosValidos(Lista<Destino*>* listaDestinos, Cultivo* cultivo, CatalogoDe<Destino>* catalogoDestinos) {
 
 	unsigned int cantidad = catalogoDestinos->obtenerCantidadDisponible();

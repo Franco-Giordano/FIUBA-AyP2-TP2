@@ -5,6 +5,7 @@
 #include "Jugador.h"
 #include "Destino.h"
 #include "Catalogo.h"
+#include "Correo.h"
 
 class Acciones {
 private:
@@ -47,6 +48,9 @@ public:
 
 	//Post: muestra por pantalla la lista de destinos validos.
 	void imprimirListaDestinos(Lista<Destino*>* destinosValidos);
+
+	//Post: devuelve true si la rentabilidad del cultivo es mayor al coste de envio.
+	bool esEnvioValido(Destino* destino, Correo correo);
 
 private:
 

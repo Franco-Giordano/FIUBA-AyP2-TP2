@@ -16,9 +16,9 @@ void Correo::enviarCultivo(unsigned int posicionCultivoAEnviar, Almacen* almacen
 	almacen->quitarCultivo(posicionCultivoAEnviar);
 }
 
-void Correo::cobrar(Destino* destino, Monedero* monedero) { //todo hacer que costo sea perdida para usuario, no ganancia
+void Correo::cobrar(Destino* destino, Monedero* monedero) {
 	unsigned int rentabilidad = obtenerRentabilidad();
-	int ganancia = calcularCostoEnvio(destino) + rentabilidad;
+	int ganancia = rentabilidad - destino->obtenerPrecio();
 	monedero->sumarDinero(ganancia);
 }
 
@@ -26,6 +26,6 @@ unsigned int Correo::obtenerRentabilidad() {
 	return cultivoAEnviar->obtenerRentabilidad();
 }
 
-int Correo::calcularCostoEnvio(Destino* destino) {
-	return destino->obtenerPrecio() * destino->obtenerDistancia();
-}
+//int Correo::calcularCostoEnvio(Destino* destino) {
+//	return destino->obtenerPrecio();
+//}
