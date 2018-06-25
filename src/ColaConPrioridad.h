@@ -23,6 +23,8 @@ private:
 
 	Candidato<std::string>** candidatos; //se identificaran los vertices con strings (sus nombres) pero se ordenaran por peso minimo
 
+	unsigned int posUltima;
+
 	void copiarListaEnCandidatos(ListaNombrada<ListaNombrada<unsigned int>*>* listaOriginal, unsigned int origen) {
 
 		ListaNombrada<unsigned int>* adyacentesOrigen = listaOriginal->obtenerDato(origen);
@@ -35,10 +37,10 @@ private:
 		while (listaOriginal->avanzarCursor()) {
 
 			if (listaOriginal->obtenerNombreCursor() != nombreOrigen) {
-				Candidato<std::string>* nuevoElem = new Candidato<std::string>(listaOriginal->obtenerNombreCursor(),
-																			   INFINITO);
+				Candidato<std::string>* nuevoElem = new Candidato<std::string>(listaOriginal->obtenerNombreCursor(), INFINITO);
 
 				candidatos[i] = nuevoElem;
+
 				i++;
 			}
 		}
@@ -89,8 +91,6 @@ private:
 			else {
 				minimo = ultimo + 1; //si no se ejecuto lo de arriba, entonces ya puedo salir del loop
 			}
-
-
 		}
 	}
 
@@ -107,6 +107,8 @@ public:
 
 		maximaCantidad = listaAdyacencia->contarElementos() - 1; //no se debe contar el origen
 
+		this -> posUltima = maximaCantidad - 1;
+
 		candidatos = new Candidato<std::string>*[maximaCantidad];
 		this->copiarListaEnCandidatos(listaAdyacencia, origen);
 
@@ -114,10 +116,12 @@ public:
 		for (int i = maximaCantidad/2 - 1; i>= 0 ; i--) {
 			bajar(i, maximaCantidad - 1);
 		}
+
+
 	}
 
 	void imprimirHeap() {
-		for (unsigned int i=0; i < this->maximaCantidad; i++) {
+		for (unsigned int i=0; i < this->posUltima + 1; i++) {
 			std::cout << "[" << candidatos[i]->obtenerIdentificador() << " | $" << candidatos[i]->obtenerPeso() << "] ";
 		}
 	}
@@ -126,8 +130,40 @@ public:
 		return candidatos[0] == NULL;
 	}
 
-	std::string removerRaiz() { //TODO metodo remover raiz
-		return "";
+	Candidato<std::string> removerRaiz() { //TODO metodo remover raiz
+
+		Candidato<std::string> raiz (candidatos [0]->obtenerIdentificador(), candidatos[0]->obtenerPeso());
+
+		delete candidatos[0];
+
+		candidatos[0] = candidatos [posUltima];
+
+		candidatos[posUltima] = NULL;
+
+		posUltima --;
+
+		this -> bajar(0,posUltima);
+
+		return raiz;
+	}
+
+	void actualizarPeso(std::string nombreRecibido, unsigned int pesoRecibido){
+
+		unsigned int i = 0;
+
+		bool encontrado = false;
+
+		while (!encontrado && i < posUltima + 1){
+
+			if (nombreRecibido == candidatos[i]->obtenerIdentificador()){
+
+				candidatos[i]->modificarPeso(pesoRecibido);
+
+				encontrado = true;
+
+				this -> bajar(0, posUltima);
+			}
+		}
 	}
 
 	~ColaConPrioridad() {

@@ -21,6 +21,20 @@ private:
 
 	ListaNombrada<unsigned int>** mejoresCostos;
 
+	unsigned int minimoEntre(unsigned int elemento1, unsigned int elemento2){
+
+		unsigned int minimo;
+
+		if (elemento1 < elemento2){
+			minimo = elemento1;
+		}
+		else {
+			minimo = elemento2;
+		}
+
+		return minimo;
+	}
+
 public:
 	GPS(std::string origenRecibido, CatalogoDe<Cultivo>* catalogoSemillas, CatalogoDe<Destino>* catalogoDestinos) {
 
@@ -45,13 +59,38 @@ public:
 	ListaNombrada<unsigned int>* hallarCaminoMinConDijkstra(unsigned int i) { //TODO dijkstra
 		GrafoDirigidoPonderado<Destino>* grafo = this->grafos[i];
 
-		unsigned int posOrigen = grafo->obtenerListaAdyacencia()->obtenerPosicionConNombre(this->origen);
+		ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacentes= grafo->obtenerListaAdyacencia();
 
-		ColaConPrioridad cola(grafo->obtenerListaAdyacencia(), posOrigen);
+		unsigned int posOrigen = listaAdyacentes -> obtenerPosicionConNombre(this->origen);
+
+		ColaConPrioridad cola(listaAdyacentes, posOrigen);
 
 		ListaNombrada<unsigned int>* mejoresCaminos = cola.convertirColaAlistaNombrada();
 
 		while (!cola.estaVacia()) {
+
+			Candidato<std::string> raizRemovida = cola.removerRaiz();
+
+			ListaNombrada<unsigned int>* adyacentesActual = listaAdyacentes->obtenerDatoDeNombre(raizRemovida.obtenerIdentificador());
+
+			adyacentesActual->iniciarCursor();
+
+			while (adyacentesActual->avanzarCursor()){
+
+				std::string nombreAyacenteActual = adyacentesActual->obtenerNombreCursor();
+
+				unsigned int pesoAnterior = mejoresCaminos->obtenerDatoDeNombre(nombreAyacenteActual);
+
+				unsigned int pesoNuevo = raizRemovida.obtenerPeso() + adyacentesActual->obtenerDatoCursor();
+
+				if (pesoNuevo < pesoAnterior){
+
+					mejoresCaminos->modificarDatoConNombre(nombreAyacenteActual, pesoNuevo);
+
+					cola.actualizarPeso(nombreAyacenteActual, pesoNuevo);
+				}
+			}
+
 
 		}
 

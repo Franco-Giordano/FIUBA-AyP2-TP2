@@ -57,6 +57,13 @@ public:
 
 	std::string obtenerNombre(unsigned int posicion);
 
+	void modificarDatoCursor(T elemento){
+		if (this -> cursor != NULL){
+			this -> cursor->cambiarDato(elemento);
+		}
+
+	}
+
 //	/*
 //	 * pre : posicion pertenece al intervalo: [1, contarElementos()]
 //	 * post: cambia el elemento en la posición indicada por el
@@ -111,6 +118,8 @@ public:
 	T obtenerDatoDeNombre(std::string nombre);
 
 	unsigned int obtenerPosicionConNombre(std::string nombre);
+
+	void modificarDatoConNombre(std::string nombreRecibido, T dato);
 
 	/*
 	 * post: libera los recursos asociados a la Lista.
@@ -196,6 +205,12 @@ template<class T> void ListaNombrada<T>::agregar(std::string nombre, T elemento,
 
 }
 
+template<class T> void ListaNombrada<T>::modificarDatoConNombre(std::string nombreRecibido, T datoRecibido){
+
+	NodoNombrado<T>* nodoAmodificar = this->obtenerNodoConNombre(nombreRecibido);
+
+	nodoAmodificar->cambiarDato(datoRecibido);
+}
 
 template<class T> T ListaNombrada<T>::obtenerDato(unsigned int posicion) {
 

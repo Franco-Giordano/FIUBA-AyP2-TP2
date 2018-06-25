@@ -30,4 +30,19 @@ int main() {
 
 	colaConPrioridad.imprimirHeap();
 
+	cout << endl;
+
+	cout << colaConPrioridad.removerRaiz().obtenerIdentificador() << endl;
+
+	colaConPrioridad.imprimirHeap();
+
+	cout << endl;
+
+	cout << "Vamo a mofidicar el peso: " << endl;
+
+	colaConPrioridad.actualizarPeso("tierra del fuego", 777);
+
+	cout << "Peso modificado xd" << endl;
+
+	colaConPrioridad.imprimirHeap();
 }
