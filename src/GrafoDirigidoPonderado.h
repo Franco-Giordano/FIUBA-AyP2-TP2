@@ -20,7 +20,7 @@
  * 	En nuestro caso, T = Destino.
  */
 template <class T>
-class GrafoDirigidoPonderado { //todo metodos para interactuar con el grafo
+class GrafoDirigidoPonderado {
 private:
 	ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacencia;
 
@@ -60,7 +60,7 @@ public:
 	}
 
 
-	void imprimirListaAdyacencia() { //todo DE MOMENTO SOLO UTILIZADO PARA PRUEBAS
+	void imprimirListaAdyacencia() {
 		listaAdyacencia->iniciarCursor();
 		while (listaAdyacencia->avanzarCursor()) {
 			ListaNombrada<unsigned int>* actual = listaAdyacencia->obtenerDatoCursor();

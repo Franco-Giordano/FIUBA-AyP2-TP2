@@ -20,29 +20,48 @@ int main() {
 
 	LectorCSV lectorDestinos("src/destinos.txt", 5);
 
+	LectorCSV lectorSemillas("src/cultivos.txt", 6);
+
+	CatalogoDe<Cultivo> catalogoDeSemillas(lectorSemillas.obtenerLista());
+
 	CatalogoDe<Destino> catalogoDeDestinos(lectorDestinos.obtenerLista());
 
-	GrafoDirigidoPonderado<Destino> grafoDestinos(&catalogoDeDestinos, "papa");
+	GPS miRealizadorDeGPS("almacen", &catalogoDeSemillas, &catalogoDeDestinos);
 
-	grafoDestinos.imprimirListaAdyacencia();
 
-	ColaConPrioridad colaConPrioridad(grafoDestinos.obtenerListaAdyacencia(), 1);
 
-	colaConPrioridad.imprimirHeap();
+//
+//	GrafoDirigidoPonderado<Destino> grafoDestinos(&catalogoDeDestinos, "papa");
+//
+//	grafoDestinos.imprimirListaAdyacencia();
+//
+//	ColaConPrioridad colaConPrioridad(grafoDestinos.obtenerListaAdyacencia(), 1);
+//
+//	colaConPrioridad.imprimirHeap();
+//
+//	cout << endl;
+//
+//	cout << colaConPrioridad.removerRaiz().obtenerIdentificador() << endl;
+//
+//
+//	cout << colaConPrioridad.removerRaiz().obtenerIdentificador() << endl;
+//
+//
+//	cout << colaConPrioridad.removerRaiz().obtenerIdentificador() << endl;
+//
+//	cout << colaConPrioridad.removerRaiz().obtenerIdentificador() << endl;
+//
+//	cout << colaConPrioridad.removerRaiz().obtenerIdentificador() << endl;
 
-	cout << endl;
-
-	cout << colaConPrioridad.removerRaiz().obtenerIdentificador() << endl;
-
-	colaConPrioridad.imprimirHeap();
-
-	cout << endl;
-
-	cout << "Vamo a mofidicar el peso: " << endl;
-
-	colaConPrioridad.actualizarPeso("tierra del fuego", 777);
-
-	cout << "Peso modificado xd" << endl;
-
-	colaConPrioridad.imprimirHeap();
+//	colaConPrioridad.imprimirHeap();
+//
+//	cout << endl;
+//
+//	cout << "Vamo a mofidicar el peso: " << endl;
+//
+//	colaConPrioridad.mejorarPeso("tierra del fuego", 1);
+//
+//	cout << "Peso modificado xd" << endl;
+//
+//	colaConPrioridad.imprimirHeap();
 }

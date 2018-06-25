@@ -17,7 +17,7 @@
 #include "Candidato.h"
 #include <iostream>
 
-class ColaConPrioridad { //TODO esto xd
+class ColaConPrioridad {
 private:
 	unsigned int maximaCantidad;
 
@@ -102,6 +102,19 @@ private:
 		candidatos[posB] = aux;
 	}
 
+    void subir(int pos) {
+    	int padre;
+    	if (pos != 0) {
+    		padre = (pos - 1)/2;
+
+    		if (candidatos[padre]->obtenerPeso() > candidatos[pos]->obtenerPeso()) {
+    			intercambiar(padre,pos);
+
+    			subir(padre);
+    		}
+    	}
+    }
+
 public:
 	ColaConPrioridad(ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacencia, unsigned int origen) {
 
@@ -130,24 +143,28 @@ public:
 		return candidatos[0] == NULL;
 	}
 
-	Candidato<std::string> removerRaiz() { //TODO metodo remover raiz
+	Candidato<std::string> removerRaiz() {
 
 		Candidato<std::string> raiz (candidatos [0]->obtenerIdentificador(), candidatos[0]->obtenerPeso());
 
 		delete candidatos[0];
 
-		candidatos[0] = candidatos [posUltima];
+		candidatos[0] = NULL;
 
-		candidatos[posUltima] = NULL;
+		if (posUltima != 0) {
+			candidatos[0] = candidatos [posUltima];
 
-		posUltima --;
+			candidatos[posUltima] = NULL;
 
-		this -> bajar(0,posUltima);
+			posUltima--;
+
+			this -> bajar(0,posUltima);
+		}
 
 		return raiz;
 	}
 
-	void actualizarPeso(std::string nombreRecibido, unsigned int pesoRecibido){
+	void mejorarPeso(std::string nombreRecibido, unsigned int pesoRecibido){
 
 		unsigned int i = 0;
 
@@ -161,9 +178,23 @@ public:
 
 				encontrado = true;
 
-				this -> bajar(0, posUltima);
+				this -> subir(i);
 			}
+			i++;
 		}
+	}
+
+	bool estaNombre(std::string nombre) {
+		bool esta = false;
+		unsigned int i = 0;
+		while (i < posUltima + 1 && !esta) {
+			if (candidatos[i]->obtenerIdentificador() == nombre) {
+				esta = true;
+			}
+			i++;
+		}
+
+		return esta;
 	}
 
 	~ColaConPrioridad() {
@@ -174,7 +205,7 @@ public:
 		delete[] candidatos;
 	}
 
-	ListaNombrada<unsigned int>* convertirColaAlistaNombrada() { //TODO un toque turbio violar la definicion de cola
+	ListaNombrada<unsigned int>* convertirColaAlistaNombrada() {
 		ListaNombrada<unsigned int>* resultado = new ListaNombrada<unsigned int>();
 
 		for (unsigned int i = 0; i < this->maximaCantidad; i++) {

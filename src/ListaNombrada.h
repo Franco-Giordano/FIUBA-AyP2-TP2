@@ -6,6 +6,7 @@
 #endif
 
 #include "NodoNombrado.h"
+#include <iostream>
 
 
 template<class T> class ListaNombrada {
@@ -120,6 +121,8 @@ public:
 	unsigned int obtenerPosicionConNombre(std::string nombre);
 
 	void modificarDatoConNombre(std::string nombreRecibido, T dato);
+
+	void imprimirLista();
 
 	/*
 	 * post: libera los recursos asociados a la Lista.
@@ -324,6 +327,14 @@ T ListaNombrada<T>::obtenerDatoDeNombre(std::string nombre){
 	return this->obtenerNodoConNombre(nombre)->obtenerDato();
 }
 
+template <class T>
+void ListaNombrada<T>::imprimirLista() {
+	this->iniciarCursor();
+	while (this->avanzarCursor()) {
+		std::cout <<  "["<<this->obtenerNombreCursor() << " | $" << this->obtenerDatoCursor() << "]~";
+	}
+
+}
 
 template<class T> ListaNombrada<T>::~ListaNombrada() {
 

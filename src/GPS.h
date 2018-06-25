@@ -50,48 +50,54 @@ public:
 			grafos[i] = new GrafoDirigidoPonderado<Destino>(catalogoDestinos,
 															catalogoSemillas->obtenerPosicion(i)->obtenerNombre());
 
-			ListaNombrada<unsigned int>* mejoresCostosCultivoActual = this->hallarCaminoMinConDijkstra(i); //grafo en la posicion i
+			ListaNombrada<unsigned int>* mejoresCostosCultivoActual = this->hallarCaminoMinConDijkstra(this->grafos[i]); //grafo en la posicion i
 
 			mejoresCostos[i] = mejoresCostosCultivoActual;
 		}
 	}
 
-	ListaNombrada<unsigned int>* hallarCaminoMinConDijkstra(unsigned int i) { //TODO dijkstra
-		GrafoDirigidoPonderado<Destino>* grafo = this->grafos[i];
+	ListaNombrada<unsigned int>* hallarCaminoMinConDijkstra(GrafoDirigidoPonderado<Destino>* grafo) {
 
 		ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacentes= grafo->obtenerListaAdyacencia();
 
-		unsigned int posOrigen = listaAdyacentes -> obtenerPosicionConNombre(this->origen);
+		ListaNombrada<unsigned int>* mejoresCaminos;
 
-		ColaConPrioridad cola(listaAdyacentes, posOrigen);
+		if (listaAdyacentes->yaExisteNombre(this->origen)) {
+			unsigned int posOrigen = listaAdyacentes -> obtenerPosicionConNombre(this->origen);
 
-		ListaNombrada<unsigned int>* mejoresCaminos = cola.convertirColaAlistaNombrada();
+			ColaConPrioridad cola(listaAdyacentes, posOrigen);
 
-		while (!cola.estaVacia()) {
+			mejoresCaminos = cola.convertirColaAlistaNombrada();
 
-			Candidato<std::string> raizRemovida = cola.removerRaiz();
+			while (!cola.estaVacia()) {
 
-			ListaNombrada<unsigned int>* adyacentesActual = listaAdyacentes->obtenerDatoDeNombre(raizRemovida.obtenerIdentificador());
+				Candidato<std::string> raizRemovida = cola.removerRaiz();
 
-			adyacentesActual->iniciarCursor();
+				ListaNombrada<unsigned int>* adyacentesActual = listaAdyacentes->obtenerDatoDeNombre(raizRemovida.obtenerIdentificador());
 
-			while (adyacentesActual->avanzarCursor()){
+				adyacentesActual->iniciarCursor();
 
-				std::string nombreAyacenteActual = adyacentesActual->obtenerNombreCursor();
+				while (adyacentesActual->avanzarCursor()){
 
-				unsigned int pesoAnterior = mejoresCaminos->obtenerDatoDeNombre(nombreAyacenteActual);
+					std::string nombreAdyacenteActual = adyacentesActual->obtenerNombreCursor();
 
-				unsigned int pesoNuevo = raizRemovida.obtenerPeso() + adyacentesActual->obtenerDatoCursor();
+					unsigned int pesoAnterior = mejoresCaminos->obtenerDatoDeNombre(nombreAdyacenteActual);
 
-				if (pesoNuevo < pesoAnterior){
+					unsigned int pesoNuevo = raizRemovida.obtenerPeso() + adyacentesActual->obtenerDatoCursor();
 
-					mejoresCaminos->modificarDatoConNombre(nombreAyacenteActual, pesoNuevo);
+					if (pesoNuevo < pesoAnterior){
 
-					cola.actualizarPeso(nombreAyacenteActual, pesoNuevo);
+						mejoresCaminos->modificarDatoConNombre(nombreAdyacenteActual, pesoNuevo);
+
+						if (cola.estaNombre(nombreAdyacenteActual)) {
+							cola.mejorarPeso(nombreAdyacenteActual, pesoNuevo);
+						}
+					}
 				}
 			}
-
-
+		}
+		else {
+			mejoresCaminos = new ListaNombrada<unsigned int>();
 		}
 
 		return mejoresCaminos;
@@ -100,8 +106,10 @@ public:
 	~GPS() {
 		for (unsigned int i = 0; i < cantidadGrafos; i++) {
 			delete grafos[i];
+			delete mejoresCostos[i];
 		}
 		delete[] grafos;
+		delete[] mejoresCostos;
 	}
 };
 
