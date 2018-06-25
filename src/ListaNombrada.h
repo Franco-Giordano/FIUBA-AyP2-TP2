@@ -104,6 +104,8 @@ public:
 	//pre: existe nodo con nombre 'nombre'
 	T obtenerDatoDeNombre(std::string nombre);
 
+	unsigned int obtenerPosicionConNombre(std::string nombre);
+
 	/*
 	 * post: libera los recursos asociados a la Lista.
 	 */
@@ -129,6 +131,23 @@ template<class T> ListaNombrada<T>::ListaNombrada() {
 	this->cursor = NULL;
 }
 
+template <class T> unsigned int ListaNombrada<T>::obtenerPosicionConNombre(std::string nombre) {
+	bool encontrado = false;
+	NodoNombrado<T>* actual = this->primero;
+
+	unsigned int i = 1;
+	while (!encontrado && i < this->tamanio) {
+		if (actual->obtenerNombre() == nombre){
+			encontrado = true;
+		}
+		else {
+			i++;
+			actual = actual->obtenerSiguiente();
+		}
+	}
+
+	return i;
+}
 
 template<class T> bool ListaNombrada<T>::estaVacia() {
 

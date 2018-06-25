@@ -1,4 +1,4 @@
 Almacen, San Luis, 60, 1, Papa
 Almacen, Jujuy, 60, 3, Papa
-Almacen, Buenos Aires, 60, 8, Papa
+Jujuy, Buenos Aires, 60, 8, Papa
 San Luis, Cordoba, 800, 2, Zanahoria

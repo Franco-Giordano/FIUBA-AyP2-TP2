@@ -12,6 +12,7 @@
 #include "Marcador.h"
 #include "DronAereo.h"
 #include "Participantes.h"
+#include "GPS.h"
 #include "GrafoDirigidoPonderado.h"
 
 using namespace std;

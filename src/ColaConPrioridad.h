@@ -122,6 +122,13 @@ public:
 		}
 	}
 
+	bool estaVacia() {
+		return candidatos[0] == NULL;
+	}
+
+	std::string removerRaiz() { //TODO metodo remover raiz
+		return "";
+	}
 
 	~ColaConPrioridad() {
 		for (unsigned int i = 0; i < maximaCantidad; i++) {
@@ -129,6 +136,16 @@ public:
 		}
 
 		delete[] candidatos;
+	}
+
+	ListaNombrada<unsigned int>* convertirColaAlistaNombrada() { //TODO un toque turbio violar la definicion de cola
+		ListaNombrada<unsigned int>* resultado = new ListaNombrada<unsigned int>();
+
+		for (unsigned int i = 0; i < this->maximaCantidad; i++) {
+			resultado->agregar(candidatos[i]->obtenerIdentificador(), candidatos[i]->obtenerPeso());
+		}
+
+		return resultado;
 	}
 
 };
