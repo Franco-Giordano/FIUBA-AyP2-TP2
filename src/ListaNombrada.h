@@ -54,8 +54,8 @@ public:
 	 */
 	T obtenerDato(unsigned int posicion);
 
-
-	std::string obtenerNombre(unsigned int posicion);
+	//Post: devuelve el nombre en la posicion pedida.
+	T obtenerNombre(unsigned int posicion);
 
 //	/*
 //	 * pre : posicion pertenece al intervalo: [1, contarElementos()]
@@ -77,7 +77,7 @@ public:
 	void iniciarCursor();
 
 	/*
-	 * pre : se ha iniciado un recorrido (invocando el metodo
+	 * pre : se ha iniciado un recorrido (invocando el método
 	 *       iniciarCursor()) y desde entonces no se han agregado o
 	 *       removido elementos de la Lista.
 	 * post: mueve el cursor y lo posiciona en el siguiente elemento
@@ -90,18 +90,22 @@ public:
 
 	/*
 	 * pre : el cursor está posicionado sobre un elemento de la Lista,
-	 *       (fue invocado el metodo avanzarCursor() y devolvió true)
+	 *       (fue invocado el método avanzarCursor() y devolvió true)
 	 * post: devuelve el elemento en la posición del cursor.
 	 *
 	 */
 	T obtenerDatoCursor();
 
+	//Post: devuelve el nombre del elemento apuntado por el cursor en el momento.
 	std::string obtenerNombreCursor();
 
+
+	//Post: devuelve un true en caso que ya exista el nombre recibido.
 	bool yaExisteNombre(std::string nombre);
 
 
-	//pre: existe nodo con nombre 'nombre'
+	//pre: Existe nodo con nombre 'nombre'.
+	//Post: devuelve el dato del nombre recibido.
 	T obtenerDatoDeNombre(std::string nombre);
 
 	unsigned int obtenerPosicionConNombre(std::string nombre);
@@ -120,7 +124,7 @@ private:
 	NodoNombrado<T>* obtenerNodoNombrado(unsigned int posicion); // NOTA: primitiva PRIVADA
 
 
-	//si no esta devuelve NULL
+	//Post: devuelve el nodo buscado por el criterio nombre. Devuelve null si no fue encontrado.
 	NodoNombrado<T>* obtenerNodoConNombre(std::string nombre);
 };
 
@@ -203,9 +207,9 @@ template<class T> T ListaNombrada<T>::obtenerDato(unsigned int posicion) {
 	return elemento;
 }
 
-template<class T> std::string ListaNombrada<T>::obtenerNombre(unsigned int posicion) {
+template<class T> T ListaNombrada<T>::obtenerNombre(unsigned int posicion) {
 
-	std::string elemento = "";
+	T elemento;
 
 	if ((posicion > 0) && (posicion <= this->tamanio)) {
 
@@ -215,13 +219,6 @@ template<class T> std::string ListaNombrada<T>::obtenerNombre(unsigned int posic
 	return elemento;
 }
 
-//template<class T> void ListaNombrada<T>::asignar(T elemento, unsigned int posicion) {
-//
-//	if ((posicion > 0) && (posicion <= this->tamanio)) {
-//
-//		this->obtenerNodoNombrado(posicion)->cambiarDato(elemento);
-//	}
-//}
 
 template<class T> void ListaNombrada<T>::remover(unsigned int posicion) {
 
@@ -333,11 +330,11 @@ NodoNombrado<T>* ListaNombrada<T>::obtenerNodoConNombre(std::string nombre) {
 	NodoNombrado<T>* devolver = NULL;
 	this->iniciarCursor();
 	bool encontrado = false;
+
 	while (this->avanzarCursor() && !encontrado) {
-		if (this->obtenerNombreCursor() == nombre) {
-			encontrado = true;
-			devolver = this->cursor;
-		}
+
+		encontrado = this->obtenerNombreCursor()==nombre;
+		devolver = this->cursor;
 	}
 
 	return devolver;
