@@ -5,8 +5,8 @@
  *      Author: frank
  */
 
-#ifndef SRC_MINHEAP_H_
-#define SRC_MINHEAP_H_
+#ifndef SRC_COLACONPRIORIDAD_H_
+#define SRC_COLACONPRIORIDAD_H_
 
 #ifndef INFINITO
 #define INFINITO 99999999
@@ -17,7 +17,7 @@
 #include "Candidato.h"
 #include <iostream>
 
-class MinHeap { //TODO esto xd
+class ColaConPrioridad { //TODO esto xd
 private:
 	unsigned int maximaCantidad;
 
@@ -103,7 +103,7 @@ private:
 	}
 
 public:
-	MinHeap(ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacencia, unsigned int origen) {
+	ColaConPrioridad(ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacencia, unsigned int origen) {
 		//TODO hace el HEAP solo con los adyacentes al origen, no tiene implementado manejar los de peso infinito
 
 		maximaCantidad = listaAdyacencia->contarElementos() - 1; //no se debe contar el origen
@@ -124,7 +124,7 @@ public:
 	}
 
 
-	~MinHeap() {
+	~ColaConPrioridad() {
 		for (unsigned int i = 0; i < maximaCantidad; i++) {
 			delete candidatos[i];
 		}
@@ -134,4 +134,4 @@ public:
 
 };
 
-#endif /* SRC_HEAP_H_ */
+#endif /* SRC_ColaConPrioridad_H_ */
