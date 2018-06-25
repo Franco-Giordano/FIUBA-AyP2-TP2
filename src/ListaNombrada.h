@@ -55,7 +55,7 @@ public:
 	T obtenerDato(unsigned int posicion);
 
 
-	T obtenerNombre(unsigned int posicion);
+	std::string obtenerNombre(unsigned int posicion);
 
 //	/*
 //	 * pre : posicion pertenece al intervalo: [1, contarElementos()]
@@ -77,7 +77,7 @@ public:
 	void iniciarCursor();
 
 	/*
-	 * pre : se ha iniciado un recorrido (invocando el método
+	 * pre : se ha iniciado un recorrido (invocando el metodo
 	 *       iniciarCursor()) y desde entonces no se han agregado o
 	 *       removido elementos de la Lista.
 	 * post: mueve el cursor y lo posiciona en el siguiente elemento
@@ -90,7 +90,7 @@ public:
 
 	/*
 	 * pre : el cursor está posicionado sobre un elemento de la Lista,
-	 *       (fue invocado el método avanzarCursor() y devolvió true)
+	 *       (fue invocado el metodo avanzarCursor() y devolvió true)
 	 * post: devuelve el elemento en la posición del cursor.
 	 *
 	 */
@@ -184,9 +184,9 @@ template<class T> T ListaNombrada<T>::obtenerDato(unsigned int posicion) {
 	return elemento;
 }
 
-template<class T> T ListaNombrada<T>::obtenerNombre(unsigned int posicion) {
+template<class T> std::string ListaNombrada<T>::obtenerNombre(unsigned int posicion) {
 
-	T elemento;
+	std::string elemento;
 
 	if ((posicion > 0) && (posicion <= this->tamanio)) {
 

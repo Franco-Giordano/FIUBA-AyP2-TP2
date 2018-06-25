@@ -9,7 +9,7 @@
 #define SRC_MINHEAP_H_
 
 #ifndef INFINITO
-#define INFINITO 99999999999999999999999999
+#define INFINITO 999999999
 #endif
 
 #include <string>
@@ -23,19 +23,52 @@ private:
 
 	Candidato<std::string>** candidatos; //se identificaran los vertices con strings (sus nombres) pero se ordenaran por peso minimo
 
-	void copiarListaEnArray(ListaNombrada<ListaNombrada<unsigned int>*>* listaOriginal, Candidato<std::string>** arrayDondeCopiar, unsigned int origen) {
+	void copiarListaEnCandidatos(ListaNombrada<ListaNombrada<unsigned int>*>* listaOriginal, unsigned int origen) {
+
 		ListaNombrada<unsigned int>* adyacentesOrigen = listaOriginal->obtenerDato(origen);
 
-		adyacentesOrigen->iniciarCursor();
+		std::string nombreOrigen = listaOriginal->obtenerNombre(origen);
+
+		//copio todos los elementos con peso infinito
+		listaOriginal->iniciarCursor();
 		unsigned int i = 0;
-		while (adyacentesOrigen->avanzarCursor()) {
+		while (listaOriginal->avanzarCursor()) {
 
-			Candidato<std::string>* nuevoElem = new Candidato<std::string>(adyacentesOrigen->obtenerNombreCursor(), adyacentesOrigen->obtenerDatoCursor());
+			if (listaOriginal->obtenerNombreCursor() != nombreOrigen) {
+				Candidato<std::string>* nuevoElem = new Candidato<std::string>(listaOriginal->obtenerNombreCursor(),
+																			   INFINITO);
 
-			arrayDondeCopiar[i] = nuevoElem;
-
+				candidatos[i] = nuevoElem;
+			}
 			i++;
 		}
+
+		this->imprimirHeap(); //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+		//me fijo cuales son adyacentes a mi origen y corrijo su respectivo peso en el array
+		adyacentesOrigen->iniciarCursor();
+		while (adyacentesOrigen->avanzarCursor()) {
+
+			unsigned int posAdy = this->hallarPosicionConNombre(adyacentesOrigen->obtenerNombreCursor());
+
+			candidatos[posAdy]->modificarPeso(adyacentesOrigen->obtenerDatoCursor());
+		}
+	}
+
+	//PRE: el nombre esta en el array
+	unsigned int hallarPosicionConNombre(std::string nombre) {
+		unsigned int posicion = 0;
+		bool encontrado = false;
+
+		unsigned int i = 0;
+		while (i < maximaCantidad && !encontrado) {
+			if (candidatos[i]->obtenerIdentificador() == nombre) {
+				posicion = i;
+				encontrado = true;
+			}
+			i++;
+		}
+		return posicion;
 	}
 
 	void bajar(unsigned int primero, unsigned int ultimo) {
@@ -75,11 +108,12 @@ public:
 	MinHeap(ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacencia, unsigned int origen) {
 		//TODO hace el HEAP solo con los adyacentes al origen, no tiene implementado manejar los de peso infinito
 
-		maximaCantidad = listaAdyacencia->obtenerDato(origen)->contarElementos(); //TODO TA MAL AAAAAAAAAAAAAAAAAAAAAAAAAAA
+		maximaCantidad = listaAdyacencia->contarElementos() - 1; //no se debe contar el origen
+
+		std::cout << maximaCantidad;
 
 		candidatos = new Candidato<std::string>*[maximaCantidad];
-		this->copiarListaEnArray(listaAdyacencia, candidatos, origen); //TODO ARREGLAR QUE AGREGUE VERTICES NO APUNTADOS POR EL ORIGEN
-
+		this->copiarListaEnCandidatos(listaAdyacencia, origen); //TODO ARREGLAR QUE AGREGUE VERTICES NO APUNTADOS POR EL ORIGEN
 
 		//Inicio Algoritmo de Floyd para construir HEAP desde array
 		for (int i = maximaCantidad/2 - 1; i>= 0 ; i--) {
@@ -94,7 +128,6 @@ public:
 	}
 
 
-	//TODO destructor xd
 	~MinHeap() {
 		for (unsigned int i = 0; i < maximaCantidad; i++) {
 			delete candidatos[i];

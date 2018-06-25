@@ -29,6 +29,10 @@ public:
 	unsigned int obtenerPeso() {
 		return peso;
 	}
+
+	void modificarPeso(unsigned int nuevoPeso){
+		this->peso= nuevoPeso;
+	}
 };
 
 

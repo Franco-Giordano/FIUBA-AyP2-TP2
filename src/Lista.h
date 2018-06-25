@@ -85,7 +85,7 @@ public:
 	void iniciarCursor();
 
 	/*
-	 * pre : se ha iniciado un recorrido (invocando el método
+	 * pre : se ha iniciado un recorrido (invocando el metodo
 	 *       iniciarCursor()) y desde entonces no se han agregado o
 	 *       removido elementos de la Lista.
 	 * post: mueve el cursor y lo posiciona en el siguiente elemento
@@ -98,7 +98,7 @@ public:
 
 	/*
 	 * pre : el cursor está posicionado sobre un elemento de la Lista,
-	 *       (fue invocado el método avanzarCursor() y devolvió true)
+	 *       (fue invocado el metodo avanzarCursor() y devolvió true)
 	 * post: devuelve el elemento en la posición del cursor.
 	 *
 	 */
