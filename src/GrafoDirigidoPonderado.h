@@ -24,41 +24,39 @@ class GrafoDirigidoPonderado { //todo metodos para interactuar con el grafo
 private:
 	ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacencia;
 
-//	ListaNombrada<unsigned int>* adyacentesAlVerticeInteresante;	-------------originalmente pensado para acceder a 'Almacen' mas rapido pero provoca errores mas adelante.
-
 public:
-	GrafoDirigidoPonderado<T>(CatalogoDe<T>* catalogo /*, std::string verticeInteresante*/) {
+	GrafoDirigidoPonderado<T>(CatalogoDe<T>* catalogo, std::string cultivoBuscado) {
 		listaAdyacencia = new ListaNombrada<ListaNombrada<unsigned int>*>();
 
 		for (unsigned int i=0; i < catalogo->obtenerCantidadDisponible(); i++){
 
-			T* actual = catalogo->obtenerPosicion(i);
-			std::string origenDeActual = catalogo->obtenerPosicion(i)->obtenerOrigen();
+			if (catalogo->obtenerPosicion(i)->obtenerNombreCultivo() == cultivoBuscado) { //TODO generalizar el grafo
+				T* actual = catalogo->obtenerPosicion(i);
+				std::string origenDeActual = catalogo->obtenerPosicion(i)->obtenerOrigen();
 
-			if (listaAdyacencia->yaExisteNombre(origenDeActual)){
+				if (listaAdyacencia->yaExisteNombre(origenDeActual)) {
 
-				ListaNombrada<unsigned int>* listaDestinos = listaAdyacencia->obtenerDatoDeNombre(origenDeActual);
+					ListaNombrada<unsigned int>* listaDestinos = listaAdyacencia->obtenerDatoDeNombre(origenDeActual);
 
-				listaDestinos->agregar(actual->obtenerNombre(), actual->obtenerPrecio());
-			}
+					listaDestinos->agregar(actual->obtenerNombre(), actual->obtenerPrecio());
+				}
 
-			else {
-				ListaNombrada<unsigned int>* nuevosAdyacentes = new ListaNombrada<unsigned int>();
+				else {
+					ListaNombrada<unsigned int>* nuevosAdyacentes = new ListaNombrada<unsigned int>();
 
-				nuevosAdyacentes->agregar(actual->obtenerNombre(), actual->obtenerPrecio());
+					nuevosAdyacentes->agregar(actual->obtenerNombre(), actual->obtenerPrecio());
 
-				listaAdyacencia->agregar(origenDeActual, nuevosAdyacentes);
-			}
+					listaAdyacencia->agregar(origenDeActual, nuevosAdyacentes);
+				}
 
-			if (!listaAdyacencia->yaExisteNombre(actual->obtenerNombre())){
-				ListaNombrada<unsigned int>* nuevosAdyacentes = new ListaNombrada<unsigned int>();
+				if (!listaAdyacencia->yaExisteNombre(actual->obtenerNombre())){
+					ListaNombrada<unsigned int>* nuevosAdyacentes = new ListaNombrada<unsigned int>();
 
-				listaAdyacencia->agregar(actual->obtenerNombre(), nuevosAdyacentes);
+					listaAdyacencia->agregar(actual->obtenerNombre(), nuevosAdyacentes);
+				}
 			}
 
 		}
-
-//		adyacentesAlVerticeInteresante = listaAdyacencia->obtenerDatoDeNombre(verticeInteresante);
 	}
 
 

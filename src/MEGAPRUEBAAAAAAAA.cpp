@@ -21,11 +21,9 @@ int main() {
 
 	CatalogoDe<Destino> catalogoDeDestinos(lectorDestinos.obtenerLista());
 
-	GrafoDirigidoPonderado<Destino> grafoDestinos(&catalogoDeDestinos);
+	GrafoDirigidoPonderado<Destino> grafoDestinos(&catalogoDeDestinos, "papa");
 
 	grafoDestinos.imprimirListaAdyacencia();
-
-//	ListaNombrada<unsigned int>* adyacentesOrigen = grafoDestinos.obtenerListaAdyacencia()->obtenerDato(1);
 
 	ColaConPrioridad colaConPrioridad(grafoDestinos.obtenerListaAdyacencia(), 1);
 

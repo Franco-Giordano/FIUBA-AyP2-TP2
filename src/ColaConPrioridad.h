@@ -104,12 +104,11 @@ private:
 
 public:
 	ColaConPrioridad(ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacencia, unsigned int origen) {
-		//TODO hace el HEAP solo con los adyacentes al origen, no tiene implementado manejar los de peso infinito
 
 		maximaCantidad = listaAdyacencia->contarElementos() - 1; //no se debe contar el origen
 
 		candidatos = new Candidato<std::string>*[maximaCantidad];
-		this->copiarListaEnCandidatos(listaAdyacencia, origen); //TODO ARREGLAR QUE AGREGUE VERTICES NO APUNTADOS POR EL ORIGEN
+		this->copiarListaEnCandidatos(listaAdyacencia, origen);
 
 		//Inicio Algoritmo de Floyd para construir HEAP desde array
 		for (int i = maximaCantidad/2 - 1; i>= 0 ; i--) {
