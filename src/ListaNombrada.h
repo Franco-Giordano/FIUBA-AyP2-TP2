@@ -186,7 +186,7 @@ template<class T> T ListaNombrada<T>::obtenerDato(unsigned int posicion) {
 
 template<class T> std::string ListaNombrada<T>::obtenerNombre(unsigned int posicion) {
 
-	std::string elemento;
+	std::string elemento = "";
 
 	if ((posicion > 0) && (posicion <= this->tamanio)) {
 

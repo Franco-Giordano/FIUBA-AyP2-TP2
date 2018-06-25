@@ -9,7 +9,7 @@
 #define SRC_MINHEAP_H_
 
 #ifndef INFINITO
-#define INFINITO 999999999
+#define INFINITO 99999999
 #endif
 
 #include <string>
@@ -39,11 +39,9 @@ private:
 																			   INFINITO);
 
 				candidatos[i] = nuevoElem;
+				i++;
 			}
-			i++;
 		}
-
-		this->imprimirHeap(); //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 		//me fijo cuales son adyacentes a mi origen y corrijo su respectivo peso en el array
 		adyacentesOrigen->iniciarCursor();
@@ -76,7 +74,7 @@ private:
 		unsigned int minimo = 2*primero + 1; //el minimo de los dos hijos
 
 		while (minimo <= ultimo) {
-			if (minimo > ultimo && candidatos[ultimo]->obtenerPeso() > candidatos[ultimo+1]->obtenerPeso()) {
+			if (minimo < ultimo && candidatos[minimo]->obtenerPeso() > candidatos[minimo+1]->obtenerPeso()) {
 				//chequeo si realmente elegi al hijo mas chico, sino cambio al otro
 				minimo++;
 			}
@@ -109,8 +107,6 @@ public:
 		//TODO hace el HEAP solo con los adyacentes al origen, no tiene implementado manejar los de peso infinito
 
 		maximaCantidad = listaAdyacencia->contarElementos() - 1; //no se debe contar el origen
-
-		std::cout << maximaCantidad;
 
 		candidatos = new Candidato<std::string>*[maximaCantidad];
 		this->copiarListaEnCandidatos(listaAdyacencia, origen); //TODO ARREGLAR QUE AGREGUE VERTICES NO APUNTADOS POR EL ORIGEN
