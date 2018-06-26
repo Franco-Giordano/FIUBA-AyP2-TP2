@@ -15,6 +15,9 @@
 
 class GPS {
 private:
+
+	CatalogoDe<Cultivo>* catalogoSemillas;
+
 	std::string origen;
 
 	GrafoDirigidoPonderado<Destino>** grafos;
@@ -37,8 +40,34 @@ private:
 		return minimo;
 	}
 
+	unsigned int obtenerPosicionDeNombre(std::string nombre) {
+		unsigned int i = 0;
+		bool encontrado = false;
+		while (!encontrado && i < catalogoSemillas->obtenerCantidadDisponible()) {
+			encontrado = catalogoSemillas->obtenerPosicion(i)->obtenerNombre() == nombre;
+			i++;
+		}
+		return i-1;
+	}
+
+	void removerInfinitos(ListaNombrada<unsigned int>*& lista) {
+		ListaNombrada<unsigned int>* aux = new ListaNombrada<unsigned int>();
+		lista->iniciarCursor();
+		while (lista->avanzarCursor()) {
+			if (lista->obtenerDatoCursor() < INFINITO) {
+				aux->agregar(lista->obtenerNombreCursor(), lista->obtenerDatoCursor()); //TODO esto tiene un tiempo de mierda
+			}
+		}
+
+		delete lista;
+
+		lista = aux;
+	}
+
 public:
 	GPS(std::string origenRecibido, CatalogoDe<Cultivo>* catalogoSemillas, CatalogoDe<Destino>* catalogoDestinos) {
+
+		this->catalogoSemillas = catalogoSemillas;
 
 		this->cantidadGrafos = catalogoSemillas->obtenerCantidadDisponible();
 
@@ -53,6 +82,8 @@ public:
 															catalogoSemillas->obtenerPosicion(i)->obtenerNombre());
 
 			ListaNombrada<unsigned int>* mejoresCostosCultivoActual = this->hallarCaminoMinConDijkstra(this->grafos[i]); //grafo en la posicion i
+
+			this->removerInfinitos(mejoresCostosCultivoActual);
 
 			mejoresCostos[i] = mejoresCostosCultivoActual;
 		}
@@ -105,9 +136,11 @@ public:
 		return mejoresCaminos;
 	}
 
-	ListaNombrada<unsigned int>* obtenerMejoresCostosPara(unsigned int posCultivo){
+	ListaNombrada<unsigned int>* obtenerMejoresCostosPara(std::string nombreCultivo){
 
-		return mejoresCostos[posCultivo];
+		unsigned int pos = this->obtenerPosicionDeNombre(nombreCultivo);
+
+		return mejoresCostos[pos];
 	}
 
 	~GPS() {

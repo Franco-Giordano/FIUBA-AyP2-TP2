@@ -113,16 +113,13 @@ void Acciones::obtenerDestinosValidos(Lista<Destino*>* listaDestinos, Cultivo* c
 	}
 }
 
-unsigned int Acciones::imprimirListaDestinos(ListaNombrada<unsigned int>* destinosValidos) {
+void Acciones::imprimirListaDestinos(ListaNombrada<unsigned int>* destinosValidos) {
 	unsigned int posicionDestino = 1;
 	destinosValidos->iniciarCursor();
 	while (destinosValidos->avanzarCursor()) {
-		if (destinosValidos->obtenerDatoCursor() < INFINITO){
-		cout << posicionDestino << ". " << destinosValidos->obtenerNombreCursor() << " | costo de envio: " <<
+		cout << posicionDestino << ". " << destinosValidos->obtenerNombreCursor() << " | Costo de envio: " <<
 					destinosValidos->obtenerDatoCursor() << endl;
 		posicionDestino ++;
-		}
 	}
-	return posicionDestino;
 }
 

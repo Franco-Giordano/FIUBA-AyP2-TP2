@@ -178,31 +178,32 @@ void Secretario::gestionarEnvioCosecha(Acciones acciones) {
 		cout << "Escoja cual de sus cultivos quiere vender: " << endl;
 		this->jugador->obtenerAlmacen()->mostrarNombresDeCultivosEnElAlmacen();
 		int numCultivoAEnviar = this->obtenerNumero(1, this->jugador->obtenerAlmacen()->contarCultivos(), "");
-		ListaNombrada<unsigned int>* destinosValidos = gps->obtenerMejoresCostosPara(numCultivoAEnviar);
+		std::string nombreCultivo = jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar)->obtenerNombre();
+		ListaNombrada<unsigned int>* destinosValidos = gps->obtenerMejoresCostosPara(nombreCultivo);
 
 		if (destinosValidos->contarElementos() != 0) {
 
 			cout << "A cual de estos destinos quiere enviar la cosecha?" << endl;
-			unsigned int rangoImpreso = acciones.imprimirListaDestinos(destinosValidos);
-			unsigned int destinoEscojido = this->obtenerNumero(1, rangoImpreso, ""); //todo hacer que costo sea perdida para usuario, no ganancia
+			acciones.imprimirListaDestinos(destinosValidos);
+			unsigned int destinoEscojido = this->obtenerNumero(1, destinosValidos->contarElementos(), "");
 			Correo correo(this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
 
 			if (acciones.esEnvioValido(destinosValidos->obtenerDato(destinoEscojido) ,correo)){
 
 				correo.enviarCultivo(numCultivoAEnviar, this->jugador->obtenerAlmacen());
 				correo.cobrar(destinosValidos->obtenerDato(destinoEscojido), this->jugador->obtenerMonedero());
+
+				cout << "**Envio realizado**"<<endl;
 			}
 			else {
 
-				cout <<  "El destino no es valido ya que el coste de envio supera a la rentabilidad del cultivo. No se han realizado cambios." << endl;
+				cout <<  "**El destino no es valido ya que el coste de envio supera a la rentabilidad del cultivo. No se han realizado cambios.**" << endl;
 			}
 
 		} else {
 
 			cout << "**No hay ningun comprador que acepte su cosecha.**" << endl;
 		}
-
-		delete destinosValidos;
 	} else{
 
 		cout << "**No posee cultivos en el almacen.**" << endl;
