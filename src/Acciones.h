@@ -6,6 +6,12 @@
 #include "Destino.h"
 #include "Catalogo.h"
 #include "Correo.h"
+#include "ListaNombrada.h"
+
+
+#ifndef INFINITO
+#define INFINITO 99999999
+#endif
 
 class Acciones {
 private:
@@ -47,10 +53,10 @@ public:
 	void obtenerDestinosValidos(Lista<Destino*>* listaDestinos, Cultivo* cultivo, CatalogoDe<Destino>* catalogoDestinos);
 
 	//Post: muestra por pantalla la lista de destinos validos.
-	void imprimirListaDestinos(Lista<Destino*>* destinosValidos);
+	unsigned int imprimirListaDestinos(ListaNombrada<unsigned int>* destinosValidos) ;
 
 	//Post: devuelve true si la rentabilidad del cultivo es mayor al coste de envio.
-	bool esEnvioValido(Destino* destino, Correo correo);
+	bool esEnvioValido(unsigned int precio, Correo correo);
 
 private:
 

@@ -11,7 +11,7 @@
 
 using namespace std;
 
-Secretario::Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos, unsigned int filas, unsigned int columnas, unsigned int dificultad) {
+Secretario::Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos, unsigned int filas, unsigned int columnas, unsigned int dificultad,GPS* gpsRecibido) {
 
 	this->filas = filas;
 	this->columnas = columnas;
@@ -22,6 +22,8 @@ Secretario::Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destin
 	this->catalogoDestinos = pCatalogoDestinos;
 
 	this->jugador = NULL;
+
+	this->gps = gpsRecibido;
 }
 
 int Secretario::obtenerNumero(int minimo, int maximo, std::string textoOpcional /*= ""*/) {
@@ -176,26 +178,25 @@ void Secretario::gestionarEnvioCosecha(Acciones acciones) {
 		cout << "Escoja cual de sus cultivos quiere vender: " << endl;
 		this->jugador->obtenerAlmacen()->mostrarNombresDeCultivosEnElAlmacen();
 		int numCultivoAEnviar = this->obtenerNumero(1, this->jugador->obtenerAlmacen()->contarCultivos(), "");
-		Lista<Destino*>* destinosValidos = new Lista<Destino*>;
-		acciones.obtenerDestinosValidos(destinosValidos, this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar), this->catalogoDestinos);
+		ListaNombrada<unsigned int>* destinosValidos = gps->obtenerMejoresCostosPara(numCultivoAEnviar - 1);
 
 		if (destinosValidos->contarElementos() != 0) {
 
 			cout << "A cual de estos destinos quiere enviar la cosecha?" << endl;
-			acciones.imprimirListaDestinos(destinosValidos);
-			unsigned int destinoEscojido = this->obtenerNumero(1, destinosValidos->contarElementos(), ""); //todo hacer que costo sea perdida para usuario, no ganancia
-			Correo correo(destinosValidos, this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
+			unsigned int rangoImpreso = acciones.imprimirListaDestinos(destinosValidos);
+			unsigned int destinoEscojido = this->obtenerNumero(1, rangoImpreso, ""); //todo hacer que costo sea perdida para usuario, no ganancia
+			Correo correo(this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
 
-			Destino* destinoElegido= destinosValidos->obtener(destinoEscojido);
+			if (acciones.esEnvioValido(destinosValidos->obtenerDato(destinoEscojido) ,correo)){
 
-			if(acciones.esEnvioValido(destinoElegido, correo)){
 				correo.enviarCultivo(numCultivoAEnviar, this->jugador->obtenerAlmacen());
-				correo.cobrar(destinoElegido, this->jugador->obtenerMonedero());
+				correo.cobrar(destinosValidos->obtenerDato(destinoEscojido), this->jugador->obtenerMonedero());
 			}
-			else{
-				cout << "El destino no es valido ya que el coste de envio supera a la rentabilidad del cultivo. No se han "
-						"realizado cambios." << endl;
+			else {
+
+				cout <<  "El destino no es valido ya que el coste de envio supera a la rentabilidad del cultivo. No se han realizado cambios." << endl;
 			}
+
 		} else {
 
 			cout << "**No hay ningun comprador que acepte su cosecha.**" << endl;

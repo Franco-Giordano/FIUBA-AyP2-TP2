@@ -14,6 +14,7 @@
 #include "Jugador.h"
 #include "Catalogo.h"
 #include "Mercado.h"
+#include "GPS.h"
 
 class Secretario {
 
@@ -22,6 +23,7 @@ private:
 	CatalogoDe<Cultivo>* catalogoSemillas;
 	CatalogoDe<Destino>* catalogoDestinos;
 	Jugador* jugador;
+	GPS* gps;
 
 	std::string convertirIntAString(int i);
 
@@ -33,7 +35,7 @@ public:
 	// el numero de turnos, la cantidad de jugadores, el tamaao del terreno y la dificultad del juego.
 	// Incluso posee los catalogos, de semillas y de destinos, que son las semillas que se pueden sembrar,
 	// en una parcela y los lugares a donde se pueden enviar una vez cosechadas.
-	Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos, unsigned int filas, unsigned int columnas, unsigned int dificultad);
+	Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destino>* pCatalogoDestinos, unsigned int filas, unsigned int columnas, unsigned int dificultad, GPS* gpsRecibido);
 
 	//Post:  valida que el numero ingresado este en el rango (minimo, maximo).
 	int obtenerNumero(int minimo, int maximo, std::string textoOpcional = "");

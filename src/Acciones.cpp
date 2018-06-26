@@ -2,6 +2,7 @@
 #include <limits>
 #include "Marcador.h"
 
+
 using namespace std;
 
 Acciones::Acciones(Jugador* pJugador) {
@@ -93,9 +94,9 @@ bool Acciones::tieneMasDeUnTerreno() {
 	return jugador->obtenerListaTerreno()->contarElementos() > 1;
 }
 
-bool Acciones::esEnvioValido(Destino* destino, Correo correo){
+bool Acciones::esEnvioValido(unsigned int precio, Correo correo){
 
-	int ganancia= correo.obtenerRentabilidad() - destino->obtenerPrecio();
+	int ganancia= correo.obtenerRentabilidad() - precio;
 
 	return (ganancia > 0);
 }
@@ -112,11 +113,16 @@ void Acciones::obtenerDestinosValidos(Lista<Destino*>* listaDestinos, Cultivo* c
 	}
 }
 
-void Acciones::imprimirListaDestinos(Lista<Destino*>* destinosValidos) {
+unsigned int Acciones::imprimirListaDestinos(ListaNombrada<unsigned int>* destinosValidos) {
 	unsigned int posicionDestino = 1;
 	destinosValidos->iniciarCursor();
 	while (destinosValidos->avanzarCursor()) {
-		Destino* destinoActual = destinosValidos->obtenerCursor();
-		cout << posicionDestino << ". " << destinoActual->obtenerNombre() << " | costo de envio: " << destinoActual->obtenerDistancia() * destinoActual->obtenerPrecio() << endl;
+		if (destinosValidos->obtenerDatoCursor() < INFINITO){
+		cout << posicionDestino << ". " << destinosValidos->obtenerNombreCursor() << " | costo de envio: " <<
+					destinosValidos->obtenerDatoCursor() << endl;
+		posicionDestino ++;
+		}
 	}
+	return posicionDestino;
 }
+

@@ -10,6 +10,8 @@
 
 #include <string>
 #include "GrafoDirigidoPonderado.h"
+#include "ColaConPrioridad.h"
+
 
 class GPS {
 private:
@@ -101,6 +103,11 @@ public:
 		}
 
 		return mejoresCaminos;
+	}
+
+	ListaNombrada<unsigned int>* obtenerMejoresCostosPara(unsigned int posCultivo){
+
+		return mejoresCostos[posCultivo];
 	}
 
 	~GPS() {

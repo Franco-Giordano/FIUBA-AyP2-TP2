@@ -10,6 +10,7 @@
 #include "Marcador.h"
 #include "Tiempo.h"
 #include "Secretario.h"
+#include "GPS.h"
 #include <iostream>
 
 using namespace std;
@@ -90,7 +91,10 @@ void DirectorDeJuego::coordinarJuego() {
 	cout << "Mandando a volar el dron, estara listo en unos momentos..." << endl << endl;
 	DronAereo dron(this->filas, this->columnas);
 
-	Secretario secretario(catalogoSemillas, catalogoDestinos, filas, columnas, dificultad);
+	cout << "Obteniendo satelites para el gps, aguarde un momento..." << endl << endl;
+	GPS gps("almacen",catalogoSemillas,catalogoDestinos);
+
+	Secretario secretario(catalogoSemillas, catalogoDestinos, filas, columnas, dificultad,&gps);
 
 	unsigned int numeroJugador = 1;
 	for (unsigned int turnoActual = 1; turnoActual <= this->turnos; turnoActual++) {

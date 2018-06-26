@@ -1,8 +1,9 @@
 #include "Correo.h"
 #include <iostream>
+
 using namespace std;
 
-Correo::Correo(Lista<Destino*>* destinosValidos, Cultivo* cultivoAEnviar) {
+Correo::Correo(Cultivo* cultivoAEnviar) {
 	this->destinosValidos = destinosValidos;
 	this->costoEnvio = 0;
 	this->cultivoAEnviar = cultivoAEnviar;
@@ -16,9 +17,9 @@ void Correo::enviarCultivo(unsigned int posicionCultivoAEnviar, Almacen* almacen
 	almacen->quitarCultivo(posicionCultivoAEnviar);
 }
 
-void Correo::cobrar(Destino* destino, Monedero* monedero) {
+void Correo::cobrar(unsigned int precio, Monedero* monedero) {
 	unsigned int rentabilidad = obtenerRentabilidad();
-	int ganancia = rentabilidad - destino->obtenerPrecio();
+	int ganancia = rentabilidad - precio;
 	monedero->sumarDinero(ganancia);
 }
 
