@@ -26,7 +26,7 @@ Secretario::Secretario(CatalogoDe<Cultivo>* pCatalogoSemillas, CatalogoDe<Destin
 	this->gps = gpsRecibido;
 }
 
-int Secretario::obtenerNumero(int minimo, int maximo, std::string textoOpcional /*= ""*/) {
+int Secretario::obtenerNumero(int minimo, int maximo, std::string textoOpcional) {
 	std::string input;
 	int numero;
 
@@ -178,7 +178,7 @@ void Secretario::gestionarEnvioCosecha(Acciones acciones) {
 		cout << "Escoja cual de sus cultivos quiere vender: " << endl;
 		this->jugador->obtenerAlmacen()->mostrarNombresDeCultivosEnElAlmacen();
 		int numCultivoAEnviar = this->obtenerNumero(1, this->jugador->obtenerAlmacen()->contarCultivos(), "");
-		ListaNombrada<unsigned int>* destinosValidos = gps->obtenerMejoresCostosPara(numCultivoAEnviar - 1);
+		ListaNombrada<unsigned int>* destinosValidos = gps->obtenerMejoresCostosPara(numCultivoAEnviar);
 
 		if (destinosValidos->contarElementos() != 0) {
 
