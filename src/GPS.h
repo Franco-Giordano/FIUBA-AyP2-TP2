@@ -55,7 +55,7 @@ private:
 		lista->iniciarCursor();
 		while (lista->avanzarCursor()) {
 			if (lista->obtenerDatoCursor() < INFINITO) {
-				aux->agregar(lista->obtenerNombreCursor(), lista->obtenerDatoCursor()); //TODO esto tiene un tiempo de mierda
+				aux->agregar(lista->obtenerNombreCursor(), lista->obtenerDatoCursor());
 			}
 		}
 

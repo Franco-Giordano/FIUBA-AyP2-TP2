@@ -30,7 +30,7 @@ public:
 
 		for (unsigned int i=0; i < catalogo->obtenerCantidadDisponible(); i++){
 
-			if (catalogo->obtenerPosicion(i)->obtenerNombreCultivo() == cultivoBuscado) { //TODO generalizar el grafo
+			if (catalogo->obtenerPosicion(i)->obtenerNombreCultivo() == cultivoBuscado) {
 				T* actual = catalogo->obtenerPosicion(i);
 				std::string origenDeActual = catalogo->obtenerPosicion(i)->obtenerOrigen();
 
