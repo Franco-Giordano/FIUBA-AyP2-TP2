@@ -1,12 +1,5 @@
-/*
- * CatalogoDeTemplate.h
- *
- *  Created on: 20 may. 2018
- *      Author: frank
- */
-
-#ifndef SRC_CATALOGO_H_
-#define SRC_CATALOGO_H_
+#ifndef CATALOGO_H_
+#define CATALOGO_H_
 
 #include "Lista.h"
 #include "ConversorDeDatos.h"
@@ -14,6 +7,7 @@
 template<class T>
 class CatalogoDe {
 private:
+
 	unsigned int cantidadDisponible;
 	T* catalogo;
 
@@ -26,45 +20,60 @@ public:
 	 *  Este catalogo es un vector dinamico implementado para aprovechar la forma de obtencion de la posicion
 	 *  de este mismo.
 	 */
-
-	CatalogoDe(Lista<std::string*>* datosCSV) {
-
-		this->cantidadDisponible = datosCSV->contarElementos();
-		this->catalogo = new T[cantidadDisponible];
-
-		ConversorDeDatos conversor;
-
-		datosCSV->iniciarCursor();
-		std::string* datosObjActual;
-
-		int posicion = 0;
-		while (datosCSV->avanzarCursor()) {
-			datosObjActual = datosCSV->obtenerCursor();
-
-			T objActual;
-			conversor.convertirAobjeto(datosObjActual, objActual);
-
-			catalogo[posicion] = objActual;
-			posicion++;
-		}
-	}
+	CatalogoDe(Lista<std::string*>* datosCSV);
 
 	// Pre: recibe la posicion que se desea obtener del catalogo.
 	// Post: devuelve la referencia a la posicion en el catalogo.
-	T* obtenerPosicion(unsigned int pos) {
-		return &catalogo[pos];
-	}
+	T* obtenerPosicion(unsigned int pos);
 
 	// Post: devuelve el numero de parametros que posee el catalogo.
-	unsigned int obtenerCantidadDisponible() {
-		return cantidadDisponible;
-	}
+	unsigned int obtenerCantidadDisponible();
 
 	// Post: libera la memoria que uso el catalogo.
-	virtual ~CatalogoDe() {
-		delete[] catalogo;
-	}
-
+	~CatalogoDe();
 };
 
-#endif /* SRC_CATALOGO_H_ */
+
+template<class T>
+Catalogo<T>::CatalogoDe(Lista<std::string*>* datosCSV) {
+
+	this->cantidadDisponible = datosCSV->contarElementos();
+	this->catalogo = new T[cantidadDisponible];
+
+	ConversorDeDatos conversor;
+
+	datosCSV->iniciarCursor();
+	std::string* datosObjActual;
+
+	int posicion = 0;
+	while (datosCSV->avanzarCursor()) {
+		datosObjActual = datosCSV->obtenerCursor();
+
+		T objActual;
+		conversor.convertirAobjeto(datosObjActual, objActual);
+
+		catalogo[posicion] = objActual;
+		posicion++;
+	}
+}
+
+template<class T>
+T* Catalogo<T>::obtenerPosicion(unsigned int pos) {
+
+	return &catalogo[pos];
+}
+
+template<class T>
+unsigned int Catalogo<T>::obtenerCantidadDisponible() {
+
+	return cantidadDisponible;
+}
+
+template<class T>
+Catalogo<T>::~CatalogoDe() {
+
+	delete[] catalogo;
+}
+
+
+#endif /* CATALOGO_H_ */
