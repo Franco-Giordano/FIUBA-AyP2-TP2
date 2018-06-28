@@ -25,6 +25,12 @@ private:
 	ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacencia;
 
 public:
+	/*
+	* POST: Crea el grafo, recibiendo como parámetros un puntero a un catálogo de Destino y un nombre de un cultivo (cultivoBuscado).
+	* Se crea una lista de adyacencia, y se hace un recorrido desde 0 hasta la cantidad disponible de destinos en el catálogo, en donde, 
+	* si el cultivo del catálogo en la posición i es el cultivoBuscado, va modificando la lista de adyacencias dependiendo de la existencia 
+	* del origen del Destino en la misma.
+	*/
 	GrafoDirigidoPonderado<T>(CatalogoDe<T>* catalogo, std::string cultivoBuscado) {
 		listaAdyacencia = new ListaNombrada<ListaNombrada<unsigned int>*>();
 
@@ -59,7 +65,10 @@ public:
 		}
 	}
 
-
+	/*
+	* PRE: Que la lista no esté vacía
+	* POST: Muestra la lista de adyacencias por pantalla
+	*/
 	void imprimirListaAdyacencia() {
 		listaAdyacencia->iniciarCursor();
 		while (listaAdyacencia->avanzarCursor()) {
@@ -76,10 +85,16 @@ public:
 		}
 	}
 
+	/*
+	* POST: Devuelve la lista de adyacencias
+	*/
 	ListaNombrada<ListaNombrada<unsigned int>*>* obtenerListaAdyacencia() {
 		return listaAdyacencia;
 	}
 
+	/*
+	* POST: Libera la memoria utilizada
+	*/
 	~GrafoDirigidoPonderado<T>() {
 		listaAdyacencia->iniciarCursor();
 		while (listaAdyacencia->avanzarCursor()) {
