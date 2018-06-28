@@ -8,7 +8,6 @@
 #include "NodoNombrado.h"
 #include <iostream>
 
-
 template<class T> class ListaNombrada {
 
 private:
@@ -55,22 +54,22 @@ public:
 	 */
 	T obtenerDato(unsigned int posicion);
 
-
+	/*
+	 * pre: la posicion está en el rango [1,contarElementos()]
+	 *	post: devuelve el nombre del elemento de la posicion recibida por parámetro.
+	 */
 	std::string obtenerNombre(unsigned int posicion);
 
-	void modificarDatoCursor(T elemento){
-		if (this -> cursor != NULL){
-			this -> cursor->cambiarDato(elemento);
+	/*
+	 * pre: el cursor fue inicializado.
+	 * post: modifica el dato correspondiente a la direccion del cursor.
+	 */
+	void modificarDatoCursor(T elemento) {
+		if (this->cursor != NULL) {
+			this->cursor->cambiarDato(elemento);
 		}
 
 	}
-
-//	/*
-//	 * pre : posicion pertenece al intervalo: [1, contarElementos()]
-//	 * post: cambia el elemento en la posición indicada por el
-//	 *       elemento dado.
-//	 */
-//	void asignar(T elemento, unsigned int posicion);
 
 	/*
 	 * pre : posición pertenece al intervalo: [1, contarElementos()]
@@ -112,16 +111,26 @@ public:
 	 */
 	bool yaExisteNombre(std::string nombre);
 
-
 	/* pre: Existe nodo con nombre 'nombre'.
 	 * Post: devuelve el dato del nombre recibido.
 	 */
 	T obtenerDatoDeNombre(std::string nombre);
 
+	/*
+	 * pre: El nombre esta en la lista.
+	 * post: Obtiene la posicion a partir del nombre recibido por parametro.
+	 */
 	unsigned int obtenerPosicionConNombre(std::string nombre);
 
+	/*
+	 * pre: El nombre esta en la lista.
+	 * post: Modifica el dato del nombre recibido por parametro.
+	 */
 	void modificarDatoConNombre(std::string nombreRecibido, T dato);
 
+	/*
+	 * post: Imprime la lista.
+	 */
 	void imprimirLista();
 
 	/*
@@ -137,7 +146,6 @@ private:
 	 */
 	NodoNombrado<T>* obtenerNodoNombrado(unsigned int posicion); // NOTA: primitiva PRIVADA
 
-
 	//si no esta devuelve NULL
 	NodoNombrado<T>* obtenerNodoConNombre(std::string nombre);
 };
@@ -149,16 +157,15 @@ template<class T> ListaNombrada<T>::ListaNombrada() {
 	this->cursor = NULL;
 }
 
-template <class T> unsigned int ListaNombrada<T>::obtenerPosicionConNombre(std::string nombre) {
+template<class T> unsigned int ListaNombrada<T>::obtenerPosicionConNombre(std::string nombre) {
 	bool encontrado = false;
 	NodoNombrado<T>* actual = this->primero;
 
 	unsigned int i = 1;
 	while (!encontrado && i < this->tamanio) {
-		if (actual->obtenerNombre() == nombre){
+		if (actual->obtenerNombre() == nombre) {
 			encontrado = true;
-		}
-		else {
+		} else {
 			i++;
 			actual = actual->obtenerSiguiente();
 		}
@@ -208,7 +215,7 @@ template<class T> void ListaNombrada<T>::agregar(std::string nombre, T elemento,
 
 }
 
-template<class T> void ListaNombrada<T>::modificarDatoConNombre(std::string nombreRecibido, T datoRecibido){
+template<class T> void ListaNombrada<T>::modificarDatoConNombre(std::string nombreRecibido, T datoRecibido) {
 
 	NodoNombrado<T>* nodoAmodificar = this->obtenerNodoConNombre(nombreRecibido);
 
@@ -317,21 +324,21 @@ template<class T> std::string ListaNombrada<T>::obtenerNombreCursor() {
 	return nombre;
 }
 
-template <class T>
+template<class T>
 bool ListaNombrada<T>::yaExisteNombre(std::string nombre) {
 	return this->obtenerNodoConNombre(nombre) != NULL;
 }
 
-template <class T>
-T ListaNombrada<T>::obtenerDatoDeNombre(std::string nombre){
+template<class T>
+T ListaNombrada<T>::obtenerDatoDeNombre(std::string nombre) {
 	return this->obtenerNodoConNombre(nombre)->obtenerDato();
 }
 
-template <class T>
+template<class T>
 void ListaNombrada<T>::imprimirLista() {
 	this->iniciarCursor();
 	while (this->avanzarCursor()) {
-		std::cout <<  "["<<this->obtenerNombreCursor() << " | $" << this->obtenerDatoCursor() << "]~";
+		std::cout << "[" << this->obtenerNombreCursor() << " | $" << this->obtenerDatoCursor() << "]~";
 	}
 
 }
@@ -359,7 +366,7 @@ NodoNombrado<T>* ListaNombrada<T>::obtenerNodoNombrado(unsigned int posicion) {
 	return actual;
 }
 
-template <class T>
+template<class T>
 NodoNombrado<T>* ListaNombrada<T>::obtenerNodoConNombre(std::string nombre) {
 
 	NodoNombrado<T>* devolver = NULL;
@@ -374,6 +381,5 @@ NodoNombrado<T>* ListaNombrada<T>::obtenerNodoConNombre(std::string nombre) {
 
 	return devolver;
 }
-
 
 #endif /* LISTA_H_ */
