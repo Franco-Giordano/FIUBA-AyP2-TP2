@@ -35,7 +35,7 @@ public:
 
 
 template<class T>
-Catalogo<T>::CatalogoDe(Lista<std::string*>* datosCSV) {
+CatalogoDe<T>::CatalogoDe(Lista<std::string*>* datosCSV) {
 
 	this->cantidadDisponible = datosCSV->contarElementos();
 	this->catalogo = new T[cantidadDisponible];
@@ -58,19 +58,19 @@ Catalogo<T>::CatalogoDe(Lista<std::string*>* datosCSV) {
 }
 
 template<class T>
-T* Catalogo<T>::obtenerPosicion(unsigned int pos) {
+T* CatalogoDe<T>::obtenerPosicion(unsigned int pos) {
 
 	return &catalogo[pos];
 }
 
 template<class T>
-unsigned int Catalogo<T>::obtenerCantidadDisponible() {
+unsigned int CatalogoDe<T>::obtenerCantidadDisponible() {
 
 	return cantidadDisponible;
 }
 
 template<class T>
-Catalogo<T>::~CatalogoDe() {
+CatalogoDe<T>::~CatalogoDe() {
 
 	delete[] catalogo;
 }
