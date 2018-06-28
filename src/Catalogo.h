@@ -33,7 +33,6 @@ public:
 	~CatalogoDe();
 };
 
-
 template<class T>
 CatalogoDe<T>::CatalogoDe(Lista<std::string*>* datosCSV) {
 
@@ -74,6 +73,5 @@ CatalogoDe<T>::~CatalogoDe() {
 
 	delete[] catalogo;
 }
-
 
 #endif /* CATALOGO_H_ */

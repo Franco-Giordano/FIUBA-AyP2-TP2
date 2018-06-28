@@ -6,20 +6,18 @@
  */
 #include "GPS.h"
 
-unsigned int GPS::minimoEntre(unsigned int elemento1, unsigned int elemento2){
+unsigned int GPS::minimoEntre(unsigned int elemento1, unsigned int elemento2) {
 
 	unsigned int minimo;
 
-	if (elemento1 < elemento2){
+	if (elemento1 < elemento2) {
 		minimo = elemento1;
-	}
-	else {
+	} else {
 		minimo = elemento2;
 	}
 
 	return minimo;
 }
-
 
 unsigned int GPS::obtenerPosicionDeNombre(std::string nombre) {
 	unsigned int i = 0;
@@ -28,9 +26,8 @@ unsigned int GPS::obtenerPosicionDeNombre(std::string nombre) {
 		encontrado = catalogoSemillas->obtenerPosicion(i)->obtenerNombre() == nombre;
 		i++;
 	}
-	return i-1;
+	return i - 1;
 }
-
 
 void GPS::removerInfinitos(ListaNombrada<unsigned int>*& lista) {
 	ListaNombrada<unsigned int>* aux = new ListaNombrada<unsigned int>();
@@ -46,7 +43,6 @@ void GPS::removerInfinitos(ListaNombrada<unsigned int>*& lista) {
 	lista = aux;
 }
 
-
 GPS::GPS(std::string origenRecibido, CatalogoDe<Cultivo>* catalogoSemillas, CatalogoDe<Destino>* catalogoDestinos) {
 
 	this->catalogoSemillas = catalogoSemillas;
@@ -55,13 +51,12 @@ GPS::GPS(std::string origenRecibido, CatalogoDe<Cultivo>* catalogoSemillas, Cata
 
 	this->origen = origenRecibido;
 
-	this->grafos = new GrafoDirigidoPonderado<Destino>*[cantidadGrafos];
+	this->grafos = new GrafoDirigidoPonderado*[cantidadGrafos];
 
 	this->mejoresCostos = new ListaNombrada<unsigned int>*[cantidadGrafos];
 
 	for (unsigned int i = 0; i < cantidadGrafos; i++) {
-		grafos[i] = new GrafoDirigidoPonderado<Destino>(catalogoDestinos,
-															catalogoSemillas->obtenerPosicion(i)->obtenerNombre());
+		grafos[i] = new GrafoDirigidoPonderado(catalogoDestinos, catalogoSemillas->obtenerPosicion(i)->obtenerNombre());
 
 		ListaNombrada<unsigned int>* mejoresCostosCultivoActual = this->hallarCaminoMinConDijkstra(this->grafos[i]); //grafo en la posicion i
 
@@ -71,15 +66,14 @@ GPS::GPS(std::string origenRecibido, CatalogoDe<Cultivo>* catalogoSemillas, Cata
 	}
 }
 
+ListaNombrada<unsigned int>* GPS::hallarCaminoMinConDijkstra(GrafoDirigidoPonderado* grafo) {
 
-ListaNombrada<unsigned int>* GPS::hallarCaminoMinConDijkstra(GrafoDirigidoPonderado<Destino>* grafo) {
-
-	ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacentes= grafo->obtenerListaAdyacencia();
+	ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacentes = grafo->obtenerListaAdyacencia();
 
 	ListaNombrada<unsigned int>* mejoresCaminos;
 
 	if (listaAdyacentes->yaExisteNombre(this->origen)) {
-		unsigned int posOrigen = listaAdyacentes -> obtenerPosicionConNombre(this->origen);
+		unsigned int posOrigen = listaAdyacentes->obtenerPosicionConNombre(this->origen);
 
 		ColaConPrioridad cola(listaAdyacentes, posOrigen);
 
@@ -93,7 +87,7 @@ ListaNombrada<unsigned int>* GPS::hallarCaminoMinConDijkstra(GrafoDirigidoPonder
 
 			adyacentesActual->iniciarCursor();
 
-			while (adyacentesActual->avanzarCursor()){
+			while (adyacentesActual->avanzarCursor()) {
 
 				std::string nombreAdyacenteActual = adyacentesActual->obtenerNombreCursor();
 
@@ -101,7 +95,7 @@ ListaNombrada<unsigned int>* GPS::hallarCaminoMinConDijkstra(GrafoDirigidoPonder
 
 				unsigned int pesoNuevo = raizRemovida.obtenerPeso() + adyacentesActual->obtenerDatoCursor();
 
-				if (pesoNuevo < pesoAnterior){
+				if (pesoNuevo < pesoAnterior) {
 
 					mejoresCaminos->modificarDatoConNombre(nombreAdyacenteActual, pesoNuevo);
 
@@ -111,22 +105,19 @@ ListaNombrada<unsigned int>* GPS::hallarCaminoMinConDijkstra(GrafoDirigidoPonder
 				}
 			}
 		}
-	}
-	else {
+	} else {
 		mejoresCaminos = new ListaNombrada<unsigned int>();
 	}
 
 	return mejoresCaminos;
 }
 
-
-ListaNombrada<unsigned int>* GPS::obtenerMejoresCostosPara(std::string nombreCultivo){
+ListaNombrada<unsigned int>* GPS::obtenerMejoresCostosPara(std::string nombreCultivo) {
 
 	unsigned int pos = this->obtenerPosicionDeNombre(nombreCultivo);
 
 	return mejoresCostos[pos];
 }
-
 
 GPS::~GPS() {
 	for (unsigned int i = 0; i < cantidadGrafos; i++) {
