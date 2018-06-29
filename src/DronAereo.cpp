@@ -88,7 +88,9 @@ void DronAereo::imprimirNumerosDeLaCuadrilla(char* texto) {
 	unsigned int numeroDeParcela = 1;
 	for (unsigned int i = this->multiplicador + this->margenAncho; i < this->resolucionDeFoto[0]; i += this->multiplicador) {
 		strcpy(texto, convertirEnteroAString(numeroDeParcela).c_str());
+
 		PrintString(fotoTerreno, (char*) texto, i, this->margenAlto, this->multiplicador - this->margenAncho, colorFuente);
+
 		numeroDeParcela++;
 	}
 
@@ -96,7 +98,9 @@ void DronAereo::imprimirNumerosDeLaCuadrilla(char* texto) {
 	numeroDeParcela = 1;
 	for (unsigned int i = this->multiplicador + this->margenAlto; i < this->resolucionDeFoto[1]; i += this->multiplicador) {
 		strcpy(texto, convertirEnteroAString(numeroDeParcela).c_str());
+
 		PrintString(fotoTerreno, (char*) texto, this->margenAlto, i, this->multiplicador - this->margenAncho, colorFuente);
+
 		numeroDeParcela++;
 	}
 
