@@ -180,11 +180,12 @@ void Secretario::gestionarEnvioCosecha(Acciones acciones) {
 		int numCultivoAEnviar = this->obtenerNumero(1, this->jugador->obtenerAlmacen()->contarCultivos(), "");
 		std::string nombreCultivo = jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar)->obtenerNombre();
 		ListaNombrada<unsigned int>* destinosValidos = gps->obtenerMejoresCostosPara(nombreCultivo);
+		Candidato<std::string>* previosCultivoActual = gps->obtenerPreviosPara(nombreCultivo);
 
 		if (destinosValidos->contarElementos() != 0) {
 
 			cout << "A cual de estos destinos quiere enviar la cosecha?" << endl;
-			acciones.imprimirListaDestinos(destinosValidos);
+			acciones.imprimirListaDestinos(destinosValidos, previosCultivoActual, gps->cantVertices(nombreCultivo));
 			unsigned int destinoEscojido = this->obtenerNumero(1, destinosValidos->contarElementos(), "");
 			Correo correo(this->jugador->obtenerAlmacen()->obtenerCultivoEnPosicion(numCultivoAEnviar));
 

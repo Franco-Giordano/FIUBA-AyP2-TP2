@@ -11,6 +11,9 @@ private:
 
 public:
 
+    //Post: Inicializa el objeto con basura.
+    Candidato<T>();
+
     //Post: crea un candidato, el cual representa un nodo del heap y que posee un identificador y un peso. Este peso
     // es el del camino del grafo ponderado.
     Candidato<T>(T ident, unsigned int peso);
@@ -24,6 +27,13 @@ public:
     // Post: devuelve el peso del candidato.
     unsigned int obtenerPeso();
 };
+
+template <class T>
+Candidato<T>::Candidato() {
+	T objeto;
+	this->identificador = objeto;
+	this->peso = 0;
+}
 
 
 template <class T>

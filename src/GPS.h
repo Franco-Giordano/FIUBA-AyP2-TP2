@@ -25,6 +25,8 @@ private:
 
 	ListaNombrada<unsigned int>** mejoresCostos;
 
+	Candidato<std::string>** previosCadaCultivoCadaDestino;
+
 	/*
 	 * POST: Recibe dos unsigned int y devuelve el menor de ellos.
 	 */
@@ -41,6 +43,8 @@ private:
 	 */
 	void removerInfinitos(ListaNombrada<unsigned int>*& lista);
 
+	void inicializarPrevios(Candidato<std::string>* array, ListaNombrada<ListaNombrada<unsigned int>*>* listaAdy);
+
 public:
 
 	/*
@@ -56,12 +60,23 @@ public:
 	 * POST: Devuelve los caminos de menor costo de grafo calculado con el método de Dijkstra basado en una lista de adyacencias y una cola con
 	 * prioridad
 	 */
-	ListaNombrada<unsigned int>* hallarCaminoMinConDijkstra(GrafoDirigidoPonderado* grafo);
+	ListaNombrada<unsigned int>* hallarCaminoMinConDijkstra(unsigned int i);
 
 	/*
 	 * POST: Devuelve los mejores costos para un cultivo dado
 	 */
 	ListaNombrada<unsigned int>* obtenerMejoresCostosPara(std::string nombreCultivo);
+
+	/*
+	 * POST: Devuelve la cantidad de vertices del grafo correspondiente a 'nombreCultivo'
+	 */
+	unsigned int cantVertices(std::string nombreCultivo);
+
+
+	/*
+	 * POST: Devuelve un puntero al array de previos, que representa el mejor camino segun Dijkstra.
+	 */
+	Candidato<std::string>* obtenerPreviosPara(std::string nombreCultivo);
 
 	/*
 	 * POST: Libera la memoria utilizada

@@ -1,7 +1,7 @@
 #include "Acciones.h"
 #include <limits>
 #include "Marcador.h"
-
+#include "Pila.h"
 
 using namespace std;
 
@@ -113,13 +113,51 @@ void Acciones::obtenerDestinosValidos(Lista<Destino*>* listaDestinos, Cultivo* c
 	}
 }
 
-void Acciones::imprimirListaDestinos(ListaNombrada<unsigned int>* destinosValidos) {
+void Acciones::imprimirListaDestinos(ListaNombrada<unsigned int>* destinosValidos, Candidato<std::string>* previos, unsigned int cantVertices) {
 	unsigned int posicionDestino = 1;
 	destinosValidos->iniciarCursor();
 	while (destinosValidos->avanzarCursor()) {
-		cout << posicionDestino << ". " << destinosValidos->obtenerNombreCursor() << " | Costo de envio: " <<
-					destinosValidos->obtenerDatoCursor() << endl;
+		cout << posicionDestino << ". ";
+		this->imprimirCaminoPara(destinosValidos->obtenerNombreCursor(), previos, cantVertices);
+		cout <<  " | Costo de envio: " << destinosValidos->obtenerDatoCursor() << endl;
 		posicionDestino ++;
 	}
 }
 
+
+void Acciones::imprimirCaminoPara(std::string nombreLlegada, Candidato<std::string>* previos, unsigned int cantVertices) {
+	Pila<std::string> pila;
+
+	unsigned int posLlegada = 0;
+
+	//Hallar posicion del destino final
+	bool encontrado = false;
+	unsigned int i = 0;
+	while (!encontrado && i < cantVertices) {
+		if (previos[i].obtenerIdentificador() == nombreLlegada) {
+			posLlegada = i;
+			encontrado = true;
+		}
+		i++;
+	}
+
+
+	//Reconstruir hacia atras el camino
+	bool llegueAlOrigen = false;
+	while (!llegueAlOrigen) {
+		pila.apilar(previos[posLlegada].obtenerIdentificador());
+
+		posLlegada = previos[posLlegada].obtenerPeso();
+
+		if (posLlegada == cantVertices) {
+			llegueAlOrigen = true;
+		}
+	}
+
+	cout << "almacen";
+
+	//Imprimir camino
+	while (!pila.estaVacia()) {
+		cout << "--> " << pila.desapilar();
+	}
+}

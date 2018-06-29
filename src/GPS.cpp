@@ -55,10 +55,12 @@ GPS::GPS(std::string origenRecibido, CatalogoDe<Cultivo>* catalogoSemillas, Cata
 
 	this->mejoresCostos = new ListaNombrada<unsigned int>*[cantidadGrafos];
 
+	this->previosCadaCultivoCadaDestino = new Candidato<std::string>*[cantidadGrafos];
+
 	for (unsigned int i = 0; i < cantidadGrafos; i++) {
 		grafos[i] = new GrafoDirigidoPonderado(catalogoDestinos, catalogoSemillas->obtenerPosicion(i)->obtenerNombre());
 
-		ListaNombrada<unsigned int>* mejoresCostosCultivoActual = this->hallarCaminoMinConDijkstra(this->grafos[i]); //grafo en la posicion i
+		ListaNombrada<unsigned int>* mejoresCostosCultivoActual = this->hallarCaminoMinConDijkstra(i); //grafo en la posicion i
 
 		this->removerInfinitos(mejoresCostosCultivoActual);
 
@@ -66,7 +68,17 @@ GPS::GPS(std::string origenRecibido, CatalogoDe<Cultivo>* catalogoSemillas, Cata
 	}
 }
 
-ListaNombrada<unsigned int>* GPS::hallarCaminoMinConDijkstra(GrafoDirigidoPonderado* grafo) {
+ListaNombrada<unsigned int>* GPS::hallarCaminoMinConDijkstra(unsigned int i) {
+
+	GrafoDirigidoPonderado* grafo = this->grafos[i];
+
+	unsigned int cantVertices = grafo->obtenerListaAdyacencia()->contarElementos();
+
+	Candidato<std::string>* previosCultivoActual = new Candidato<std::string>[cantVertices];
+
+	previosCadaCultivoCadaDestino[i] = previosCultivoActual;
+
+	this->inicializarPrevios(previosCultivoActual, grafo->obtenerListaAdyacencia());
 
 	ListaNombrada<ListaNombrada<unsigned int>*>* listaAdyacentes = grafo->obtenerListaAdyacencia();
 
@@ -83,7 +95,9 @@ ListaNombrada<unsigned int>* GPS::hallarCaminoMinConDijkstra(GrafoDirigidoPonder
 
 			Candidato<std::string> raizRemovida = cola.removerRaiz();
 
-			ListaNombrada<unsigned int>* adyacentesActual = listaAdyacentes->obtenerDatoDeNombre(raizRemovida.obtenerIdentificador());
+			std::string nombreRaiz = raizRemovida.obtenerIdentificador();
+
+			ListaNombrada<unsigned int>* adyacentesActual = listaAdyacentes->obtenerDatoDeNombre(nombreRaiz);
 
 			adyacentesActual->iniciarCursor();
 
@@ -99,6 +113,12 @@ ListaNombrada<unsigned int>* GPS::hallarCaminoMinConDijkstra(GrafoDirigidoPonder
 
 					mejoresCaminos->modificarDatoConNombre(nombreAdyacenteActual, pesoNuevo);
 
+					unsigned int posDestino = listaAdyacentes->obtenerPosicionConNombre(nombreAdyacenteActual) - 1; //array arranca en 0, no en 1 como la lista
+
+					unsigned int posRaiz = listaAdyacentes->obtenerPosicionConNombre(nombreRaiz) - 1;
+
+					previosCultivoActual[posDestino].modificarPeso(posRaiz); //interpretar peso como la posicion en el array del previo
+
 					if (cola.estaNombre(nombreAdyacenteActual)) {
 						cola.mejorarPeso(nombreAdyacenteActual, pesoNuevo);
 					}
@@ -106,10 +126,16 @@ ListaNombrada<unsigned int>* GPS::hallarCaminoMinConDijkstra(GrafoDirigidoPonder
 			}
 		}
 	} else {
-		mejoresCaminos = new ListaNombrada<unsigned int>();
+		mejoresCaminos = new ListaNombrada<unsigned int>(); //Caso origen no tenga adyacentes
 	}
 
 	return mejoresCaminos;
+}
+
+Candidato<std::string>* GPS::obtenerPreviosPara(std::string nombreCultivo) {
+	unsigned int pos = this->obtenerPosicionDeNombre(nombreCultivo);
+
+	return this->previosCadaCultivoCadaDestino[pos];
 }
 
 ListaNombrada<unsigned int>* GPS::obtenerMejoresCostosPara(std::string nombreCultivo) {
@@ -119,11 +145,30 @@ ListaNombrada<unsigned int>* GPS::obtenerMejoresCostosPara(std::string nombreCul
 	return mejoresCostos[pos];
 }
 
+
+void GPS::inicializarPrevios(Candidato<std::string>* array, ListaNombrada<ListaNombrada<unsigned int>*>* listaAdy) {
+	listaAdy->iniciarCursor();
+	for (unsigned int i = 0; i < listaAdy->contarElementos(); i++) {
+		listaAdy->avanzarCursor();
+		Candidato<std::string> nuevoPrevio(listaAdy->obtenerNombreCursor(), listaAdy->contarElementos());
+		array[i] = nuevoPrevio;
+	}
+}
+
+unsigned int GPS::cantVertices(std::string nombreCultivo) {
+
+	unsigned int pos = this->obtenerPosicionDeNombre(nombreCultivo);
+
+	return grafos[pos]->obtenerListaAdyacencia()->contarElementos();
+}
+
 GPS::~GPS() {
 	for (unsigned int i = 0; i < cantidadGrafos; i++) {
 		delete grafos[i];
 		delete mejoresCostos[i];
+		delete[] previosCadaCultivoCadaDestino[i];
 	}
 	delete[] grafos;
 	delete[] mejoresCostos;
+	delete[] previosCadaCultivoCadaDestino;
 }

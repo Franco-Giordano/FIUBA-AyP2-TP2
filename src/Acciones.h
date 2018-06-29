@@ -7,6 +7,7 @@
 #include "Catalogo.h"
 #include "Correo.h"
 #include "ListaNombrada.h"
+#include "Candidato.h"
 
 
 class Acciones {
@@ -16,11 +17,9 @@ private:
 public:
 
 	 //Post: inicializa la opcionElegida en 0.
-
 	Acciones(Jugador* pJugador);
 
 	//Post: le muestra por pantalla a cada jugador las acciones que puede realizar durante el juego.
-
 	unsigned int obtenerAccionDeJugador();
 
 	//Post: devuelve true si es posible sembrar en la parcela.
@@ -49,12 +48,14 @@ public:
 	void obtenerDestinosValidos(Lista<Destino*>* listaDestinos, Cultivo* cultivo, CatalogoDe<Destino>* catalogoDestinos);
 
 	//Post: muestra por pantalla la lista de destinos validos.
-	void imprimirListaDestinos(ListaNombrada<unsigned int>* destinosValidos) ;
+	void imprimirListaDestinos(ListaNombrada<unsigned int>* destinosValidos, Candidato<std::string>* previos, unsigned int cantVertices) ;
 
 	//Post: devuelve true si la rentabilidad del cultivo es mayor al coste de envio.
 	bool esEnvioValido(unsigned int precio, Correo correo);
 
 private:
+
+	void imprimirCaminoPara(std::string nombreLlegada, Candidato<std::string>* previos, unsigned int cantVertices);
 
 	bool opcionValida(unsigned int minimo, unsigned int maximo, unsigned int opcion);
 };
