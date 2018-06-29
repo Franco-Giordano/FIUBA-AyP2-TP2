@@ -21,36 +21,30 @@ DronAereo::DronAereo(unsigned int cantidadFilas, unsigned int cantidadColumnas) 
 	this->resolucionDeFoto[0] = (cantidadFilas * multiplicador) + multiplicador + margenAncho;
 	this->resolucionDeFoto[1] = (cantidadColumnas * multiplicador) + multiplicador + margenAlto;
 
+	bool matrizMemoria[resolucionDeFoto[0]][resolucionDeFoto[1]];
+
 	this->fotoTerreno.SetSize(resolucionDeFoto[0], resolucionDeFoto[1]);
 	this->fotoTerreno.SetBitDepth(8);
 
-	/*Imprime en la foto el pasto de fondo. Lo hace hasta resolucion menos 2 asi queda un recuadro
-	 blanco (solamente est�tico)*/
-	for (unsigned int i = 1; i < resolucionDeFoto[0] - 1; i++) {
-		for (unsigned int j = 1; j < resolucionDeFoto[1] - 1; j++) {
-			fotoTerreno(i, j)->Green = rand() % 161 + 255;
-			fotoTerreno(i, j)->Red = 0;
-			fotoTerreno(i, j)->Blue = 0;
+	//Inicializo la matriz.
+	for (unsigned int i = 0; i < resolucionDeFoto[0]; i ++){
+		for (unsigned int j = 0; j < resolucionDeFoto[0]; j++){
+			matrizMemoria[i][j] = false;
 		}
 	}
+
 
 	//Imprime en la foto las lineas horizontales de la matriz.
 	for (unsigned int i = multiplicador + margenAncho; i < resolucionDeFoto[0]; i++) {
 		for (unsigned int j = multiplicador + margenAlto; j < resolucionDeFoto[1]; j += multiplicador) {
-
-			fotoTerreno(i, j)->Blue = 255;
-			fotoTerreno(i, j)->Red = 255;
-			fotoTerreno(i, j)->Green = 255;
+			matrizMemoria[i][j] = true;
 		}
 	}
 
 	//Imprime en la foto las lineas verticales de la matriz.
 	for (unsigned int i = multiplicador + margenAncho; i < resolucionDeFoto[0]; i += multiplicador) {
 		for (unsigned int j = multiplicador + margenAlto; j < resolucionDeFoto[1]; j++) {
-
-			fotoTerreno(i, j)->Blue = 255;
-			fotoTerreno(i, j)->Red = 255;
-			fotoTerreno(i, j)->Green = 255;
+			matrizMemoria[i][j] = true;
 		}
 	}
 
@@ -59,6 +53,21 @@ DronAereo::DronAereo(unsigned int cantidadFilas, unsigned int cantidadColumnas) 
 	colorFuente.Red = 255;
 	colorFuente.Green = 255;
 	colorFuente.Blue = 255;
+
+	for (unsigned int i = 1; i < resolucionDeFoto[0] - 1; i ++){
+		for (unsigned int j = 1; j < resolucionDeFoto[1] - 1; j ++){
+			if (matrizMemoria[i][j] == false){
+				fotoTerreno(i, j)->Green = rand() % 161 + 255;
+				fotoTerreno(i, j)->Red = 0;
+				fotoTerreno(i, j)->Blue = 0;
+			}
+			else {
+				fotoTerreno(i, j) -> Green = 255;
+				fotoTerreno(i, j)->Red = 255;
+				fotoTerreno(i, j)->Blue = 255;
+			}
+		}
+	}
 
 	char* texto = new char[5];
 
