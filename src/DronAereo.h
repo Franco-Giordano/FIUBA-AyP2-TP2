@@ -32,9 +32,6 @@ private:
 
 	unsigned int margenAncho;
 
-	//Post: Imprime los numeros verticales y horizontales de la cuadrilla para tenerlos como referencia al momento de jugar.
-	void imprimirNumerosDeLaCuadrilla(char*  texto);
-
 	RGBApixel colorFuente;
 
 public:
@@ -52,6 +49,9 @@ public:
 private:
 
 	std::string convertirEnteroAString(int enteroAConvetir);
+
+	void imprimirNumerosDeLaCuadrilla(char*  texto);
+
 
 };
 
