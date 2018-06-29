@@ -371,7 +371,7 @@ NodoCoordenado<T>* ListaCoordenada<T>::obtenerNodo(unsigned int posicion) {
 template<class T>
 NodoCoordenado<T>* ListaCoordenada<T>::obtenerNodoAnteriorALaCoordenada(unsigned int coordenada) {
 
-	NodoCoordenado<T>* actual;
+	NodoCoordenado<T>* actual = NULL;
 	this->iniciarCursor();
 	while ((this->avanzarCursor()) && (this->obtenerNodoCursor()->obtenerCoordenada() < coordenada)) {
 		actual = this->obtenerNodoCursor();

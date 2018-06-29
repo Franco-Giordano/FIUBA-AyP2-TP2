@@ -47,11 +47,11 @@ unsigned int ColaConPrioridad::hallarPosicionConNombre(std::string nombre) {
 }
 
 
-void ColaConPrioridad::bajar(unsigned int primero, unsigned int ultimo) {
+void ColaConPrioridad::bajar(unsigned int primero) {
 
 	unsigned int minimo = 2*primero + 1; //el minimo de los dos hijos
-	while (minimo <= ultimo) {
-	if (minimo < ultimo && candidatos[minimo]->obtenerPeso() > candidatos[minimo+1]->obtenerPeso()) {
+	while (minimo <= posUltima) {
+	if (minimo < posUltima && candidatos[minimo]->obtenerPeso() > candidatos[minimo+1]->obtenerPeso()) {
 			//chequeo si realmente elegi al hijo mas chico, sino cambio al otro
 			minimo++;
 		}
@@ -62,7 +62,7 @@ void ColaConPrioridad::bajar(unsigned int primero, unsigned int ultimo) {
 		minimo = 2*primero +1;
 	}
 	else {
-		minimo = ultimo + 1; //si no se ejecuto lo de arriba, entonces ya puedo salir del loop
+		minimo = posUltima + 1; //si no se ejecuto lo de arriba, entonces ya puedo salir del loop
 	}
 	}
 }
@@ -98,7 +98,7 @@ ColaConPrioridad::ColaConPrioridad(ListaNombrada<ListaNombrada<unsigned int>*>* 
 
 	//Inicio Algoritmo de Floyd para construir HEAP desde array
 	for (int i = maximaCantidad/2 - 1; i>= 0 ; i--) {
-		bajar(i, maximaCantidad - 1);
+		bajar(i);
 	}
 }
 
@@ -130,7 +130,7 @@ Candidato<std::string> ColaConPrioridad::removerRaiz() {
 
 		posUltima--;
 
-		this -> bajar(0,posUltima);
+		this -> bajar(0);
 	}
 
 	return raiz;

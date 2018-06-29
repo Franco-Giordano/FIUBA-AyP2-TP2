@@ -28,7 +28,7 @@ private:
 
 	//PRE: El elemento en la posicion primero tiene una prioridad peor de la que deberia
 	//POST: Acomoda el elemento en su posicion correcta
-	void bajar(unsigned int primero, unsigned int ultimo);
+	void bajar(unsigned int primero);
 
 	//POST: intercambia los punteros almacenados en candidatos[posA] y candidatos[posB]
 	void intercambiar(unsigned int posA, unsigned int posB);

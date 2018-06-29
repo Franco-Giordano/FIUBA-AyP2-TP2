@@ -4,7 +4,6 @@
 using namespace std;
 
 Correo::Correo(Cultivo* cultivoAEnviar) {
-	this->destinosValidos = destinosValidos;
 	this->costoEnvio = 0;
 	this->cultivoAEnviar = cultivoAEnviar;
 }
@@ -26,7 +25,3 @@ void Correo::cobrar(unsigned int precio, Monedero* monedero) {
 unsigned int Correo::obtenerRentabilidad() {
 	return cultivoAEnviar->obtenerRentabilidad();
 }
-
-//int Correo::calcularCostoEnvio(Destino* destino) {
-//	return destino->obtenerPrecio();
-//}

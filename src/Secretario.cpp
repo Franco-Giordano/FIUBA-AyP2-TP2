@@ -84,9 +84,8 @@ bool Secretario::administrarEleccion(unsigned int eleccion, Acciones acciones) {
 
 	bool pasarTurno = false;
 
-	unsigned int fila;
-	unsigned int columna;
-	Terreno* terreno;
+	unsigned int fila = 1, columna = 1;
+	Terreno* terreno = NULL;
 
 	if (eleccion >= 1 && eleccion <= 3) { //Si la eleccion es sembrar, cosechar o regar.
 

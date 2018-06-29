@@ -8,7 +8,6 @@
 
 class Correo {
 private:
-	ListaNombrada<unsigned int>* destinosValidos;
 	int costoEnvio;
 	Cultivo* cultivoAEnviar;
 public:
@@ -30,9 +29,6 @@ public:
 
 	// Post: devuelve la rentabilidad del cultivo.
 	unsigned int obtenerRentabilidad();
-
- //Post: calcula el costo del envio como el producto entre el precio y la distancia.
-//	int calcularCostoEnvio(Destino* destino);
 };
 
 #endif /* CORREO_H_ */

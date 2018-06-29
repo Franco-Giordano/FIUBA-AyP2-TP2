@@ -12,6 +12,7 @@ Destino::Destino() {
 	distanciaKM = 0;
 	precio = 0;
 	cultivo = "";
+	origen = "";
 }
 
 void Destino::modificarDestino(std::string origenRecibido, std::string nombreLugarRecibido, int distanciaKMRecibido, int precioRecibido, std::string cultivoRecibido) {
