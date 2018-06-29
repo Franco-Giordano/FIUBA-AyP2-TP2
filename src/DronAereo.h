@@ -32,6 +32,11 @@ private:
 
 	unsigned int margenAncho;
 
+	//Post: Imprime los numeros verticales y horizontales de la cuadrilla para tenerlos como referencia al momento de jugar.
+	void imprimirNumerosDeLaCuadrilla(char*  texto);
+
+	RGBApixel colorFuente;
+
 public:
 
 	//Pre: Los parametros recibidos deben de estar validadas previamente.
